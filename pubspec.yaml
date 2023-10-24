@@ -45,11 +45,12 @@ dependencies:
   shared_preferences: ^2.2.0
   conditional_builder_null_safety: ^0.0.6
   flutter_screenutil: ^5.9.0
+  flutter_iconly: ^1.0.2
 
 
   # dots_indicator:
 
-
+  draggable_scrollbar: ^0.1.0
   smooth_page_indicator: ^1.0.1
 
 dev_dependencies:
@@ -76,7 +77,9 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+    - assets/
     - assets/images/
+    - assets/icons/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

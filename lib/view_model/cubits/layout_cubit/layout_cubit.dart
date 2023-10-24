@@ -1,10 +1,9 @@
-import 'package:amisa/view/screens/menu/menu_screen.dart';
-import 'package:amisa/view/screens/search/search.dart';
-import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../view/screens/category/category.dart';
-import '../../../view/screens/home/home.dart';
+import '../../../view/screens_path.dart';
+
+
 
 part 'layout_state.dart';
 
