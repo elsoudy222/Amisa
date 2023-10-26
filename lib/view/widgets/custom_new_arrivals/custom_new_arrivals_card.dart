@@ -13,7 +13,7 @@ class CustomNewArrivalsCard extends StatelessWidget {
     return Padding(
       padding:  EdgeInsets.only(left: 15.0.w),
       child: SizedBox(
-        height: 150.h,
+        height: 160.h,
         width: 260.w,
 
         child: Column(
@@ -28,7 +28,7 @@ class CustomNewArrivalsCard extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              padding: const EdgeInsets.only(top: 8.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.end,

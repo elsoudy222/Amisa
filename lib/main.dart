@@ -37,12 +37,10 @@ class MyApp extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               title: 'Amisa K.C.T',
               theme: ThemeData(
-                scrollbarTheme: ScrollbarThemeData(
-                  trackColor: MaterialStateProperty.all(Colors.white)
-                ),
                 scaffoldBackgroundColor: AppColors.scaffoldBackground,
                // primaryColor: AppColors.scaffoldBackground,
-                primarySwatch: Colors.red
+                 //primarySwatch: Colors.red
+                 // fontFamily: "Montserrat-Black",
 
 
               ),

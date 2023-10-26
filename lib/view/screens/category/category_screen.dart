@@ -6,8 +6,15 @@ class CategoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Center(
-        child: Text("Category Screen",style: TextStyle(color: Colors.white),),
+      body: Column(
+        children: [
+          Center(
+            child: Text(
+              "Category Screen",
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+        ],
       ),
     );
   }
