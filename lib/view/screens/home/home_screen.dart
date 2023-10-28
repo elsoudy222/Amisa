@@ -1,3 +1,4 @@
+import 'package:amisa/view/screens/category/sub_category/sub_category_screen.dart';
 import 'package:amisa/view/widgets/custom_news_card/custom_news_card.dart';
 import 'package:amisa/view/widgets/custom_text_title/custom_title_text.dart';
 import 'package:amisa/view_model/cubits/layout_cubit/layout_cubit.dart';
@@ -98,6 +99,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                   onTap: () {
                                     print(
                                         " **************** (Tapped) ****************");
+                                    Navigator.of(context).push(MaterialPageRoute(builder: (context){
+                                      return SubCategoryScreen();
+                                    }));
                                   },
                                   child: Container(
                                     height: 50.h,
@@ -185,10 +189,19 @@ class _HomeScreenState extends State<HomeScreen> {
                                   return Padding(
                                     padding: EdgeInsets.only(bottom: 12.h),
                                     child: CustomCategoryCard(
-                                      categoryTitle: categoryCard[i]["title"],
+                                      // categoryTitle: categoryCard[i]["title"],
+                                      badgeWidget: Text(
+                                        categoryCard[i]["title"],
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 20.sp,
+                                            fontWeight: FontWeight.w500),
+                                      ),
                                       description: categoryCard[i]["desc"],
                                       backgroundImage: ceramics,
                                       onTap: () {},
+                                      buttonText: 'shop now',
                                     ),
                                   );
                                 },
@@ -217,10 +230,18 @@ class _HomeScreenState extends State<HomeScreen> {
                               return Padding(
                                 padding: EdgeInsets.only(bottom: 12.h),
                                 child: CustomCategoryCard(
-                                  categoryTitle: categoryCard[i]["title"],
+                                  // categoryTitle: categoryCard[i]["title"],
+                                  badgeWidget: Text(
+                                    categoryCard[i]["title"],
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 20.sp,
+                                        fontWeight: FontWeight.w500),
+                                  ),
                                   description: categoryCard[i]["desc"],
                                   backgroundImage: ceramics,
-                                  onTap: () {},
+                                  onTap: () {}, buttonText: 'shop now',
                                 ),
                               );
                             },

@@ -19,10 +19,9 @@ class LayoutScreen extends StatelessWidget {
 
         return Scaffold(
           appBar: AppBar(
-            title: Text("sjgsghfilghslgls"),
+            title: const Text("sjgsghfilghslgls"),
           ),
-
-       body: cubit.screens[cubit.currentIndex],
+          body: cubit.screens[cubit.currentIndex],
           bottomNavigationBar: const CustomBottomNavbar(),
         );
       },

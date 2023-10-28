@@ -4,17 +4,20 @@ import '../../../core/config/config_path.dart';
 import '../../screens_path.dart';
 
 class CustomCategoryCard extends StatelessWidget {
-  final String categoryTitle;
+  final Widget badgeWidget;
+
   final String description;
+  final String buttonText;
   final String backgroundImage;
   final VoidCallback onTap;
 
   const CustomCategoryCard({
     super.key,
-    required this.categoryTitle,
+
     required this.description,
     required this.backgroundImage,
     required this.onTap,
+    required this.buttonText, required this.badgeWidget,
   });
 
   @override
@@ -45,14 +48,7 @@ class CustomCategoryCard extends StatelessWidget {
                   width: 120.w,
                   color: Colors.black.withOpacity(0.5),
                   child: Center(
-                    child: Text(
-                      categoryTitle.toUpperCase(),
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.w500),
-                    ),
+                    child: badgeWidget,
                   ),
                 ),
               ),
@@ -89,10 +85,10 @@ class CustomCategoryCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Shop Now".toUpperCase(),
+                          buttonText.toUpperCase(),
                           style: TextStyle(
                               color: Colors.white,
-                              fontWeight: FontWeight.w200,
+                              fontWeight: FontWeight.w400,
                               fontSize: 15.sp),
                         ),
                         SizedBox(

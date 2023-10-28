@@ -37,10 +37,14 @@ class MyApp extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               title: 'Amisa K.C.T',
               theme: ThemeData(
+                appBarTheme: AppBarTheme(
+                  color: AppColors.scaffoldBackground,
+                  elevation: 0.0
+                ),
                 scaffoldBackgroundColor: AppColors.scaffoldBackground,
                // primaryColor: AppColors.scaffoldBackground,
                  //primarySwatch: Colors.red
-                 // fontFamily: "Montserrat-Black",
+                  fontFamily: "Montserrat-Black",
 
 
               ),
