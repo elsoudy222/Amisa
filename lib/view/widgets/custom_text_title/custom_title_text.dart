@@ -5,14 +5,17 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 Widget customTitleText({
   required String title,
+   double fontSize = 20.0,
+  FontWeight fontWeight = FontWeight.w600,
 }){
 
   return Text(
     title.toUpperCase(),
     style: TextStyle(
-        fontSize: 20.sp,
+        fontSize: fontSize.sp,
         color: Colors.white,
-        fontWeight: FontWeight.bold
+        fontWeight: fontWeight,
+      fontFamily: "Montserrat"
     ),
   );
 }

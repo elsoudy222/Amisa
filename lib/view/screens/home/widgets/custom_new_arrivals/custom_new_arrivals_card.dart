@@ -1,7 +1,8 @@
 import 'package:amisa/view/screens_path.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../core/config/const/app_strings.dart';
+import '../../../../../core/config/const/app_strings.dart';
+
 
 class CustomNewArrivalsCard extends StatelessWidget {
   const CustomNewArrivalsCard({

@@ -1,3 +1,6 @@
+import 'package:amisa/view/screens/category/kitchens_type/kitchens_sub_category_type.dart';
+import 'package:amisa/view/screens/category/sub_category/sub_category_screen.dart';
+import 'package:amisa/view/screens/product_details/product_details_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:amisa/view/screens/layout/layout_screen.dart';
@@ -11,6 +14,7 @@ import 'core/config/config_path.dart';
 
 void main() {
   runApp(const MyApp());
+
 }
 
 class MyApp extends StatelessWidget {
@@ -18,6 +22,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -29,6 +34,10 @@ class MyApp extends StatelessWidget {
           // TODO: implement listener
         },
         builder: (context, state) {
+          // To Change StatusBar Color:
+          SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+              statusBarBrightness: Brightness.dark
+          ));
           return ScreenUtilInit(
             designSize: const Size(400,800),
             minTextAdapt: true,
@@ -36,19 +45,20 @@ class MyApp extends StatelessWidget {
             child: MaterialApp(
               debugShowCheckedModeBanner: false,
               title: 'Amisa K.C.T',
+              themeMode: ThemeMode.dark,
               theme: ThemeData(
-                appBarTheme: AppBarTheme(
-                  color: AppColors.scaffoldBackground,
+                appBarTheme: const AppBarTheme(
+                  backgroundColor: AppColors.scaffoldBackground,
                   elevation: 0.0
                 ),
                 scaffoldBackgroundColor: AppColors.scaffoldBackground,
-               // primaryColor: AppColors.scaffoldBackground,
-                 //primarySwatch: Colors.red
+                  primaryColor: AppColors.scaffoldBackground,
                   fontFamily: "Montserrat-Black",
 
 
+
               ),
-              home: LayoutScreen(),
+              home:   ProductDetailsScreen(),
             ),
           );
         },

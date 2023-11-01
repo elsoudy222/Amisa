@@ -1,10 +1,9 @@
 import 'package:amisa/view/screens_path.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_iconly/flutter_iconly.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../core/config/const/app_strings.dart';
+
+import '../../../core/components/custom_bottom_navbar/custom_bottom_navbar.dart';
 import '../../../view_model/cubits/layout_cubit/layout_cubit.dart';
 
 class LayoutScreen extends StatelessWidget {
@@ -18,11 +17,9 @@ class LayoutScreen extends StatelessWidget {
         var cubit = LayoutCubit.get(context);
 
         return Scaffold(
-          appBar: AppBar(
-            title: const Text("sjgsghfilghslgls"),
-          ),
+         // appBar: AppBar(),
           body: cubit.screens[cubit.currentIndex],
-          bottomNavigationBar: const CustomBottomNavbar(),
+          bottomNavigationBar: CustomNavBar(cubit: cubit),
         );
       },
     );

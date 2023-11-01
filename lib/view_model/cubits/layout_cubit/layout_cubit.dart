@@ -26,4 +26,6 @@ class LayoutCubit extends Cubit<LayoutStates> {
     currentIndex = index;
     emit(LayoutChangeNavBarState());
   }
+
+
 }

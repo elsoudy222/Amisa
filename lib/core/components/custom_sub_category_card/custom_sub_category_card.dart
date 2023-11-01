@@ -1,23 +1,26 @@
+import 'dart:ui';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/config/config_path.dart';
-import '../../screens_path.dart';
+import '../../../view/screens_path.dart';
 
-class CustomCategoryCard extends StatelessWidget {
+class CustomSubCategoryCard extends StatelessWidget {
   final Widget badgeWidget;
-
+  final Color badgeBackgroundColor;
   final String description;
   final String buttonText;
   final String backgroundImage;
   final VoidCallback onTap;
 
-  const CustomCategoryCard({
+  const CustomSubCategoryCard({
     super.key,
-
     required this.description,
     required this.backgroundImage,
     required this.onTap,
-    required this.buttonText, required this.badgeWidget,
+    required this.buttonText,
+    required this.badgeWidget,
+    this.badgeBackgroundColor = Colors.transparent,
   });
 
   @override
@@ -46,7 +49,7 @@ class CustomCategoryCard extends StatelessWidget {
                 child: Container(
                   height: 120.h,
                   width: 120.w,
-                  color: Colors.black.withOpacity(0.5),
+                  color: badgeBackgroundColor,
                   child: Center(
                     child: badgeWidget,
                   ),
@@ -55,7 +58,7 @@ class CustomCategoryCard extends StatelessWidget {
             ],
           ),
 
-          Spacer(),
+          const Spacer(),
           Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -67,7 +70,7 @@ class CustomCategoryCard extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       color: Colors.white,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w400,
                       fontSize: 16.sp),
                 ),
               ),
@@ -107,5 +110,3 @@ class CustomCategoryCard extends StatelessWidget {
     );
   }
 }
-
-

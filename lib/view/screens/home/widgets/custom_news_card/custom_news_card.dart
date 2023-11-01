@@ -1,7 +1,7 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../core/config/config_path.dart';
-import '../../screens_path.dart';
+import '../../../../screens_path.dart';
+
 
 class CustomNewsCard extends StatelessWidget {
   final String newsDesc;
