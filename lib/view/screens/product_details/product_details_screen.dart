@@ -16,6 +16,7 @@ PageController imageController =PageController();
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text("TITLE"),
         leading: IconButton(
           onPressed: () {

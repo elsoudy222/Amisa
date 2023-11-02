@@ -22,7 +22,9 @@ class SubCategoryScreen extends StatelessWidget {
     },
   ];
 
-  SubCategoryScreen({super.key});
+  final Function() onTap;
+
+  SubCategoryScreen({super.key, required this.onTap});
 
   @override
   Widget build(BuildContext context) {

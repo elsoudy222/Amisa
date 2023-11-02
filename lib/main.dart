@@ -36,6 +36,7 @@ class MyApp extends StatelessWidget {
         builder: (context, state) {
           // To Change StatusBar Color:
           SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+            statusBarColor: AppColors.scaffoldBackground,
               statusBarBrightness: Brightness.dark
           ));
           return ScreenUtilInit(
@@ -55,10 +56,8 @@ class MyApp extends StatelessWidget {
                   primaryColor: AppColors.scaffoldBackground,
                   fontFamily: "Montserrat-Black",
 
-
-
               ),
-              home:   ProductDetailsScreen(),
+              home:   LayoutScreen(),
             ),
           );
         },

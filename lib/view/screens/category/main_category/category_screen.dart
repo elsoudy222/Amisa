@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../sub_category/sub_category_screen.dart';
+
 class CategoryScreen extends StatefulWidget {
   const CategoryScreen({super.key});
 
@@ -32,7 +34,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
       'image': ceramics,
     },
     {
-      'title': 'Sinatry Ware',
+      'title': 'Sanitary Ware',
       'image': newArrivals,
     },
     {
@@ -80,6 +82,15 @@ class _CategoryScreenState extends State<CategoryScreen> {
                   (index) => carouselItemCard(
                     image: categoryModel[index]["image"],
                     title: categoryModel[index]["title"],
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context){
+                        return SubCategoryScreen(
+                          onTap: () {
+                            // TODO: Sub Category OnTap :
+                          },
+                        );
+                      }));
+                    },
                   ),
                 ),
                 options: CarouselOptions(
@@ -118,39 +129,43 @@ class _CategoryScreenState extends State<CategoryScreen> {
     );
   }
 
-  Container carouselItemCard({
+  Widget carouselItemCard({
     required String image,
     required String title,
+    required VoidCallback onTap,
   }) {
-    return Container(
-      //margin: EdgeInsets.all(20.r),
-      width: 290.w,
-      height: 430.h,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(25.w),
-        image: DecorationImage(image: AssetImage(image), fit: BoxFit.cover),
-      ),
-      child: Column(mainAxisAlignment: MainAxisAlignment.end, children: [
-        Container(
-          height: 66.h,
-          width: double.infinity,
-          decoration: BoxDecoration(
-              color: Colors.black.withOpacity(0.5),
-              borderRadius:
-                  BorderRadius.vertical(bottom: Radius.circular(25.w))),
-          child: Center(
-            child: Text(
-              title.toUpperCase(),
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 23.sp,
-                fontWeight: FontWeight.w400,
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        //margin: EdgeInsets.all(20.r),
+        width: 290.w,
+        height: 430.h,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(25.w),
+          image: DecorationImage(image: AssetImage(image), fit: BoxFit.cover),
+        ),
+        child: Column(mainAxisAlignment: MainAxisAlignment.end, children: [
+          Container(
+            height: 66.h,
+            width: double.infinity,
+            decoration: BoxDecoration(
+                color: Colors.black.withOpacity(0.5),
+                borderRadius:
+                    BorderRadius.vertical(bottom: Radius.circular(25.w))),
+            child: Center(
+              child: Text(
+                title.toUpperCase(),
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 23.sp,
+                  fontWeight: FontWeight.w400,
+                ),
               ),
             ),
-          ),
-        )
-      ]),
+          )
+        ]),
+      ),
     );
   }
 }

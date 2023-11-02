@@ -1,8 +1,6 @@
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/config/const/app_strings.dart';
 import '../../../../screens_path.dart';
-import '../../../category/sub_category/sub_category_screen.dart';
 
 class CustomHeaderWidget extends StatelessWidget {
   const CustomHeaderWidget({
@@ -46,27 +44,25 @@ class CustomHeaderWidget extends StatelessWidget {
                 SizedBox(
                   width: 75.w,
                 ),
-                InkWell(
-                  onTap: () {
-                    print(
-                        " **************** (Tapped) ****************");
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context){
-                      return SubCategoryScreen();
-                    }));
-                  },
-                  child: Container(
-                    height: 50.h,
-                    width: 50.h,
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.white.withOpacity(.2)),
-                    child: Icon(
-                      Icons.arrow_forward_ios_rounded,
-                      color: Colors.white,
-                      size: 25.sp,
-                    ),
-                  ),
-                )
+                // InkWell(
+                //   onTap: () {
+                //     print(
+                //         " **************** (Tapped) ****************");
+                //
+                //   },
+                //   child: Container(
+                //     height: 50.h,
+                //     width: 50.h,
+                //     decoration: BoxDecoration(
+                //         shape: BoxShape.circle,
+                //         color: Colors.white.withOpacity(.2)),
+                //     child: Icon(
+                //       Icons.arrow_forward_ios_rounded,
+                //       color: Colors.white,
+                //       size: 25.sp,
+                //     ),
+                //   ),
+                // )
               ],
             ),
           ),

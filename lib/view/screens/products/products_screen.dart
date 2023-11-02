@@ -1,7 +1,10 @@
 import 'package:amisa/core/components/custom_appbars/custom_products-appbar.dart';
 import 'package:amisa/core/components/custom_sub_category_card/custom_sub_category_card.dart';
 import 'package:amisa/core/config/config_path.dart';
+import 'package:amisa/core/const/extensions.dart';
 import 'package:amisa/view/screens_path.dart';
+
+import '../product_details/product_details_screen.dart';
 
 class ProductsScreen extends StatelessWidget {
   const ProductsScreen({super.key});
@@ -24,7 +27,9 @@ class ProductsScreen extends StatelessWidget {
               child: CustomSubCategoryCard(
                 description: "",
                 backgroundImage: ceramics,
-                onTap: (){},
+                onTap: (){
+                 // context.push(ProductDetailsScreen());
+                },
                 buttonText: "Show OLTRE",
                 badgeBackgroundColor: Colors.black.withOpacity(0.5),
                 badgeWidget: Text(

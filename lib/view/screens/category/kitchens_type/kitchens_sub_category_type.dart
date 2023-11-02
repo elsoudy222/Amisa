@@ -1,5 +1,7 @@
 import 'package:amisa/core/config/config_path.dart';
+import 'package:amisa/core/const/extensions.dart';
 import 'package:amisa/view/screens/category/kitchens_type/widgets/custom_kitchen-Type_card.dart';
+import 'package:amisa/view/screens/products/products_screen.dart';
 import 'package:amisa/view/screens_path.dart';
 import 'package:amisa/view/widgets/custom_text_title/custom_title_text.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -63,12 +65,16 @@ class KitchensSubCategoryType extends StatelessWidget {
               CustomKitchenTypeCard(
                 backgroundImage: header,
                 title: 'modern',
-                onTap: () {},
+                onTap: () {
+                  context.push(ProductsScreen());
+                },
               ),
               CustomKitchenTypeCard(
                 backgroundImage: ceramics,
                 title: "classic",
-                onTap: (){},
+                onTap: (){
+                  context.push(ProductsScreen());
+                },
               )
             ],
           )
