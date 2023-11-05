@@ -3,20 +3,23 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/config/const/app_strings.dart';
 
-
 class CustomNewArrivalsCard extends StatelessWidget {
+  final String title;
+  final String subtitle;
+
   const CustomNewArrivalsCard({
     super.key,
+    required this.title,
+    required this.subtitle,
   });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:  EdgeInsets.only(left: 15.0.w),
+      padding: EdgeInsets.only(left: 15.0.w),
       child: SizedBox(
         height: 160.h,
         width: 260.w,
-
         child: Column(
           children: [
             Container(
@@ -35,20 +38,18 @@ class CustomNewArrivalsCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text(
-                    "LUBE",
+                    title.toUpperCase(),
                     style: TextStyle(
                         fontSize: 17.sp,
                         fontWeight: FontWeight.w500,
-                        color: Colors.white
-                    ),
+                        color: Colors.white),
                   ),
                   Text(
-                    "OLTRE",
+                    subtitle,
                     style: TextStyle(
                         fontSize: 12.sp,
                         fontWeight: FontWeight.w400,
-                        color: Colors.white
-                    ),
+                        color: Colors.white),
                   ),
                 ],
               ),

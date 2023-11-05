@@ -1,14 +1,10 @@
-import 'package:amisa/view/screens/category/sub_category/sub_category_screen.dart';
 import 'package:amisa/view/screens/home/widgets/custom_header_widget/custom_header_widget.dart';
 import 'package:amisa/view/screens/home/widgets/custom_new_arrivals/custom_new_arrivals_card.dart';
 import 'package:amisa/view/screens/home/widgets/custom_news_card/custom_news_card.dart';
 import 'package:amisa/view/widgets/custom_text_title/custom_title_text.dart';
+import 'package:amisa/view_model/cubits/home_cubit/home_cubit.dart';
 import 'package:amisa/view_model/cubits/layout_cubit/layout_cubit.dart';
-import 'package:draggable_scrollbar/draggable_scrollbar.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../core/components/custom_sub_category_card/custom_sub_category_card.dart';
 import '../../../core/components/show_all_button/show_all_button.dart';
 import '../../../core/config/config_path.dart';
@@ -22,37 +18,15 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final ScrollController scrollController = ScrollController();
-  final List<Map<String, dynamic>> categoryCard = [
-    {
-      'title': 'kitchens',
-      'desc': "The Number One Italian Kitchen Company You Will Find Here.",
-    },
-    {
-      'title': 'Ceramics',
-      'desc': "The Number One Italian Kitchen Company You Will Find Here.",
-    },
-    {
-      'title': 'Ceramics',
-      'desc': "The Number One Italian Kitchen Company You Will Find Here.",
-    },
-  ];
-
-  final List<String> newsDesc = [
-    "The Number One Italian Kitchen Company You Will Find Here.",
-    'We were pleased to welcome you in The Gulf Bride Show at The World Trade Center.Stay tuned for our upcoming events.',
-    'We were pleased to welcome you in The Gulf Bride Show at The World Trade Center.Stay tuned for our upcoming events.',
-    'We were pleased to welcome you in The Gulf Bride Show at The World Trade Center.Stay tuned for our upcoming events.',
-  ];
-
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<LayoutCubit, LayoutStates>(
+    return BlocConsumer<HomeCubit, HomeStates>(
       listener: (context, state) {
         // TODO: implement listener
       },
       builder: (context, state) {
-        var cubit = LayoutCubit.get(context);
+        var layoutCubit = LayoutCubit.get(context);
+        var homeCubit = HomeCubit.get(context);
         return Scaffold(
           body: SingleChildScrollView(
             child: Column(
@@ -70,8 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   data: Theme.of(context).copyWith(
                       scrollbarTheme: ScrollbarThemeData(
                     thumbColor: MaterialStateProperty.all(Colors.white),
-                    trackBorderColor:
-                        MaterialStateProperty.all(Colors.grey),
+                    trackBorderColor: MaterialStateProperty.all(Colors.grey),
                   )),
                   child: Scrollbar(
                     thumbVisibility: true,
@@ -80,18 +53,21 @@ class _HomeScreenState extends State<HomeScreen> {
                     thickness: 4.h,
                     radius: const Radius.circular(20),
                     interactive: true,
-                    controller: scrollController,
+                    controller: homeCubit.scrollController,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
                       child: SizedBox(
                         height: 156.h,
                         child: ListView.builder(
-                            controller: scrollController,
+                            controller: homeCubit.scrollController,
                             shrinkWrap: true,
                             scrollDirection: Axis.horizontal,
                             itemCount: 4,
                             itemBuilder: (context, i) {
-                              return const CustomNewArrivalsCard();
+                              return const CustomNewArrivalsCard(
+                                title: 'lube',
+                                subtitle: 'oltre',
+                              );
                             }),
                       ),
                     ),
@@ -105,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   child: customTitleText(title: "Categories"),
                 ),
-                categoryCard.length > 2
+                homeCubit.categoryCard.length > 2
                     ? Column(
                         children: [
                           ListView.builder(
@@ -119,7 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   badgeBackgroundColor:
                                       Colors.black.withOpacity(0.5),
                                   badgeWidget: Text(
-                                    "${categoryCard[i]["title"]}"
+                                    "${homeCubit.categoryCard[i]["title"]}"
                                         .toUpperCase(),
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
@@ -127,7 +103,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                         fontSize: 19.sp,
                                         fontWeight: FontWeight.w500),
                                   ),
-                                  description: categoryCard[i]["desc"],
+                                  description: homeCubit.categoryCard[i]
+                                      ["desc"],
                                   backgroundImage: ceramics,
                                   onTap: () {},
                                   buttonText: 'shop now',
@@ -135,17 +112,15 @@ class _HomeScreenState extends State<HomeScreen> {
                               );
                             },
                           ),
-                          SizedBox(
-                            height: 15.h,
-                          ),
+                          SizedBox(height: 15.h,),
                           CustomShowAllButton(
                             onTap: () {
                               /* First: Change bottom nav bar index to (1)
                                         that's CategoryScreen Index.
                                  Second : Call changeBottomNavBar function .
                               */
-                              cubit.currentIndex = 1;
-                              cubit.changeBottomNavBar(cubit.currentIndex);
+                              layoutCubit.currentIndex = 1;
+                              layoutCubit.changeBottomNavBar(layoutCubit.currentIndex);
                             },
                           ),
                         ],
@@ -153,14 +128,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     : ListView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
-                        itemCount: categoryCard.length,
+                        itemCount: homeCubit.categoryCard.length,
                         itemBuilder: (context, i) {
                           return Padding(
                             padding: EdgeInsets.only(bottom: 12.h),
                             child: CustomSubCategoryCard(
                               // categoryTitle: categoryCard[i]["title"],
                               badgeWidget: Text(
-                                categoryCard[i]["title"],
+                                homeCubit.categoryCard[i]["title"],
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   color: Colors.white,
@@ -168,7 +143,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
-                              description: categoryCard[i]["desc"],
+                              description: homeCubit.categoryCard[i]["desc"],
                               backgroundImage: ceramics,
                               onTap: () {
                                 //TODO:
@@ -190,7 +165,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   child: customTitleText(title: "latest NEWS"),
                 ),
-                newsDesc.length > 2
+                homeCubit.newsDesc.length > 2
                     ? Column(
                         children: [
                           ListView.builder(
@@ -201,7 +176,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               return Padding(
                                 padding: EdgeInsets.only(bottom: 10.h),
                                 child: CustomNewsCard(
-                                  newsDesc: newsDesc[i],
+                                  newsDesc: homeCubit.newsDesc[i],
                                   backgroundImage: news,
                                 ),
                               );
@@ -211,27 +186,19 @@ class _HomeScreenState extends State<HomeScreen> {
                             height: 15.h,
                           ),
                           CustomShowAllButton(
-                            onTap: () {
-                              /* First: Change bottom nav bar index to (1)
-                        that's CategoryScreen Index.
-                        Second : Call changeBottomNavBar function .
-                         */
-                              // cubit.currentIndex = 1;
-                              // cubit
-                              //     .changeBottomNavBar(cubit.currentIndex);
-                            },
+                            onTap: () {},
                           ),
                         ],
                       )
                     : ListView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
-                        itemCount: categoryCard.length,
+                        itemCount: homeCubit.categoryCard.length,
                         itemBuilder: (context, i) {
                           return Padding(
                             padding: EdgeInsets.only(bottom: 12.h),
                             child: CustomNewsCard(
-                              newsDesc: newsDesc[i],
+                              newsDesc: homeCubit.newsDesc[i],
                               backgroundImage: news,
                             ),
                           );

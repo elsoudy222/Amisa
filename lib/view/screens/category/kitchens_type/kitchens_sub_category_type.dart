@@ -66,14 +66,14 @@ class KitchensSubCategoryType extends StatelessWidget {
                 backgroundImage: header,
                 title: 'modern',
                 onTap: () {
-                  context.push(ProductsScreen());
+                  context.push(const ProductsScreen());
                 },
               ),
               CustomKitchenTypeCard(
                 backgroundImage: ceramics,
                 title: "classic",
                 onTap: (){
-                  context.push(ProductsScreen());
+               //   context.push(ProductsScreen());
                 },
               )
             ],

@@ -4,7 +4,7 @@ import 'package:amisa/core/config/config_path.dart';
 import 'package:amisa/core/const/extensions.dart';
 import 'package:amisa/view/screens_path.dart';
 
-import '../product_details/product_details_screen.dart';
+import '../product_details/kitchen_product_details/kitchen_product_details_screen.dart';
 
 class ProductsScreen extends StatelessWidget {
   const ProductsScreen({super.key});
@@ -13,7 +13,7 @@ class ProductsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomProductAppbar(
-        title: "LUBE Modern kitchens",
+        title: "LUBE ${"Modern"} kitchens",
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(vertical: 15.0.h),
@@ -28,12 +28,12 @@ class ProductsScreen extends StatelessWidget {
                 description: "",
                 backgroundImage: ceramics,
                 onTap: (){
-                 // context.push(ProductDetailsScreen());
+                  context.push(KitchensProductDetailsScreen());
                 },
                 buttonText: "Show OLTRE",
                 badgeBackgroundColor: Colors.black.withOpacity(0.5),
                 badgeWidget: Text(
-                  "olter".toUpperCase(),
+                  "oltre".toUpperCase(),
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       color: Colors.white,

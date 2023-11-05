@@ -19,7 +19,7 @@ class CustomKitchenTypeCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: 220.h,
+        height: 190.h,
         width: 195.w,
         decoration: BoxDecoration(
           image: DecorationImage(

@@ -5,6 +5,7 @@ const String appName = "Amisa";
 /// LOGO :
 const String lubeLogo = "assets/icons/lube.png";
 const String creoLogo = "assets/icons/creo.png";
+const String kitchenSizes = "assets/icons/kitchen_sizes.png";
 
 /// Image paths :
 
