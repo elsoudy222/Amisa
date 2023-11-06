@@ -188,7 +188,7 @@ class CollectionsScreen extends StatelessWidget {
                         ),
                       );
                     },
-                    child: const CustomNewArrivalsCard(title: "", subtitle: ""));
+                    child:  CustomNewArrivalsCard(title: "", subtitle: "", image: '',));
               },
             ),
           ],

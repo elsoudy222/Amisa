@@ -1,16 +1,16 @@
 import 'package:amisa/view/screens_path.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../../../../../core/config/const/app_strings.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import '../../../../../view_model/database/network/end_points.dart';
 
 class CustomNewArrivalsCard extends StatelessWidget {
   final String title;
   final String subtitle;
+  final String image;
 
   const CustomNewArrivalsCard({
     super.key,
     required this.title,
-    required this.subtitle,
+    required this.subtitle, required this.image,
   });
 
   @override
@@ -22,38 +22,37 @@ class CustomNewArrivalsCard extends StatelessWidget {
         width: 260.w,
         child: Column(
           children: [
-            Container(
-              height: 120.h,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(newArrivals),
-                  fit: BoxFit.cover,
+          Container(
+          height: 120.h,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: CachedNetworkImageProvider("$baseImage$image",),fit: BoxFit.cover,)
+
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text(
+                  title.toUpperCase(),
+                  style: TextStyle(
+                      fontSize: 17.sp,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.white),
                 ),
-              ),
+                Text(
+                  subtitle,
+                  style: TextStyle(
+                      fontSize: 12.sp,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.white),
+                ),
+              ],
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Text(
-                    title.toUpperCase(),
-                    style: TextStyle(
-                        fontSize: 17.sp,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.white),
-                  ),
-                  Text(
-                    subtitle,
-                    style: TextStyle(
-                        fontSize: 12.sp,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.white),
-                  ),
-                ],
-              ),
-            ),
+          ),
           ],
         ),
       ),

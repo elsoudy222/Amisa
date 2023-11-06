@@ -1,11 +1,11 @@
-import 'dart:ui';
 
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import 'package:cached_network_image/cached_network_image.dart';
 import '../../../core/config/config_path.dart';
 import '../../../view/screens_path.dart';
+import '../../../view_model/database/network/end_points.dart';
 
 class CustomSubCategoryCard extends StatelessWidget {
+
   final Widget badgeWidget;
   final Color badgeBackgroundColor;
   final String description;
@@ -21,6 +21,7 @@ class CustomSubCategoryCard extends StatelessWidget {
     required this.buttonText,
     required this.badgeWidget,
     this.badgeBackgroundColor = Colors.transparent,
+
   });
 
   @override
@@ -30,15 +31,14 @@ class CustomSubCategoryCard extends StatelessWidget {
       decoration: BoxDecoration(
         image: DecorationImage(
           colorFilter: ColorFilter.mode(
-              Colors.black.withOpacity(0.5), BlendMode.dstATop),
+              Colors.black.withOpacity(0.7), BlendMode.dstATop),
 
           /// This Image will be changes :--------------
-          image: AssetImage(backgroundImage),
+          image: CachedNetworkImageProvider("$baseImage$backgroundImage",),
           fit: BoxFit.cover,
         ),
       ),
       child: Column(
-        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           // Category Badge :
           Row(

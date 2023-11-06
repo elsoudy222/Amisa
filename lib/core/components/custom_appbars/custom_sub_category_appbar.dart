@@ -1,3 +1,5 @@
+import 'package:amisa/view_model/database/network/end_points.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -19,7 +21,7 @@ class CustomSubCategoryAppBar extends StatelessWidget
     super.key,
     this.sizeHeight = 280,
     this.center = true,
-    this.title = " ",
+    this.title = "",
     this.fontWeight,
     required this.imageUrl,
     required this.description,
@@ -35,8 +37,8 @@ class CustomSubCategoryAppBar extends StatelessWidget
                 Colors.black.withOpacity(0.5),
                 BlendMode.dstATop,
               ),
-              image: AssetImage(
-                imageUrl,
+              image: CachedNetworkImageProvider(
+                "$baseImage$imageUrl",
               ),
               fit: BoxFit.cover)),
       child: Stack(
@@ -54,7 +56,7 @@ class CustomSubCategoryAppBar extends StatelessWidget
                       RotatedBox(
                         quarterTurns: -1,
                         child: Text(
-                          title.toUpperCase(),
+                          title,
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 20.sp,
@@ -62,8 +64,9 @@ class CustomSubCategoryAppBar extends StatelessWidget
                               fontFamily: "Montserrat-Black"),
                         ),
                       ),
-                      const Image(
+                       const Image(
                         image: AssetImage(line),
+
                       ),
                     ],
                   ),
@@ -72,10 +75,11 @@ class CustomSubCategoryAppBar extends StatelessWidget
                     width: 280.w,
                     child: Text(
                       description,
+                      maxLines: 3,
+                      overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 18.sp,
-
                           fontFamily: "Montserrat-Black",
                       ),
                     ),

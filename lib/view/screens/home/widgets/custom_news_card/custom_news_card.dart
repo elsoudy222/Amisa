@@ -1,11 +1,10 @@
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../../view_model/database/network/end_points.dart';
 import '../../../../screens_path.dart';
 
 
 class CustomNewsCard extends StatelessWidget {
   final String newsDesc;
-
   final String backgroundImage;
 
   const CustomNewsCard({
@@ -25,7 +24,7 @@ class CustomNewsCard extends StatelessWidget {
             BlendMode.dstATop,
           ),
           /// This Image will be changes :--------------
-          image: AssetImage(backgroundImage),
+          image: NetworkImage("$baseImage$backgroundImage"),
           fit: BoxFit.cover,
         ),
       ),

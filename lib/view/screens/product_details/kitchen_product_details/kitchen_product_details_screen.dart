@@ -237,7 +237,7 @@ class KitchensProductDetailsScreen extends StatelessWidget {
                               ),
                             );
                           },
-                            child: const CustomNewArrivalsCard(title: "Collection 1", subtitle: ""));
+                            child:  CustomNewArrivalsCard(title: "Collection 1", subtitle: "", image: '',));
                       },
                     ),
                   ],

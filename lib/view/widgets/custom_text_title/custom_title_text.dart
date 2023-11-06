@@ -1,7 +1,6 @@
 
 
 import 'package:amisa/view/screens_path.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 Widget customTitleText({
   required String title,

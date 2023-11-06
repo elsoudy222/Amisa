@@ -1,5 +1,8 @@
 
 
+import 'package:amisa/view_model/database/network/end_points.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+
 import '../../../../screens_path.dart';
 
 Widget carouselItemCard({
@@ -15,7 +18,7 @@ Widget carouselItemCard({
       height: 430.h,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(25.w),
-        image: DecorationImage(image: AssetImage(image), fit: BoxFit.cover),
+        image: DecorationImage(image: CachedNetworkImageProvider("$baseImage$image",), fit: BoxFit.cover),
       ),
       child: Column(mainAxisAlignment: MainAxisAlignment.end, children: [
         Container(

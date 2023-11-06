@@ -1,20 +1,16 @@
-import 'package:amisa/view/screens/category/kitchens_type/kitchens_sub_category_type.dart';
-import 'package:amisa/view/screens/category/sub_category/sub_category_screen.dart';
-import 'package:amisa/view/screens/product_details/kitchen_product_details/kitchen_product_details_screen.dart';
 import 'package:amisa/view_model/cubits/home_cubit/home_cubit.dart';
 import 'package:amisa/view_model/database/local/cache_helper.dart';
 import 'package:amisa/view_model/database/local/observer.dart';
 import 'package:amisa/view_model/database/network/dio_helper.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'package:amisa/view/screens/layout/layout_screen.dart';
 import 'package:amisa/view_model/cubits/layout_cubit/layout_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'core/config/config_path.dart';
+
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -40,11 +36,9 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => LayoutCubit(),
-
         ),
         BlocProvider(
-          create: (context) => HomeCubit(),
-
+          create: (context) => HomeCubit()..getHomeData(),
         ),
       ],
       child: BlocConsumer<LayoutCubit, LayoutStates>(
@@ -72,6 +66,7 @@ class MyApp extends StatelessWidget {
                 ),
                 scaffoldBackgroundColor: AppColors.scaffoldBackground,
                   primaryColor: AppColors.scaffoldBackground,
+                 primarySwatch: Colors.grey,
                  // fontFamily: "Montserrat-Black",
                 textTheme: GoogleFonts.montserratTextTheme(),
 

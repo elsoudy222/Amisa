@@ -1,14 +1,10 @@
 ///End Points that's Used in API
 
 /// Network Connection Details
-const String baseUrl = '';
-
+const String baseUrl = 'http://amisa.aspire-4edu.com/';
+const String baseImage = '${baseUrl}uploads/';
 
 /// End Points :
-
-
-
-
 /// Post Requests :
 
 
@@ -16,4 +12,5 @@ const String baseUrl = '';
 
 
 /// Get Requests :
-
+const HOME = 'home';
+const BRANDS = 'onecategory/';
