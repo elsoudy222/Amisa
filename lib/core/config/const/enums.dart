@@ -1,0 +1,3 @@
+
+
+enum KitchenTypes{modern,classic}

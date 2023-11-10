@@ -1,3 +1,4 @@
+import 'package:amisa/core/const/extensions.dart';
 import 'package:amisa/view/screens/home/widgets/custom_header_widget/custom_header_widget.dart';
 import 'package:amisa/view/screens/home/widgets/custom_new_arrivals/custom_new_arrivals_card.dart';
 import 'package:amisa/view/screens/home/widgets/custom_news_card/custom_news_card.dart';
@@ -6,11 +7,13 @@ import 'package:amisa/view_model/cubits/home_cubit/home_cubit.dart';
 import 'package:amisa/view_model/cubits/layout_cubit/layout_cubit.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import '../../../core/components/components.dart';
 import '../../../core/components/custom_sub_category_card/custom_sub_category_card.dart';
 import '../../../core/components/show_all_button/show_all_button.dart';
 import '../../../core/config/config_path.dart';
 import '../../screens_path.dart';
+import '../category/sub_category/sub_category_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -22,13 +25,24 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    var layoutCubit = LayoutCubit.get(context);
+    var homeCubit = HomeCubit.get(context);
     return BlocConsumer<HomeCubit, HomeStates>(
       listener: (context, state) {
-        // TODO: implement listener
+        if(state is SuccessGetAllBrandsStates){
+          EasyLoading.dismiss();
+          context.push(SubCategoryScreen(
+            categoryTitle: homeCubit.homeModel!.categories[homeCubit.currentIndex].catName,
+            categoryDes: homeCubit.homeModel!.categories[homeCubit.currentIndex].description,
+            categoryImage: homeCubit.homeModel!.categories[homeCubit.currentIndex].image,
+          ),);
+        }
+        else if(state is LoadingGetAllBrandsStates){
+          MyDialog.showLoadingDialog();
+        }
       },
       builder: (context, state) {
-        var layoutCubit = LayoutCubit.get(context);
-        var homeCubit = HomeCubit.get(context);
+
         return ConditionalBuilder(
           condition: homeCubit.homeModel != null,
           builder: (context) {
@@ -68,16 +82,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                 controller: homeCubit.scrollController,
                                 shrinkWrap: true,
                                 scrollDirection: Axis.horizontal,
-                                itemCount:
-                                    homeCubit.homeModel!.newArrival.length,
+                                itemCount: homeCubit.homeModel!.newArrival.length,
                                 itemBuilder: (context, i) {
                                   return CustomNewArrivalsCard(
-                                    title: homeCubit
-                                        .homeModel!.newArrival[i].brandName,
-                                    subtitle: homeCubit
-                                        .homeModel!.newArrival[i].productName,
-                                    image: homeCubit
-                                        .homeModel!.newArrival[i].photo,
+                                    title: homeCubit.homeModel!.newArrival[i].brandName,
+                                    subtitle: homeCubit.homeModel!.newArrival[i].productName,
+                                    image: homeCubit.homeModel!.newArrival[i].photo,
                                   );
                                 }),
                           ),
@@ -119,7 +129,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                           .homeModel!.categories[i].description,
                                       backgroundImage: homeCubit
                                           .homeModel!.categories[i].image,
-                                      onTap: () {},
+                                      onTap: () {
+                                        homeCubit.changeIndex(i);
+                                        homeCubit.getAllBrands(homeCubit.homeModel!.categories[i].id);
+
+                                      },
                                       buttonText: 'shop now',
                                       // model: homeCubit.homeModel!,
                                     ),

@@ -2,6 +2,7 @@ import 'package:amisa/view_model/cubits/home_cubit/home_cubit.dart';
 import 'package:amisa/view_model/database/local/cache_helper.dart';
 import 'package:amisa/view_model/database/local/observer.dart';
 import 'package:amisa/view_model/database/network/dio_helper.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:amisa/view/screens/layout/layout_screen.dart';
 import 'package:amisa/view_model/cubits/layout_cubit/layout_cubit.dart';
@@ -21,6 +22,7 @@ void main() async{
 
   DioHelper.init();
   await CacheHelper.init();
+
   Bloc.observer = MyBlocObserver();
   runApp(const MyApp());
 
@@ -40,6 +42,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => HomeCubit()..getHomeData(),
         ),
+
       ],
       child: BlocConsumer<LayoutCubit, LayoutStates>(
         listener: (context, state) {
@@ -56,6 +59,7 @@ class MyApp extends StatelessWidget {
             minTextAdapt: true,
             splitScreenMode: true,
             child: MaterialApp(
+              builder: EasyLoading.init(),
               debugShowCheckedModeBanner: false,
               title: 'Amisa K.C.T',
               themeMode: ThemeMode.dark,

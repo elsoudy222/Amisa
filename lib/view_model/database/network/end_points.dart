@@ -7,9 +7,7 @@ const String baseImage = '${baseUrl}uploads/';
 /// End Points :
 /// Post Requests :
 
-
-
-
+const ALL_PRODUCTS = 'productsforBrand';
 
 /// Get Requests :
 const HOME = 'home';

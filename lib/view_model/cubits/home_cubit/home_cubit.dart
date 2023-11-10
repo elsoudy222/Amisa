@@ -1,7 +1,9 @@
 import 'dart:convert';
 
+import 'package:amisa/core/config/const/enums.dart';
 import 'package:amisa/model/category_model.dart';
 import 'package:amisa/model/home_model.dart';
+import 'package:amisa/model/products_model.dart';
 import 'package:amisa/view_model/database/network/dio_helper.dart';
 import 'package:amisa/view_model/database/network/end_points.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,32 +17,34 @@ class HomeCubit extends Cubit<HomeStates> {
 
   static HomeCubit get(context) => BlocProvider.of(context);
   final ScrollController scrollController = ScrollController();
+  int currentIndex = 0;
 
-  final List<Map<String, dynamic>> categoryCard = [
-    {
-      'title': 'kitchens',
-      'desc': "The Number One Italian Kitchen Company You Will Find Here.",
-    },
-    {
-      'title': 'Ceramics',
-      'desc': "The Number One Italian Kitchen Company You Will Find Here.",
-    },
-    {
-      'title': 'Ceramics',
-      'desc': "The Number One Italian Kitchen Company You Will Find Here.",
-    },
-  ];
+  void changeIndex(int index) {
+    currentIndex = index;
+    emit(ChangeIndexState());
+  }
+List<String> kitchen=["modern" , "classic"];
 
-  final List<String> newsDesc = [
-    "The Number One Italian Kitchen Company You Will Find Here.",
-    'We were pleased to welcome you in The Gulf Bride Show at The World Trade Center.Stay tuned for our upcoming events.',
-    'We were pleased to welcome you in The Gulf Bride Show at The World Trade Center.Stay tuned for our upcoming events.',
-    'We were pleased to welcome you in The Gulf Bride Show at The World Trade Center.Stay tuned for our upcoming events.',
-  ];
+ String? kitchenType;
+  void changeKitchenTypeToModern( ) {
+    kitchenType = KitchenTypes.modern.toString();
+    print(kitchenType);
+    emit(ChangeKitchenTypeToModernState());
+
+  }
+  void changeKitchenTypeToClassic() {
+    kitchenType = KitchenTypes.classic.toString();
+    print(kitchenType);
+    emit(ChangeKitchenTypeToClassicState());
+
+  }
 
 
-  // Get Home Data from API :
+
+
+  /// Get Home Data from API :
   HomeModel? homeModel;
+
   void getHomeData() {
     emit(LoadingHomeDataStates());
     DioHelper.getData(
@@ -55,19 +59,53 @@ class HomeCubit extends Cubit<HomeStates> {
     });
   }
 
+
+  /// Get All Products Data from API :
+ ProductsModel? productsModel;
+  void getAllProducts({
+    required String brandId,
+    String type = "" ,
+    String pageNumber ="" ,
+
+}) {
+    emit(LoadingGetAllProductsStates());
+    DioHelper.postData(
+      url: ALL_PRODUCTS,
+      data: {
+        "brand_id" : brandId,
+        "type" : type,
+        "pagenum" : pageNumber,
+      },
+    ).then((value) {
+      // for(var product in value.data){
+      //   productsModel?.add(ProductsModel.fromJson(product) );
+      // }
+    productsModel = ProductsModel.fromJson(value.data);
+      // productsModel = value.data.map((e) => ProductsModel.fromJson(e)).toList();
+
+      print(productsModel.toString());
+      print(productsModel?.products.type.toString());
+    emit(SuccessGetAllProductsStates());
+      print("====================== SUCCESS ==========================");
+
+    }).catchError((error){
+      print("==========ERROR =========== ${error.toString()}");
+      emit(ErrorGetAllProductsStates(error.toString()));
+    });
+  }
+
+  /// Get All Brands Data from API :
   CategoryModel? brandModel;
-  void getAllBrands(int catId){
+  void getAllBrands(int catId) {
     emit(LoadingGetAllBrandsStates());
     DioHelper.getData(
-      url: BRANDS+catId.toString(),
+      url: BRANDS + catId.toString(),
     ).then((value) {
       brandModel = CategoryModel.fromJson(value.data);
       emit(SuccessGetAllBrandsStates());
-    }).catchError((error){
+    }).catchError((error) {
       emit(ErrorGetAllBrandsStates(error.toString()));
       print(error.toString());
     });
   }
-
-
 }

@@ -1,5 +1,6 @@
 import 'package:amisa/core/components/components.dart';
 import 'package:amisa/core/config/config_path.dart';
+import 'package:amisa/core/const/extensions.dart';
 import 'package:amisa/model/category_model.dart';
 import 'package:amisa/model/home_model.dart';
 import 'package:amisa/model/main_category_model.dart';
@@ -10,6 +11,7 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../view_model/cubits/home_cubit/home_cubit.dart';
 import '../sub_category/sub_category_screen.dart';
@@ -22,19 +24,25 @@ class CategoryScreen extends StatefulWidget {
 }
 
 class _CategoryScreenState extends State<CategoryScreen> {
-
-
-
-  int currentIndex = 0;
-
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<LayoutCubit, LayoutStates>(
+    var homeCubit = HomeCubit.get(context);
+    return BlocConsumer<HomeCubit, HomeStates>(
       listener: (context, state) {
-        // TODO: implement listener
+        if(state is SuccessGetAllBrandsStates){
+          EasyLoading.dismiss();
+          context.push(SubCategoryScreen(
+            categoryTitle: homeCubit.homeModel!.categories[homeCubit.currentIndex].catName,
+            categoryDes: homeCubit.homeModel!.categories[homeCubit.currentIndex].description,
+            categoryImage: homeCubit.homeModel!.categories[homeCubit.currentIndex].image,
+          ),);
+        }
+        else if(state is LoadingGetAllBrandsStates){
+          MyDialog.showLoadingDialog();
+        }
       },
       builder: (context, state) {
-        var homeCubit = HomeCubit.get(context);
+
         return ConditionalBuilder(
           condition: homeCubit.homeModel != null,
           builder: (context) {
@@ -66,25 +74,17 @@ class _CategoryScreenState extends State<CategoryScreen> {
                     CarouselSlider(
                       items: List.generate(
                         homeCubit.homeModel!.categories.length,
-                            (index) =>
-                            carouselItemCard(
-                              image: homeCubit.homeModel!.categories[index].image,
-                              title: homeCubit.homeModel!.categories[index]
-                                  .catName,
-                              onTap: () {
-                                homeCubit.getAllBrands(homeCubit.homeModel!.categories[index].id);
-                                Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                        builder: (context) {
+                        (index) => carouselItemCard(
+                          image: homeCubit.homeModel!.categories[index].image,
+                          title: homeCubit.homeModel!.categories[index].catName,
+                          onTap: () {
+                           // homeCubit.changeIndex(index);
+                           //  homeCubit.chosenCategoryType = Cate;
+                            homeCubit.getAllBrands(homeCubit.homeModel!.categories[index].id);
 
-                                          return SubCategoryScreen(
-                                             categoryTitle: homeCubit.homeModel!.categories[index].catName,
-                                              categoryDes: homeCubit.homeModel!.categories[index].description,
-                                            categoryImage: homeCubit.homeModel!.categories[index].image,
-                                          );
-                                        }));
-                              },
-                            ),
+
+                          },
+                        ),
                       ),
                       options: CarouselOptions(
                           autoPlay: true,
@@ -94,10 +94,10 @@ class _CategoryScreenState extends State<CategoryScreen> {
                           scrollPhysics: const BouncingScrollPhysics(),
                           autoPlayInterval: const Duration(seconds: 3),
                           autoPlayAnimationDuration:
-                          const Duration(milliseconds: 800),
+                              const Duration(milliseconds: 800),
                           onPageChanged: (index, reason) {
                             setState(() {
-                              currentIndex = index;
+                              homeCubit.currentIndex = index;
                             });
                           }),
                     ),
@@ -106,7 +106,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                     ),
                     DotsIndicator(
                       dotsCount: homeCubit.homeModel!.categories.length,
-                      position: currentIndex,
+                      position: homeCubit.currentIndex,
                       decorator: DotsDecorator(
                         color: Colors.grey,
                         activeSize: Size(35.0.w, 6.0.h),

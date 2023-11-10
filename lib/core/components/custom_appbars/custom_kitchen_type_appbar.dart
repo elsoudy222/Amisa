@@ -1,6 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../view/screens_path.dart';
+import '../../../view_model/database/network/end_points.dart';
 import '../../config/const/app_strings.dart';
 
 class CustomKitchensTypeAppbar extends StatelessWidget implements PreferredSizeWidget {
@@ -36,7 +38,7 @@ class CustomKitchensTypeAppbar extends StatelessWidget implements PreferredSizeW
                 BlendMode.dstATop,
               ),
               image: AssetImage(
-                imageUrl,
+                "$imageUrl",
               ),
               fit: BoxFit.cover)),
       child: Stack(
@@ -46,7 +48,7 @@ class CustomKitchensTypeAppbar extends StatelessWidget implements PreferredSizeW
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 30.0.w, vertical: 20.h),
               child: Image(
-               image: AssetImage(companyLogo),
+               image: NetworkImage("$baseImage$companyLogo"),
                height: 81.h,
                width: 81.h,
                fit: BoxFit.contain,
