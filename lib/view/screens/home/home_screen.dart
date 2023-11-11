@@ -14,6 +14,7 @@ import '../../../core/components/show_all_button/show_all_button.dart';
 import '../../../core/config/config_path.dart';
 import '../../screens_path.dart';
 import '../category/sub_category/sub_category_screen.dart';
+import '../product_details/kitchen_product_details/kitchen_product_details_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -31,7 +32,8 @@ class _HomeScreenState extends State<HomeScreen> {
       listener: (context, state) {
         if(state is SuccessGetAllBrandsStates){
           EasyLoading.dismiss();
-          context.push(SubCategoryScreen(
+          context.push(
+            SubCategoryScreen(
             categoryTitle: homeCubit.homeModel!.categories[homeCubit.currentIndex].catName,
             categoryDes: homeCubit.homeModel!.categories[homeCubit.currentIndex].description,
             categoryImage: homeCubit.homeModel!.categories[homeCubit.currentIndex].image,
@@ -84,10 +86,26 @@ class _HomeScreenState extends State<HomeScreen> {
                                 scrollDirection: Axis.horizontal,
                                 itemCount: homeCubit.homeModel!.newArrival.length,
                                 itemBuilder: (context, i) {
-                                  return CustomNewArrivalsCard(
-                                    title: homeCubit.homeModel!.newArrival[i].brandName,
-                                    subtitle: homeCubit.homeModel!.newArrival[i].productName,
-                                    image: homeCubit.homeModel!.newArrival[i].photo,
+                                  return InkWell(
+                                    onTap: (){
+                                      // homeCubit.getProductDetails(homeCubit.productsModel!.products.productsList[i].productId);
+                                      //
+                                      // if(state is SuccessGetProductDetailsStates){
+                                      //   EasyLoading.dismiss();
+                                      //   context.push(
+                                      //       ProductDetailsScreen()
+                                      //     ,);
+                                      // }
+                                      // else if(state is LoadingGetProductDetailsStates){
+                                      //   MyDialog.showLoadingDialog();
+                                      // }
+                                    },
+                                    child: CustomNewArrivalsCard(
+                                      title: homeCubit.homeModel!.newArrival[i].brandName,
+                                      subtitle: homeCubit.homeModel!.newArrival[i].productName,
+                                      image: homeCubit.homeModel!.newArrival[i].photo,
+
+                                    ),
                                   );
                                 }),
                           ),

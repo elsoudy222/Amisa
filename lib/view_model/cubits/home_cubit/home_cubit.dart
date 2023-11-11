@@ -8,6 +8,7 @@ import 'package:amisa/view_model/database/network/dio_helper.dart';
 import 'package:amisa/view_model/database/network/end_points.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../model/product_details_model.dart';
 import '../../../view/screens_path.dart';
 
 part 'home_state.dart';
@@ -16,9 +17,10 @@ class HomeCubit extends Cubit<HomeStates> {
   HomeCubit() : super(HomeInitialState());
 
   static HomeCubit get(context) => BlocProvider.of(context);
+  // Scrollbar in home Screen:
   final ScrollController scrollController = ScrollController();
-  int currentIndex = 0;
 
+  int currentIndex = 0;
   void changeIndex(int index) {
     currentIndex = index;
     emit(ChangeIndexState());
@@ -106,6 +108,21 @@ List<String> kitchen=["modern" , "classic"];
     }).catchError((error) {
       emit(ErrorGetAllBrandsStates(error.toString()));
       print(error.toString());
+    });
+  }
+
+  /// Get Product Details Data from API :
+  ProductsDetailsModel? productsDetailsModel;
+  void getProductDetails(int productID) {
+    emit(LoadingGetProductDetailsStates());
+    DioHelper.getData(
+      url: PRODUCT_DETAILS + productID.toString(),
+    ).then((value) {
+      productsDetailsModel = ProductsDetailsModel.fromJson(value.data);
+      emit(SuccessGetProductDetailsStates());
+    }).catchError((error) {
+      emit(ErrorGetProductDetailsStates(error.toString()));
+      print("(Product Details ERROR) => ${error.toString()}");
     });
   }
 }

@@ -11,7 +11,7 @@ class CustomProductAppbar extends StatelessWidget implements PreferredSizeWidget
 
   CustomProductAppbar({
     super.key,
-    this.sizeHeight = 210,
+    this.sizeHeight = 170,
 
     this.title = " ",
     this.fontWeight,
@@ -23,7 +23,6 @@ class CustomProductAppbar extends StatelessWidget implements PreferredSizeWidget
   Widget build(BuildContext context) {
     return Container(
       height: sizeHeight.h,
-
       child: Stack(
         children: [
           Positioned(
@@ -34,8 +33,9 @@ class CustomProductAppbar extends StatelessWidget implements PreferredSizeWidget
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
-                  width: 310.w,
+                 // color: Colors.red,
 
+                  width: 310.w,
                   child: Text(
                     title.toUpperCase(),
                     textAlign: TextAlign.center,

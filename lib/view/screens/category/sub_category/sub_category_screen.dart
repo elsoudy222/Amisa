@@ -1,6 +1,4 @@
 import 'package:amisa/core/components/components.dart';
-import 'package:amisa/core/config/config_path.dart';
-import 'package:amisa/core/config/const/enums.dart';
 import 'package:amisa/core/const/extensions.dart';
 import 'package:amisa/view/screens/category/kitchens_type/kitchens_sub_category_type.dart';
 import 'package:amisa/view/screens_path.dart';
@@ -42,7 +40,8 @@ class SubCategoryScreen extends StatelessWidget {
             context.push(
               ProductsScreen(
                 type: homeCubit.productsModel!.products.type,
-                brandName: "companyName",
+                brandName: homeCubit.productsModel!.products.brandName,
+                categoryName: categoryTitle,
               ),
             );
           }
@@ -94,32 +93,35 @@ class SubCategoryScreen extends StatelessWidget {
                                           .category.brands[i].brandPhoto,
                                       companyImage: homeCubit.brandModel!
                                           .category.brands[i].brandCover,
+                                      categoryName: categoryTitle,
                                     ),
                                   );
                                   print(
                                       "==========  ${homeCubit.brandModel!.category.brands[i].brandName}");
-                                } else if (categoryTitle == "Ceramics") {
+                                } else if (categoryTitle != "Kitchens") {
                                   homeCubit.getAllProducts(
                                     brandId:
                                         "${homeCubit.brandModel!.category.brands[i].brandId}",
                                   );
                                   print(
-                                      "===ID =======  ${homeCubit.brandModel!.category.brands[i].brandId}");
-                                } else if (categoryTitle == "Wardrobes") {
-                                  homeCubit.getAllProducts(
-                                    brandId:
-                                        "${homeCubit.brandModel!.category.brands[i].brandId}",
-                                  );
-                                  print(
-                                      "===ID =======  ${homeCubit.brandModel!.category.brands[i].brandId}");
-                                } else if (categoryTitle == "Sanitary Ware") {
-                                  homeCubit.getAllProducts(
-                                    brandId:
-                                        "${homeCubit.brandModel!.category.brands[i].brandId}",
-                                  );
-                                  print(
-                                      "===ID =======  ${homeCubit.brandModel!.category.brands[i].brandId}");
+                                      "===ID =======  ${homeCubit.brandModel!.category.brands[i].brandId}");print(
+                                      "===cat name =======  ${homeCubit.brandModel!.category.categoryName}");
                                 }
+                                // else if (categoryTitle == "Wardrobes") {
+                                //   homeCubit.getAllProducts(
+                                //     brandId:
+                                //         "${homeCubit.brandModel!.category.brands[i].brandId}",
+                                //   );
+                                //   print(
+                                //       "===ID =======  ${homeCubit.brandModel!.category.brands[i].brandId}");
+                                // } else if (categoryTitle == "Sanitary Ware") {
+                                //   homeCubit.getAllProducts(
+                                //     brandId:
+                                //         "${homeCubit.brandModel!.category.brands[i].brandId}",
+                                //   );
+                                //   print(
+                                //       "===ID =======  ${homeCubit.brandModel!.category.brands[i].brandId}");
+                                // }
                               },
                             ),
                           );

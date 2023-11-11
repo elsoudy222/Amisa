@@ -86,7 +86,7 @@ class Products {
         brandName: json["brandName"] ?? "",
         type: json["type"] ?? "",
         brandCover: json["brandCover"] ?? "",
-    productsList: (json["productslist"] as List<dynamic>?)
+        productsList: (json["productslist"] as List<dynamic>?)
         ?.map((x) => ProductsList.fromJson(x))
         .toList() ?? [],
       );
