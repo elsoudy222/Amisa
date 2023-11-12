@@ -46,6 +46,7 @@ dependencies:
   conditional_builder_null_safety: ^0.0.6
   flutter_screenutil: ^5.9.0
   flutter_iconly: ^1.0.2
+  fluttertoast: ^8.2.4
 
   cached_network_image: ^3.3.0
   flutter_easyloading: ^3.0.5

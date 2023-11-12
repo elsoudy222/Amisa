@@ -21,7 +21,17 @@ class ProductDetailsScreen extends StatelessWidget {
     String productType = homeCubit.productsDetailsModel!.product.type;
     return BlocConsumer<HomeCubit, HomeStates>(
       listener: (context, state) {
-        // TODO: implement listener
+        if(state is SuccessGetCollectionDetailsStates){
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return const CollectionsScreen();
+              },
+            ),
+          );
+        }
+        print("======================== SUCCESS ========================");
       },
       builder: (context, state) {
         return Scaffold(
@@ -106,69 +116,69 @@ class ProductDetailsScreen extends StatelessWidget {
                         SizedBox(
                           height: 15.h,
                         ),
-                        SizedBox(
-                          // color: Colors.orange,
-                          width: double.infinity,
 
-                          child: Text(
-                            "Description :\n\nOltre offers rigorous lines and a rich essence, with many different finishes, details and accessories that make it unique in its genre. There are many colours and materials available, all designed to blend together elegantly to create a refined and exclusive look, such as doors with cement-effect hand-applied mortar and those with highly tactile wood veneer. ",
-                            style: TextStyle(
-                              color: AppColors.white,
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w400,
-                            ),
+                        Text(
+                          "Description :\n${homeCubit.productsDetailsModel!.product.description}.",
+                          style: TextStyle(
+                            color: AppColors.white,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w400,
                           ),
                         ),
+                        // ListView(
+                        //   // color: Colors.orange,
+                        //
+                        //
+                        //   children: List.generate(3, (index) => Text(
+                        //     "Description :\n\n ${homeCubit.brandModel}.",
+                        //     style: TextStyle(
+                        //       color: AppColors.white,
+                        //       fontSize: 14.sp,
+                        //       fontWeight: FontWeight.w400,
+                        //     ),
+                        //   )),
+                        // ),
                         SizedBox(
                           height: 15.h,
                         ),
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 20.0.w),
-                          child: Row(
-                            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Image(
-                                image: const AssetImage(line),
-                                height: 60.h,
-                              ),
-                              Expanded(
-                                child: Container(
-                                  margin: EdgeInsets.only(left: 15.w),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: List.generate(
-                                        homeCubit.productsDetailsModel!.info.length,
+                          child: Expanded(
+                            child: Container(
+                              margin: EdgeInsets.only(left: 15.w),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: List.generate(
+                                    homeCubit.productsDetailsModel!.info.length,
 
-                                            (index) => Column(
-                                              mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                              children: [
-                                                Text(
-                                                  homeCubit.productsDetailsModel!.info[index].infoTitle,
-                                                  style: TextStyle(
-                                                    color: AppColors.white,
-                                                    fontSize: 15.sp,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  height: 5.h,
-                                                ),
-                                                Text(
-                                                  "${homeCubit.productsDetailsModel!.info[index].infoValue}",
-                                                  style: TextStyle(
-                                                    color: AppColors.white,
-                                                    fontSize: 14.sp,
-                                                    fontWeight: FontWeight.w400,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),),
-                                  ),
-                                ),
-                              )
-                            ],
+                                        (index) => Column(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            Text(
+                                              homeCubit.productsDetailsModel!.info[index].infoTitle,
+                                              style: TextStyle(
+                                                color: AppColors.white,
+                                                fontSize: 15.sp,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 5.h,
+                                            ),
+                                            Text(
+                                              "${homeCubit.productsDetailsModel!.info[index].infoValue}",
+                                              style: TextStyle(
+                                                color: AppColors.white,
+                                                fontSize: 14.sp,
+                                                fontWeight: FontWeight.w400,
+                                              ),
+                                            ),
+                                          ],
+                                        ),),
+                              ),
+                            ),
                           ),
                         ),
                         SizedBox(
@@ -189,14 +199,10 @@ class ProductDetailsScreen extends StatelessWidget {
                           itemBuilder: (context, index) {
                             return InkWell(
                                 onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) {
-                                        return const CollectionsScreen();
-                                      },
-                                    ),
-                                  );
+                                  homeCubit.getCollectionDetails(homeCubit.productsDetailsModel!.collections[index].collectionsId);
+                                  print(homeCubit.productsDetailsModel!.collections[index].collectionsId.toString());
+
+
                                 },
                                 child: CustomNewArrivalsCard(
                                   title: homeCubit.productsDetailsModel!.collections[index].collectionName,

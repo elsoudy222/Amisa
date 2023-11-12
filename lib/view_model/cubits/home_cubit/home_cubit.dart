@@ -8,6 +8,7 @@ import 'package:amisa/view_model/database/network/dio_helper.dart';
 import 'package:amisa/view_model/database/network/end_points.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../model/collection_model.dart';
 import '../../../model/product_details_model.dart';
 import '../../../view/screens_path.dart';
 
@@ -125,4 +126,23 @@ List<String> kitchen=["modern" , "classic"];
       print("(Product Details ERROR) => ${error.toString()}");
     });
   }
+
+  /// Get All Brands Data from API :
+  CollectionModel? collectionModel;
+  void getCollectionDetails(int collectionID) {
+    emit(LoadingGetCollectionDetailsStates());
+    DioHelper.getData(
+        url: COLLECTION + collectionID.toString(),
+    ).then((value) {
+       collectionModel = CollectionModel.fromJson(value.data);
+      //collectionModel = value.data.map((e) => CollectionModel.fromJson(e)).toList();
+       print(value.data.toString());
+      emit(SuccessGetCollectionDetailsStates());
+    }).catchError((error) {
+      emit(ErrorGetCollectionDetailsStates(error.toString()));
+      print(error.toString());
+    });
+  }
+
+
 }

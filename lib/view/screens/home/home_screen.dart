@@ -11,6 +11,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import '../../../core/components/components.dart';
 import '../../../core/components/custom_sub_category_card/custom_sub_category_card.dart';
 import '../../../core/components/show_all_button/show_all_button.dart';
+import '../../../core/components/toast/toast.dart';
 import '../../../core/config/config_path.dart';
 import '../../screens_path.dart';
 import '../category/sub_category/sub_category_screen.dart';
@@ -41,6 +42,14 @@ class _HomeScreenState extends State<HomeScreen> {
         }
         else if(state is LoadingGetAllBrandsStates){
           MyDialog.showLoadingDialog();
+        }else if(state is ErrorGetAllBrandsStates){
+          EasyLoading.dismiss();
+          showErrorToast(
+            context,
+            msg: "تأكد من اتصالك بالانترنت أولا !",
+            time: 2,
+
+          );
         }
       },
       builder: (context, state) {

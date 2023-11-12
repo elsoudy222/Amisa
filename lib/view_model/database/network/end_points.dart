@@ -13,3 +13,4 @@ const ALL_PRODUCTS = 'productsforBrand';
 const HOME = 'home';
 const BRANDS = 'onecategory/';
 const PRODUCT_DETAILS = 'oneProduct/';
+const COLLECTION = 'getcollections/';

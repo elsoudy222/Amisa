@@ -33,6 +33,13 @@ class ErrorGetAllBrandsStates extends HomeStates{
   ErrorGetAllBrandsStates(this.error);
 }
 
+class LoadingGetCollectionDetailsStates extends HomeStates{}
+class SuccessGetCollectionDetailsStates extends HomeStates{}
+class ErrorGetCollectionDetailsStates extends HomeStates{
+  final String error;
+  ErrorGetCollectionDetailsStates(this.error);
+}
+
 class LoadingGetProductDetailsStates extends HomeStates{}
 class SuccessGetProductDetailsStates extends HomeStates{}
 class ErrorGetProductDetailsStates extends HomeStates{

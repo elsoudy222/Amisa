@@ -87,12 +87,14 @@ class Product {
   final String productName;
   final List<String> coverImages;
   final String type;
+  final String description;
 
   Product({
     required this.productId,
     required this.productName,
     required this.coverImages,
     required this.type,
+    required this.description,
   });
 
   factory Product.fromJson(Map<String, dynamic> json) => Product(
@@ -100,6 +102,7 @@ class Product {
     productName: json["productName"],
     coverImages: List<String>.from(json["coverImages"].map((x) => x)),
     type: json["type"],
+    description: json['description'],
   );
 
   Map<String, dynamic> toJson() => {
