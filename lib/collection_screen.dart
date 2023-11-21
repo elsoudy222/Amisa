@@ -3,6 +3,7 @@ import 'package:amisa/photo_view.dart';
 import 'package:amisa/view/screens/home/widgets/custom_new_arrivals/custom_new_arrivals_card.dart';
 import 'package:amisa/view/screens_path.dart';
 import 'package:amisa/view_model/cubits/home_cubit/home_cubit.dart';
+import 'package:amisa/view_model/database/network/end_points.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -41,26 +42,23 @@ class CollectionsScreen extends StatelessWidget {
           body: SingleChildScrollView(
             child: Column(
               children: [
-                Container(
-                  height: 250.h,
-                  width: double.infinity,
-                  // color: Colors.grey,
-                  decoration:  BoxDecoration(
-                    image: DecorationImage(
-                      image: CachedNetworkImageProvider(
-                        "homeCubit.productsDetailsModel!.collections,"
-                      ),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
+                // Container(
+                //   height: 250.h,
+                //   width: double.infinity,
+                //   // color: Colors.grey,
+                //   decoration:  BoxDecoration(
+                //     image: DecorationImage(
+                //       image: CachedNetworkImageProvider(
+                //         "homeCubit.productsDetailsModel!.collections,"
+                //       ),
+                //       fit: BoxFit.cover,
+                //     ),
+                //   ),
+                // ),
                 SizedBox(
                   height: 10.h,
                 ),
-                GridView.builder(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                  ),
+                ListView.builder(
                   itemCount: homeCubit
                       .collectionModel!.collections.collectionsimages.length,
                   shrinkWrap: true,
@@ -77,12 +75,25 @@ class CollectionsScreen extends StatelessWidget {
                             ),
                           );
                         },
-                        child: CustomNewArrivalsCard(
-                          title: "",
-                          subtitle: "",
-                          image: homeCubit.collectionModel!.collections.collectionsimages[index],
-                          fit: BoxFit.fill,
-                        ));
+                      child: Container(
+                        //padding: EdgeInsets.all(10),
+                        margin: EdgeInsets.all(10.r),
+                        // color: Colors.orange,
+
+                        height: 200.h,
+                        width: double.infinity,
+                        child: CachedNetworkImage(
+                          imageUrl: "$baseImage${homeCubit.collectionModel!.collections.collectionsimages[index]}",
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                        // child: CustomNewArrivalsCard(
+                        //   title: "",
+                        //   subtitle: "",
+                        //   image: homeCubit.collectionModel!.collections.collectionsimages[index],
+                        //   fit: BoxFit.fill,
+                        // ),
+                    );
                   },
                 ),
               ],

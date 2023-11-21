@@ -30,8 +30,8 @@ class CustomHeaderWidget extends StatelessWidget {
             child: Row(
               children: [
                 SizedBox(
-                  height: 70.h,
-                  width: 215.w,
+                  //height: 70.h,
+                  width: 220.w,
                   child: const Text(
                     "THE LUXURY\nDESTINATION",
                     textAlign: TextAlign.start,

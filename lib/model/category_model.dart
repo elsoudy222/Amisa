@@ -7,7 +7,7 @@ class CategoryModel {
   });
 
   factory CategoryModel.fromJson(Map<String, dynamic> json) => CategoryModel(
-    category: Category.fromJson(json["category"]),
+    category: Category.fromJson(json["category"] ?? []),
   );
 
   Map<String, dynamic> toJson() => {
@@ -31,11 +31,11 @@ class Category {
   });
 
   factory Category.fromJson(Map<String, dynamic> json) => Category(
-    categoryId: json["category_Id"],
-    categoryName: json["categoryName"],
-    categoryDescription: json["categorydescription"],
-    categoryImage: json["categoryImage"],
-    brands: List<Brand>.from(json["brands"].map((x) => Brand.fromJson(x))),
+    categoryId: json["category_Id"] ?? "",
+    categoryName: json["categoryName"] ?? "",
+    categoryDescription: json["categorydescription"] ?? "",
+    categoryImage: json["categoryImage"] ?? "",
+    brands: List<Brand>.from(json["brands"].map((x) => Brand.fromJson(x))).toList(),
   );
 
   Map<String, dynamic> toJson() => {
@@ -52,19 +52,22 @@ class Brand {
   String brandName;
   String brandPhoto;
   String brandCover;
+  String brandDescription;
 
   Brand({
     required this.brandId,
     required this.brandName,
     required this.brandPhoto,
     required this.brandCover,
+    required this.brandDescription,
   });
 
   factory Brand.fromJson(Map<String, dynamic> json) => Brand(
-    brandId: json["brand_id"],
-    brandName: json["brandName"],
-    brandPhoto: json["brandphoto"],
-    brandCover: json["brandCover"],
+    brandId: json["brand_id"]??"",
+    brandName: json["brandName"]??"",
+    brandPhoto: json["brandphoto"]??"",
+    brandCover: json["brandCover"]??"",
+    brandDescription: json["brandDescription"] ??"",
   );
 
   Map<String, dynamic> toJson() => {

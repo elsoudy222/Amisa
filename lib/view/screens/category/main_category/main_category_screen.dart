@@ -39,6 +39,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
         }
         else if(state is LoadingGetAllBrandsStates){
           MyDialog.showLoadingDialog();
+        } else if (state is ErrorGetAllBrandsStates) {
+          EasyLoading.dismiss();
+          print("================================ ERROR =======================================");
         }
       },
       builder: (context, state) {
@@ -80,7 +83,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
                           onTap: () {
                            // homeCubit.changeIndex(index);
                            //  homeCubit.chosenCategoryType = Cate;
-                            homeCubit.getAllBrands(homeCubit.homeModel!.categories[index].id);
+                            homeCubit.getAllBrands(index);
+                          //  homeCubit.getBrandDetails(homeCubit.brandModel!.category.brands[index].brandId);
 
 
                           },

@@ -8,6 +8,7 @@ const String appName = "Amisa";
 const String lubeLogo = "assets/icons/lube.png";
 const String creoLogo = "assets/icons/creo.png";
 const String kitchenSizes = "assets/icons/kitchen_sizes.png";
+const String sizes = "assets/icons/sizes.png";
 
 /// Image paths :
 
@@ -18,6 +19,8 @@ const String newArrivals = "assets/images/new-arrival.png";
 const String ceramics = "assets/images/ceramic.png";
 const String kitchen = "assets/images/kitchen.png";
 const String news = "assets/images/news.png";
+const String modern = "assets/images/modern.jpg";
+const String classic = "assets/images/classic.jpg";
 
 
 /// Icons Path :

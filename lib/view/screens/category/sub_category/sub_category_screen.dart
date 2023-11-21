@@ -9,9 +9,11 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../../../core/components/custom_appbars/custom_sub_category_appbar.dart';
 import '../../../../core/components/custom_sub_category_card/custom_sub_category_card.dart';
+import '../../../../core/components/toast/toast.dart';
 import '../../products/products_screen.dart';
 
 class SubCategoryScreen extends StatelessWidget {
@@ -45,10 +47,36 @@ class SubCategoryScreen extends StatelessWidget {
               ),
             );
           }
-        } else if (state is ErrorGetAllProductsStates) {
-          EasyLoading.dismiss();
+          else if (state is ErrorGetAllProductsStates) {
+            EasyLoading.dismiss();
+            showErrorToast(
+              context,
+              msg: "Sorry, There is no products yet",
+              time: 3,
+              gravity: ToastGravity.TOP
+            );
+            print("================================ ERROR =======================================");
+
+          }
         }
-      },
+
+        // if (state is LoadingGetBrandDetailsStates) {
+        //   MyDialog.showLoadingDialog();
+        // } else if (state is SuccessGetAllProductsStates) {
+        //     EasyLoading.dismiss();
+        //     context.push(
+        //       ProductsScreen(
+        //         type: homeCubit.productsModel!.products.type,
+        //         brandName: homeCubit.productsModel!.products.brandName,
+        //         categoryName: categoryTitle,
+        //       ),
+        //     );
+        //   }
+        //  else if (state is ErrorGetAllProductsStates) {
+        //   EasyLoading.dismiss();
+        // }
+
+        },
       builder: (context, state) {
         return Scaffold(
           appBar: CustomSubCategoryAppBar(
@@ -74,17 +102,17 @@ class SubCategoryScreen extends StatelessWidget {
                                 imageUrl:
                                     "$baseImage${homeCubit.brandModel!.category.brands[i].brandPhoto}",
                                 fit: BoxFit.cover,
+
                               ),
                               backgroundImage: homeCubit
                                   .brandModel!.category.brands[i].brandCover,
-                              description: '',
+                              description: "",
                               buttonText:
                                   'Show ${homeCubit.brandModel!.category.brands[i].brandName}',
                               onTap: () {
                                 print(categoryTitle);
                                 if (categoryTitle == "Kitchens") {
-                                  context.push(
-                                    KitchensSubCategoryType(
+                                  context.push(KitchensSubCategoryType(
                                       companyName: homeCubit.brandModel!
                                           .category.brands[i].brandName,
                                       brandId:
@@ -94,40 +122,22 @@ class SubCategoryScreen extends StatelessWidget {
                                       companyImage: homeCubit.brandModel!
                                           .category.brands[i].brandCover,
                                       categoryName: categoryTitle,
-                                    ),
-                                  );
+                                    brandDescription: homeCubit.brandModel!.category.brands[i].brandDescription,
+                                    ),);
                                   print(
                                       "==========  ${homeCubit.brandModel!.category.brands[i].brandName}");
                                 } else if (categoryTitle != "Kitchens") {
-                                  homeCubit.getAllProducts(
-                                    brandId:
-                                        "${homeCubit.brandModel!.category.brands[i].brandId}",
-                                  );
-                                  print(
-                                      "===ID =======  ${homeCubit.brandModel!.category.brands[i].brandId}");print(
-                                      "===cat name =======  ${homeCubit.brandModel!.category.categoryName}");
+                                  homeCubit.getAllProducts(brandId: "${homeCubit.brandModel!.category.brands[i].brandId}",);
+                                  print("===ID =======  ${homeCubit.brandModel!.category.brands[i].brandId}");
+                                  print("===cat name =======  ${homeCubit.brandModel!.category.categoryName}");
                                 }
-                                // else if (categoryTitle == "Wardrobes") {
-                                //   homeCubit.getAllProducts(
-                                //     brandId:
-                                //         "${homeCubit.brandModel!.category.brands[i].brandId}",
-                                //   );
-                                //   print(
-                                //       "===ID =======  ${homeCubit.brandModel!.category.brands[i].brandId}");
-                                // } else if (categoryTitle == "Sanitary Ware") {
-                                //   homeCubit.getAllProducts(
-                                //     brandId:
-                                //         "${homeCubit.brandModel!.category.brands[i].brandId}",
-                                //   );
-                                //   print(
-                                //       "===ID =======  ${homeCubit.brandModel!.category.brands[i].brandId}");
-                                // }
+
                               },
                             ),
                           );
                         },
                       )
-                    : Center(
+                    : const Center(
                         child: Text(
                         "There are no brands in this category",
                         style: TextStyle(

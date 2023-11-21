@@ -10,13 +10,14 @@ Widget customCircularProgressIndicator() {
     ),
   );
 }
+
 class MyDialog{
 
   static showLoadingDialog() {
     EasyLoading.show(
       maskType: EasyLoadingMaskType.none,
       dismissOnTap: false,
-      indicator: CircularProgressIndicator.adaptive(backgroundColor: Colors.white,),
+      indicator: const CircularProgressIndicator.adaptive(backgroundColor: Colors.white,strokeWidth: 2,),
       status: "loading",
     );
   }

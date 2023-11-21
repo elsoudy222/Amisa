@@ -10,7 +10,8 @@ import '../../../../collection_screen.dart';
 import '../../../screens_path.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
-  ProductDetailsScreen({super.key});
+  final String brandName;
+  ProductDetailsScreen({super.key, required this.brandName});
 
   final PageController imageController = PageController();
 
@@ -19,6 +20,8 @@ class ProductDetailsScreen extends StatelessWidget {
     var homeCubit = HomeCubit.get(context);
     String productTitle = homeCubit.productsDetailsModel!.product.productName;
     String productType = homeCubit.productsDetailsModel!.product.type;
+    String categoryTitle = homeCubit.brandModel!.category.categoryName;
+
     return BlocConsumer<HomeCubit, HomeStates>(
       listener: (context, state) {
         if(state is SuccessGetCollectionDetailsStates){
@@ -65,7 +68,7 @@ class ProductDetailsScreen extends StatelessWidget {
                         controller: imageController,
                         itemBuilder: (context, index) => CachedNetworkImage(
                           imageUrl: "$baseImage${homeCubit.productsDetailsModel!.product.coverImages[index]}",
-                          fit:  BoxFit.cover,
+                          fit:  BoxFit.fill,
                         ),
                         itemCount: homeCubit.productsDetailsModel!.product.coverImages.length,
                         allowImplicitScrolling: true,
@@ -91,129 +94,161 @@ class ProductDetailsScreen extends StatelessWidget {
                 SizedBox(
                   height: 15.h,
                 ),
-                SingleChildScrollView(
-                  child: Padding(
-                    padding: EdgeInsets.all(20.0.r),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        // Screen Path :
-                         Text(
-                          "Home > Kitchens > LUBE > $productType Kitchens > $productTitle ",
-                          style: const TextStyle(color: Colors.white),
+                Padding(
+                  padding: EdgeInsets.all(20.0.r),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Screen Path :
+                      categoryTitle != "Kitchens"
+                          ? Text(
+                        "Home > $categoryTitle > $brandName > $productTitle ",
+                        style: const TextStyle(color: Colors.white,fontSize: 12),
+                      )
+                          :Text(
+                        "Home > $categoryTitle > $brandName >  $productType > $productTitle ",
+                        style: const TextStyle(color: Colors.white,fontSize: 12),
+                      ) ,
+                      SizedBox(
+                        height: 15.h,
+                      ),
+                      Text(
+                        "$productTitle .",
+                        style: TextStyle(
+                          color: AppColors.white,
+                          fontSize: 20.sp,
+                          fontWeight: FontWeight.w500,
                         ),
-                        SizedBox(
-                          height: 15.h,
-                        ),
-                        Text(
-                          "Model Title: $productTitle ",
-                          style: TextStyle(
-                            color: AppColors.white,
-                            fontSize: 20.sp,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 15.h,
-                        ),
+                      ),
+                      SizedBox(
+                        height: 15.h,
+                      ),
 
-                        Text(
-                          "Description :\n${homeCubit.productsDetailsModel!.product.description}.",
-                          style: TextStyle(
-                            color: AppColors.white,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w400,
-                          ),
+                      Text(
+                        "Description :\n${homeCubit.productsDetailsModel!.product.description}",
+                        style: TextStyle(
+                          color: AppColors.white,
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w400,
                         ),
-                        // ListView(
-                        //   // color: Colors.orange,
-                        //
-                        //
-                        //   children: List.generate(3, (index) => Text(
-                        //     "Description :\n\n ${homeCubit.brandModel}.",
-                        //     style: TextStyle(
-                        //       color: AppColors.white,
-                        //       fontSize: 14.sp,
-                        //       fontWeight: FontWeight.w400,
-                        //     ),
-                        //   )),
-                        // ),
-                        SizedBox(
-                          height: 15.h,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 20.0.w),
-                          child: Expanded(
-                            child: Container(
-                              margin: EdgeInsets.only(left: 15.w),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: List.generate(
-                                    homeCubit.productsDetailsModel!.info.length,
+                      ),
 
-                                        (index) => Column(
-                                          mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            Text(
-                                              homeCubit.productsDetailsModel!.info[index].infoTitle,
-                                              style: TextStyle(
-                                                color: AppColors.white,
-                                                fontSize: 15.sp,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: 5.h,
-                                            ),
-                                            Text(
-                                              "${homeCubit.productsDetailsModel!.info[index].infoValue}",
-                                              style: TextStyle(
-                                                color: AppColors.white,
-                                                fontSize: 14.sp,
-                                                fontWeight: FontWeight.w400,
-                                              ),
-                                            ),
-                                          ],
-                                        ),),
-                              ),
+                      SizedBox(
+                        height: 15.h,
+                      ),
+                      homeCubit.productsDetailsModel!.info.isNotEmpty
+                          ? Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "More Information:",
+                            style: TextStyle(
+                              color: AppColors.white,
+                              fontSize: 17.sp,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 15.h,
-                        ),
-                        customTitleText(title: "DESIGN COLLECTIONS"),
-                        SizedBox(
-                          height: 15.h,
-                        ),
-                        GridView.builder(
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
+                          SizedBox(
+                            height: 10.h,
                           ),
-                          itemCount: homeCubit.productsDetailsModel!.collections.length,
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemBuilder: (context, index) {
-                            return InkWell(
-                                onTap: () {
-                                  homeCubit.getCollectionDetails(homeCubit.productsDetailsModel!.collections[index].collectionsId);
-                                  print(homeCubit.productsDetailsModel!.collections[index].collectionsId.toString());
+                          Row(
+                            //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Image(image: AssetImage(sizes)),
+                              Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 10.0.w),
+                                child: SizedBox(
+                                  width: 320.w,
+                                  // margin: EdgeInsets.only(left: 10.w),
+                                  //color: Colors.orange,
+                                  child: Wrap(
+                                    spacing: 8.w,
+                                    children: List.generate(
+                                        homeCubit.productsDetailsModel!.info.length,
+                                            (index) => Padding(
+                                              padding:  EdgeInsets.only(bottom: 7.0.h),
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                                children: [
+                                                  Text(
+                                                    homeCubit.productsDetailsModel!.info[index].infoTitle,
+                                                    style: TextStyle(
+                                                      color: AppColors.white,
+                                                      fontSize: 15.sp,
+                                                      fontWeight: FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    height: 5.h,
+                                                  ),
+                                                  Text(
+                                                    "${homeCubit.productsDetailsModel!.info[index].infoValue}",
+                                                    style: TextStyle(
+                                                      color: AppColors.white,
+                                                      fontSize: 14.sp,
+                                                      fontWeight: FontWeight.w400,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      )
+                      : Container(),
 
 
-                                },
-                                child: CustomNewArrivalsCard(
-                                  title: homeCubit.productsDetailsModel!.collections[index].collectionName,
-                                  subtitle: "",
-                                  image: homeCubit.productsDetailsModel!.collections[index].collectionphoto,
-                                  fit: BoxFit.fill,
-                                ));
-                          },
+                      homeCubit.productsDetailsModel!.matrialinfo.isNotEmpty
+                          ? Row(
+                            //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: List.generate(
+                              homeCubit.productsDetailsModel!.matrialinfo.length
+                            , (index) =>  Container(
+                              height: 60.h,
+                                width: 60.w,
+                                child: CachedNetworkImage(imageUrl: "$baseImage${homeCubit.productsDetailsModel!.matrialinfo[index].matrPhoto!}")),)
+
+
+                          )
+                      : Container(),
+
+                      SizedBox(
+                        height: 15.h,
+                      ),
+                      customTitleText(title: "DESIGN COLLECTIONS"),
+                      SizedBox(
+                        height: 15.h,
+                      ),
+                      GridView.builder(
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
                         ),
-                      ],
-                    ),
+                        itemCount: homeCubit.productsDetailsModel!.collections.length,
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          return InkWell(
+                              onTap: () {
+                                homeCubit.getCollectionDetails(homeCubit.productsDetailsModel!.collections[index].collectionsId);
+                                print(homeCubit.productsDetailsModel!.collections[index].collectionsId.toString());
+
+                              },
+                              child: CustomNewArrivalsCard(
+                                title: homeCubit.productsDetailsModel!.collections[index].collectionName,
+                                subtitle: "",
+                                image: homeCubit.productsDetailsModel!.collections[index].collectionphoto,
+                                fit: BoxFit.fill,
+                              ));
+                        },
+                      ),
+                    ],
                   ),
                 ),
               ],

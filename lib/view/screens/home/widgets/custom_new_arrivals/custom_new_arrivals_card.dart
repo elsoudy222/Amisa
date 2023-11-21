@@ -32,7 +32,7 @@ class CustomNewArrivalsCard extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 8.0),
+            padding:  EdgeInsets.only(top: 6.0.h),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.end,

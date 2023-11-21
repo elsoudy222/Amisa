@@ -35,7 +35,7 @@ class CustomSubCategoryCard extends StatelessWidget {
 
           /// This Image will be changes :--------------
           image: CachedNetworkImageProvider("$baseImage$backgroundImage",),
-          fit: BoxFit.cover,
+          fit: BoxFit.fill,
         ),
       ),
       child: Column(

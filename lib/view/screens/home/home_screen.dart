@@ -12,7 +12,6 @@ import '../../../core/components/components.dart';
 import '../../../core/components/custom_sub_category_card/custom_sub_category_card.dart';
 import '../../../core/components/show_all_button/show_all_button.dart';
 import '../../../core/components/toast/toast.dart';
-import '../../../core/config/config_path.dart';
 import '../../screens_path.dart';
 import '../category/sub_category/sub_category_screen.dart';
 import '../product_details/kitchen_product_details/kitchen_product_details_screen.dart';
@@ -25,6 +24,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
+
   @override
   Widget build(BuildContext context) {
     var layoutCubit = LayoutCubit.get(context);
@@ -33,8 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
       listener: (context, state) {
         if(state is SuccessGetAllBrandsStates){
           EasyLoading.dismiss();
-          context.push(
-            SubCategoryScreen(
+          context.push(SubCategoryScreen(
             categoryTitle: homeCubit.homeModel!.categories[homeCubit.currentIndex].catName,
             categoryDes: homeCubit.homeModel!.categories[homeCubit.currentIndex].description,
             categoryImage: homeCubit.homeModel!.categories[homeCubit.currentIndex].image,
@@ -46,11 +46,14 @@ class _HomeScreenState extends State<HomeScreen> {
           EasyLoading.dismiss();
           showErrorToast(
             context,
-            msg: "تأكد من اتصالك بالانترنت أولا !",
-            time: 2,
+            msg: "Check your internet connection!",
+            time: 3,
 
           );
         }
+
+
+
       },
       builder: (context, state) {
 
@@ -63,8 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     // Section 1 : Image
                     const CustomHeaderWidget(),
-//-------------------------------------------------------------------------------------------
-
+//------------------------------------------------------------------------------------------
                     // Section 2 : New Arrivals .
                     Padding(
                       padding: EdgeInsets.only(top: 25.0.h, bottom: 10.h),
@@ -88,7 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: SizedBox(
                           height: 156.h,
                           child: Padding(
-                            padding: const EdgeInsets.only(bottom: 8.0),
+                            padding: const EdgeInsets.only(bottom: 5.0),
                             child: ListView.builder(
                                 controller: homeCubit.scrollController,
                                 shrinkWrap: true,
@@ -97,17 +99,18 @@ class _HomeScreenState extends State<HomeScreen> {
                                 itemBuilder: (context, i) {
                                   return InkWell(
                                     onTap: (){
-                                      // homeCubit.getProductDetails(homeCubit.productsModel!.products.productsList[i].productId);
-                                      //
-                                      // if(state is SuccessGetProductDetailsStates){
-                                      //   EasyLoading.dismiss();
-                                      //   context.push(
-                                      //       ProductDetailsScreen()
-                                      //     ,);
-                                      // }
-                                      // else if(state is LoadingGetProductDetailsStates){
-                                      //   MyDialog.showLoadingDialog();
-                                      // }
+                                       homeCubit.getProductDetails(homeCubit.homeModel!.newArrival[i].id);
+                                       if (state is LoadingGetProductDetailsStates){
+                                         MyDialog.showLoadingDialog();
+                                       } else if ( state is SuccessGetProductDetailsStates
+                                       ){
+                                         EasyLoading.dismiss();
+                                         context.push(ProductDetailsScreen(brandName: homeCubit.homeModel!.newArrival[i].brandName),);
+                                       } else if (state is ErrorGetProductDetailsStates) {
+                                         EasyLoading.dismiss();
+                                         print("============= Error get product details ===============");
+                                       }
+
                                     },
                                     child: CustomNewArrivalsCard(
                                       title: homeCubit.homeModel!.newArrival[i].brandName,

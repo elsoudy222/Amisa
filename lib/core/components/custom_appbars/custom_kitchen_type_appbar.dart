@@ -37,8 +37,8 @@ class CustomKitchensTypeAppbar extends StatelessWidget implements PreferredSizeW
                 Colors.black.withOpacity(0.5),
                 BlendMode.dstATop,
               ),
-              image: AssetImage(
-                "$imageUrl",
+              image: CachedNetworkImageProvider(
+                baseImage+imageUrl,
               ),
               fit: BoxFit.cover)),
       child: Stack(

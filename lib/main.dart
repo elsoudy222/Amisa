@@ -29,6 +29,7 @@ void main() async{
 }
 
 class MyApp extends StatelessWidget {
+
   const MyApp({super.key});
 
   @override
@@ -37,7 +38,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => LayoutCubit(),
+          create: (context) => LayoutCubit()..getTimeline()..getDesignHub()..getShowRooms(),
         ),
         BlocProvider(
           create: (context) => HomeCubit()..getHomeData(),
@@ -65,14 +66,20 @@ class MyApp extends StatelessWidget {
               themeMode: ThemeMode.dark,
               theme: ThemeData(
                 appBarTheme: const AppBarTheme(
+                  centerTitle: true,
                   backgroundColor: AppColors.scaffoldBackground,
+
+                  iconTheme: IconThemeData(
+                    color: Colors.white
+                  ),
                   elevation: 0.0
                 ),
                 scaffoldBackgroundColor: AppColors.scaffoldBackground,
-                  primaryColor: AppColors.scaffoldBackground,
-                 primarySwatch: Colors.grey,
+                primaryColor: AppColors.white,
+                // primarySwatch: Colors.grey,
                  // fontFamily: "Montserrat-Black",
                 textTheme: GoogleFonts.montserratTextTheme(),
+
 
               ),
               home:   const LayoutScreen(),

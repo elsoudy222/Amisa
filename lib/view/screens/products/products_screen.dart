@@ -27,7 +27,7 @@ class ProductsScreen extends StatelessWidget {
         } else if (state is SuccessGetProductDetailsStates){
             EasyLoading.dismiss();
             context.push(
-              ProductDetailsScreen(),
+              ProductDetailsScreen(brandName: brandName,),
             );
         } else if (state is ErrorGetProductDetailsStates) {
           EasyLoading.dismiss();

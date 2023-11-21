@@ -1,3 +1,5 @@
 
-
-enum KitchenTypes{modern,classic}
+enum WithdrawType {
+  findATM,
+  withdrawATM,
+}

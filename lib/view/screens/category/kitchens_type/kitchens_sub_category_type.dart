@@ -18,16 +18,16 @@ class KitchensSubCategoryType extends StatelessWidget {
   final String companyImage;
   final String companyLogo;
   final String? brandId;
+  final String brandDescription;
 
-  String modern = KitchenTypes.modern.toString();
-  String classic = KitchenTypes.classic.toString();
+
 
   KitchensSubCategoryType(
       {super.key,
       required this.companyName,
       this.companyLogo = lubeLogo,
       this.brandId,
-      required this.companyImage, required this.categoryName});
+      required this.companyImage, required this.categoryName, required this.brandDescription});
 
   @override
   Widget build(BuildContext context) {
@@ -49,15 +49,14 @@ class KitchensSubCategoryType extends StatelessWidget {
           print("$brandId");
         } else if (state is ErrorGetAllProductsStates) {
           EasyLoading.dismiss();
-          print(
-              "================================ ERROR =======================================");
+          print("================================ ERROR =======================================");
         }
       },
       builder: (context, state) {
         return Scaffold(
           appBar: CustomKitchensTypeAppbar(
             title: companyName,
-            imageUrl: kitchen,
+            imageUrl: companyImage,
             companyLogo: companyLogo,
           ),
           body: Column(
@@ -72,8 +71,10 @@ class KitchensSubCategoryType extends StatelessWidget {
                     SizedBox(
                       width: 280.w,
                       child: Text(
-                        "Lube leads the Italian kitchen market, harmonizing design and innovation, and delivering exceptional quality and customer care.",
+                        brandDescription,
                         textAlign: TextAlign.start,
+                        maxLines: 3,
+                        overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                           color: AppColors.white,
                           fontSize: 16.sp,
@@ -109,21 +110,20 @@ class KitchensSubCategoryType extends StatelessWidget {
                     crossAxisSpacing: 10.w,
                     mainAxisSpacing: 10.w,
                   ),
-                  itemCount: homeCubit.kitchen.length,
+                  itemCount: homeCubit.kitchenTypes.length,
                   itemBuilder: (BuildContext context, int index) {
                     return CustomKitchenTypeCard(
                       /// will change the image:
-                      backgroundImage: header,
-                      title: homeCubit.kitchen[index],
+                      backgroundImage: homeCubit.kitchenTypesImage[index],
+                      title: homeCubit.kitchenTypes[index],
                       onTap: () {
-
 
                         homeCubit.getAllProducts(
                           brandId: "$brandId",
-                          type: homeCubit.kitchen[index],
+                          type: homeCubit.kitchenTypes[index],
                          // pageNumber: "1"
                         );
-                        print(homeCubit.kitchen[index]);
+                        print(homeCubit.kitchenTypes[index]);
                         // print("TYPE: =====${homeCubit.productsModel!.products.type[index]}");
                         //context.push(const ProductsScreen());
                       },

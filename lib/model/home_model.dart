@@ -11,9 +11,9 @@ class HomeModel {
   });
 
   factory HomeModel.fromJson(Map<String, dynamic> json) => HomeModel(
-    newArrival: List<NewArrival>.from(json["NewArrival"].map((x) => NewArrival.fromJson(x))),
-    categories: List<Category>.from(json["categories"].map((x) => Category.fromJson(x))),
-    news: List<News>.from(json["news"].map((x) => News.fromJson(x))),
+    newArrival: List<NewArrival>.from(json["NewArrival"].map((x) => NewArrival.fromJson(x)) ??[]).toList(),
+    categories: List<Category>.from(json["categories"].map((x) => Category.fromJson(x))?? []).toList(),
+    news: List<News>.from(json["news"].map((x) => News.fromJson(x))??[]).toList(),
   );
 
   Map<String, dynamic> toJson() => {
@@ -65,10 +65,10 @@ class NewArrival {
   });
 
   factory NewArrival.fromJson(Map<String, dynamic> json) => NewArrival(
-    id: json["id"],
-    brandName: json["brandName"],
-    productName: json["productName"],
-    photo: json["photo"],
+    id: json["id"]?? 0,
+    brandName: json["brandName"] ??"",
+    productName: json["productName"]??"",
+    photo: json["photo"]??"",
   );
 
   Map<String, dynamic> toJson() => {

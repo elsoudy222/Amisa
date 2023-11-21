@@ -1,6 +1,8 @@
 import 'dart:convert';
 
+import 'package:amisa/core/config/config_path.dart';
 import 'package:amisa/core/config/const/enums.dart';
+import 'package:amisa/model/brand_details_model.dart';
 import 'package:amisa/model/category_model.dart';
 import 'package:amisa/model/home_model.dart';
 import 'package:amisa/model/products_model.dart';
@@ -26,23 +28,9 @@ class HomeCubit extends Cubit<HomeStates> {
     currentIndex = index;
     emit(ChangeIndexState());
   }
-List<String> kitchen=["modern" , "classic"];
-
- String? kitchenType;
-  void changeKitchenTypeToModern( ) {
-    kitchenType = KitchenTypes.modern.toString();
-    print(kitchenType);
-    emit(ChangeKitchenTypeToModernState());
-
-  }
-  void changeKitchenTypeToClassic() {
-    kitchenType = KitchenTypes.classic.toString();
-    print(kitchenType);
-    emit(ChangeKitchenTypeToClassicState());
-
-  }
-
-
+List<String> kitchenTypes=["modern" , "classic"];
+List<String> wardrobesTypes=["Atelier Notte" , "my flexy"];
+List<String> kitchenTypesImage=[modern , classic];
 
 
   /// Get Home Data from API :
@@ -58,7 +46,7 @@ List<String> kitchen=["modern" , "classic"];
       emit(SuccessHomeDataStates());
     }).catchError((error) {
       print(error.toString());
-      emit(ErrorHomeDataStates(error));
+      emit(ErrorHomeDataStates(error.toString()));
     });
   }
 
@@ -99,10 +87,11 @@ List<String> kitchen=["modern" , "classic"];
 
   /// Get All Brands Data from API :
   CategoryModel? brandModel;
-  void getAllBrands(int catId) {
+  void getAllBrands(int index) {
     emit(LoadingGetAllBrandsStates());
     DioHelper.getData(
-      url: BRANDS + catId.toString(),
+     // url: BRANDS + catId.toString(),
+      url: "$BRANDS${homeModel!.categories[index].id}",
     ).then((value) {
       brandModel = CategoryModel.fromJson(value.data);
       emit(SuccessGetAllBrandsStates());
@@ -121,13 +110,14 @@ List<String> kitchen=["modern" , "classic"];
     ).then((value) {
       productsDetailsModel = ProductsDetailsModel.fromJson(value.data);
       emit(SuccessGetProductDetailsStates());
+      print(value.data.toString());
     }).catchError((error) {
       emit(ErrorGetProductDetailsStates(error.toString()));
       print("(Product Details ERROR) => ${error.toString()}");
     });
   }
 
-  /// Get All Brands Data from API :
+  /// Get All Collections Data from API :
   CollectionModel? collectionModel;
   void getCollectionDetails(int collectionID) {
     emit(LoadingGetCollectionDetailsStates());
