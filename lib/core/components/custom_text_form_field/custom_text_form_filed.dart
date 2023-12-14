@@ -87,7 +87,7 @@ class _TextFormFieldsCustomState extends State<TextFormFieldsCustom> {
       // prevent text from being automatically selected
       // onEditingComplete: widget.onEditingComplete,
       onChanged: (value) {
-        // widget.onChanged!(value);
+         widget.onChanged!(value);
         // widget.onChanged != null ? widget.onChanged!(value) : null;
       },
       style: const TextStyle(color:  Colors.white ),

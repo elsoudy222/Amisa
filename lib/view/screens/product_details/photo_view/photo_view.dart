@@ -19,8 +19,8 @@ class PhotoViewScreen extends StatelessWidget {
         child: Container(
           height: MediaQuery.of(context).size.height,
             child: PhotoView(
-              imageProvider:  CachedNetworkImageProvider(baseImage+image),
-              filterQuality:  FilterQuality.high,
+              imageProvider: CachedNetworkImageProvider(baseImage+image),
+              filterQuality: FilterQuality.high,
 
             )
         ),

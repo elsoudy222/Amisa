@@ -1,4 +1,3 @@
-
 class HomeModel {
   List<NewArrival> newArrival;
   List<Category> categories;
@@ -37,10 +36,10 @@ class Category {
   });
 
   factory Category.fromJson(Map<String, dynamic> json) => Category(
-    id: json["id"],
-    catName: json["catName"],
-    description: json["description"],
-    image: json["image"],
+    id: json["id"] ?? "",
+    catName: json["catName"]??"",
+    description: json["description"]??"",
+    image: json["image"]??"",
   );
 
   Map<String, dynamic> toJson() => {

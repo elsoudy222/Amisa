@@ -1,29 +1,61 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 import '../../../../../core/config/const/app_strings.dart';
 import '../../../../screens_path.dart';
 
-class CustomHeaderWidget extends StatelessWidget {
-  const CustomHeaderWidget({
+class CustomHeaderWidget extends StatelessWidget
+    implements PreferredSizeWidget {
+  @override
+  Size get preferredSize => Size.fromHeight(sizeHeight.h);
+
+  int sizeHeight = 300;
+  List<String> imageHeader = [
+    header,
+    newArrivals,
+    news,
+    ceramics,
+    kitchen,
+  ];
+
+  CustomHeaderWidget({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 450.h,
+      height: sizeHeight.h,
       decoration: BoxDecoration(
-        image: DecorationImage(
-          colorFilter: ColorFilter.mode(
-              Colors.black.withOpacity(0.5),
-              BlendMode.dstATop),
-
-          /// This Image will be changes :--------------
-          image: const AssetImage(header1),
-          fit: BoxFit.cover,
-        ),
+        borderRadius: BorderRadius.vertical(bottom: Radius.circular(25.r)),
       ),
       child: Stack(
         children: [
+          CarouselSlider(
+            items: List.generate(
+              imageHeader.length,
+              (index) => Container(
+                height: sizeHeight.h,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  borderRadius:
+                      BorderRadius.vertical(bottom: Radius.circular(30.r)),
+                  image: DecorationImage(
+                    colorFilter: ColorFilter.mode(
+                        Colors.black.withOpacity(0.7), BlendMode.dstATop),
+                    image: AssetImage(imageHeader[index]),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+            ),
+            options: CarouselOptions(
+                height: sizeHeight.h,
+                aspectRatio: 16 / 9,
+                viewportFraction: 1,
+                autoPlay: true,
+                enableInfiniteScroll: true),
+          ),
           Positioned(
             left: 30.w,
             bottom: 30.h,
@@ -32,40 +64,40 @@ class CustomHeaderWidget extends StatelessWidget {
                 SizedBox(
                   //height: 70.h,
                   width: 220.w,
-                  child: const Text(
+                  child:  Text(
                     "THE LUXURY\nDESTINATION",
                     textAlign: TextAlign.start,
                     style: TextStyle(
-                        fontSize: 30,
+                        fontSize: 30.sp,
                         fontWeight: FontWeight.bold,
                         color: Colors.white),
                   ),
                 ),
+                // SizedBox(
+                //   width: 350.0,
+                //   child: DefaultTextStyle(
+                //     style: const TextStyle(
+                //       fontSize: 30.0,
+                //      // fontFamily: 'Agne',
+                //     ),
+                //     child: AnimatedTextKit(
+                //       animatedTexts: [
+                //         TypewriterAnimatedText('THE LUXURY DESTINATION'),
+                //
+                //       ],
+                //       onTap: () {
+                //         print("Tap Event");
+                //       },
+                //     ),
+                //   ),
+                // ),
                 SizedBox(
                   width: 75.w,
                 ),
-                // InkWell(
-                //   onTap: () {
-                //     print(
-                //         " **************** (Tapped) ****************");
-                //
-                //   },
-                //   child: Container(
-                //     height: 50.h,
-                //     width: 50.h,
-                //     decoration: BoxDecoration(
-                //         shape: BoxShape.circle,
-                //         color: Colors.white.withOpacity(.2)),
-                //     child: Icon(
-                //       Icons.arrow_forward_ios_rounded,
-                //       color: Colors.white,
-                //       size: 25.sp,
-                //     ),
-                //   ),
-                // )
               ],
             ),
           ),
+
           /// LOGO : ---------------
           Positioned(
             top: 55.h,
@@ -73,10 +105,24 @@ class CustomHeaderWidget extends StatelessWidget {
             right: 160.w,
             child: Image(
               image: const AssetImage(appLogo),
-              height: 65.h,
+              height: 95.h,
               width: 70.w,
             ),
           ),
+
+          /// Kitchen and Ceramics
+          // Positioned(
+          //   top: 135.h,
+          //   left: 50.w,
+          //   child: const Text(
+          //     "Kitchens & Ceramics",
+          //     textAlign: TextAlign.start,
+          //     style: TextStyle(
+          //         fontSize: 30,
+          //         fontWeight: FontWeight.bold,
+          //         color: Colors.white),
+          //   ),
+          // ),
         ],
       ),
     );

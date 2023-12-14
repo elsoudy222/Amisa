@@ -1,4 +1,5 @@
 import 'package:amisa/core/components/components.dart';
+import 'package:amisa/core/config/config_path.dart';
 import 'package:amisa/core/const/extensions.dart';
 import 'package:amisa/view/screens/category/kitchens_type/kitchens_sub_category_type.dart';
 import 'package:amisa/view/screens_path.dart';
@@ -14,7 +15,9 @@ import 'package:fluttertoast/fluttertoast.dart';
 import '../../../../core/components/custom_appbars/custom_sub_category_appbar.dart';
 import '../../../../core/components/custom_sub_category_card/custom_sub_category_card.dart';
 import '../../../../core/components/toast/toast.dart';
+import '../../../../view_model/cubits/product_cubit/products_cubit.dart';
 import '../../products/products_screen.dart';
+import '../../products/test_products_pagination.dart';
 
 class SubCategoryScreen extends StatelessWidget {
   final String categoryTitle;
@@ -32,51 +35,28 @@ class SubCategoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var homeCubit = HomeCubit.get(context);
+    var productCubit = ProductCubit.get(context);
     return BlocConsumer<HomeCubit, HomeStates>(
       listener: (context, state) {
         if (state is LoadingGetAllProductsStates) {
           MyDialog.showLoadingDialog();
-        } else if (categoryTitle != "Kitchens") {
-          if (state is SuccessGetAllProductsStates) {
-            EasyLoading.dismiss();
-            context.push(
-              ProductsScreen(
-                type: homeCubit.productsModel!.products.type,
-                brandName: homeCubit.productsModel!.products.brandName,
-                categoryName: categoryTitle,
-              ),
-            );
-          }
-          else if (state is ErrorGetAllProductsStates) {
-            EasyLoading.dismiss();
-            showErrorToast(
-              context,
-              msg: "Sorry, There is no products yet",
-              time: 3,
-              gravity: ToastGravity.TOP
-            );
-            print("================================ ERROR =======================================");
-
-          }
+        } else if (state is SuccessGetAllProductsStates) {
+          EasyLoading.dismiss();
+          context.push(
+            ProductsScreen(
+              type: "type",
+              brandName: homeCubit.brandModel!.category.brands[homeCubit.brandCurrentIndex].brandName,
+            ),
+          );
+        } else if (state is ErrorGetAllProductsStates) {
+          EasyLoading.dismiss();
+          showErrorToast(
+            context,
+            msg: "Check your internet connection!",
+            time: 3,
+          );
         }
-
-        // if (state is LoadingGetBrandDetailsStates) {
-        //   MyDialog.showLoadingDialog();
-        // } else if (state is SuccessGetAllProductsStates) {
-        //     EasyLoading.dismiss();
-        //     context.push(
-        //       ProductsScreen(
-        //         type: homeCubit.productsModel!.products.type,
-        //         brandName: homeCubit.productsModel!.products.brandName,
-        //         categoryName: categoryTitle,
-        //       ),
-        //     );
-        //   }
-        //  else if (state is ErrorGetAllProductsStates) {
-        //   EasyLoading.dismiss();
-        // }
-
-        },
+      },
       builder: (context, state) {
         return Scaffold(
           appBar: CustomSubCategoryAppBar(
@@ -102,36 +82,48 @@ class SubCategoryScreen extends StatelessWidget {
                                 imageUrl:
                                     "$baseImage${homeCubit.brandModel!.category.brands[i].brandPhoto}",
                                 fit: BoxFit.cover,
-
                               ),
                               backgroundImage: homeCubit
                                   .brandModel!.category.brands[i].brandCover,
                               description: "",
                               buttonText:
                                   'Show ${homeCubit.brandModel!.category.brands[i].brandName}',
-                              onTap: () {
+                              onTap: ()  {
                                 print(categoryTitle);
                                 if (categoryTitle == "Kitchens") {
-                                  context.push(KitchensSubCategoryType(
+                                  context.push(
+                                    KitchensSubCategoryType(
                                       companyName: homeCubit.brandModel!
                                           .category.brands[i].brandName,
-                                      brandId:
-                                          "${homeCubit.brandModel!.category.brands[i].brandId}",
+                                      brandId: homeCubit.brandModel!.category
+                                          .brands[i].brandId,
                                       companyLogo: homeCubit.brandModel!
                                           .category.brands[i].brandPhoto,
                                       companyImage: homeCubit.brandModel!
                                           .category.brands[i].brandCover,
                                       categoryName: categoryTitle,
-                                    brandDescription: homeCubit.brandModel!.category.brands[i].brandDescription,
-                                    ),);
-                                  print(
-                                      "==========  ${homeCubit.brandModel!.category.brands[i].brandName}");
-                                } else if (categoryTitle != "Kitchens") {
-                                  homeCubit.getAllProducts(brandId: "${homeCubit.brandModel!.category.brands[i].brandId}",);
-                                  print("===ID =======  ${homeCubit.brandModel!.category.brands[i].brandId}");
-                                  print("===cat name =======  ${homeCubit.brandModel!.category.categoryName}");
-                                }
+                                      brandDescription: homeCubit.brandModel!
+                                          .category.brands[i].brandDescription,
+                                    ),
+                                  );
+                                  homeCubit.changeBrandIndex(i);
+                                  debugPrint("=================INDEX=====${i}");
 
+                                  print("==========  ${homeCubit.brandModel!.category.brands[i].brandName}");
+
+                                } else if (categoryTitle != "Kitchens") {
+                                  homeCubit.getAllProducts(
+                                    brandId:
+                                        "${homeCubit.brandModel!.category.brands[i].brandId}",
+                                  );
+                                  homeCubit.changeBrandIndex(i);
+                                  debugPrint("=================INDEX=====${i}");
+
+                                  print(
+                                      "===ID =======  ${homeCubit.brandModel!.category.brands[i].brandId}");
+                                  print(
+                                      "===cat name =======  ${homeCubit.brandModel!.category.categoryName}");
+                                }
                               },
                             ),
                           );

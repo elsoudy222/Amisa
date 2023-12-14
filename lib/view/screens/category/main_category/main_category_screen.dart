@@ -1,11 +1,6 @@
 import 'package:amisa/core/components/components.dart';
-import 'package:amisa/core/config/config_path.dart';
 import 'package:amisa/core/const/extensions.dart';
-import 'package:amisa/model/category_model.dart';
-import 'package:amisa/model/home_model.dart';
-import 'package:amisa/model/main_category_model.dart';
 import 'package:amisa/view/screens/category/main_category/widgets/carousel_item_card.dart';
-import 'package:amisa/view_model/cubits/layout_cubit/layout_cubit.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:dots_indicator/dots_indicator.dart';
@@ -13,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../core/components/toast/toast.dart';
 import '../../../../view_model/cubits/home_cubit/home_cubit.dart';
 import '../sub_category/sub_category_screen.dart';
 
@@ -32,16 +28,20 @@ class _CategoryScreenState extends State<CategoryScreen> {
         if(state is SuccessGetAllBrandsStates){
           EasyLoading.dismiss();
           context.push(SubCategoryScreen(
-            categoryTitle: homeCubit.homeModel!.categories[homeCubit.currentIndex].catName,
-            categoryDes: homeCubit.homeModel!.categories[homeCubit.currentIndex].description,
-            categoryImage: homeCubit.homeModel!.categories[homeCubit.currentIndex].image,
+            categoryTitle: homeCubit.homeModel!.categories[homeCubit.categoryCurrentIndex].catName,
+            categoryDes: homeCubit.homeModel!.categories[homeCubit.categoryCurrentIndex].description,
+            categoryImage: homeCubit.homeModel!.categories[homeCubit.categoryCurrentIndex].image,
           ),);
         }
         else if(state is LoadingGetAllBrandsStates){
           MyDialog.showLoadingDialog();
         } else if (state is ErrorGetAllBrandsStates) {
           EasyLoading.dismiss();
-          print("================================ ERROR =======================================");
+          showErrorToast(
+            context,
+            msg: "Check your internet connection!",
+            time: 3,
+          );
         }
       },
       builder: (context, state) {
@@ -83,7 +83,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                           onTap: () {
                            // homeCubit.changeIndex(index);
                            //  homeCubit.chosenCategoryType = Cate;
-                            homeCubit.getAllBrands(index);
+                            homeCubit.getAllBrands(homeCubit.homeModel!.categories[index].id);
                           //  homeCubit.getBrandDetails(homeCubit.brandModel!.category.brands[index].brandId);
 
 
@@ -101,7 +101,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                               const Duration(milliseconds: 800),
                           onPageChanged: (index, reason) {
                             setState(() {
-                              homeCubit.currentIndex = index;
+                              homeCubit.categoryCurrentIndex = index;
                             });
                           }),
                     ),
@@ -110,7 +110,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                     ),
                     DotsIndicator(
                       dotsCount: homeCubit.homeModel!.categories.length,
-                      position: homeCubit.currentIndex,
+                      position: homeCubit.categoryCurrentIndex,
                       decorator: DotsDecorator(
                         color: Colors.grey,
                         activeSize: Size(35.0.w, 6.0.h),

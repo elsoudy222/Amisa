@@ -9,13 +9,16 @@ class CustomExpansionTile extends StatelessWidget {
     required this.cubit,
     required this.leadingIcon,
     required this.title,
-    required this.subtitle,  required this.expansionBody,
+    required this.subtitle,
+    required this.expansionBody,
+
   });
 
   final LayoutCubit cubit;
   final IconData leadingIcon;
   final String title;
   final String subtitle;
+
 
 
   final List<Widget> expansionBody;
@@ -32,7 +35,7 @@ class CustomExpansionTile extends StatelessWidget {
         cubit.expansionIcon ? IconlyBold.arrowUp3 : IconlyBold.arrowDown3,
         color: Colors.white,
       ),
-      onExpansionChanged: (bool expanded) {
+      onExpansionChanged: (bool expanded){
         cubit.changeExpansionTileIcon(expanded);
       },
       subtitle: Padding(

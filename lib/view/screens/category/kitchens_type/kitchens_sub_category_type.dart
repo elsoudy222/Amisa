@@ -2,22 +2,25 @@ import 'package:amisa/core/config/config_path.dart';
 import 'package:amisa/core/const/extensions.dart';
 import 'package:amisa/view/screens/category/kitchens_type/widgets/custom_kitchen-Type_card.dart';
 import 'package:amisa/view/screens_path.dart';
-import 'package:amisa/view/widgets/custom_text_title/custom_title_text.dart';
 import 'package:amisa/view_model/cubits/home_cubit/home_cubit.dart';
+import 'package:amisa/view_model/cubits/product_cubit/products_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import '../../../../core/components/components.dart';
 import '../../../../core/components/custom_appbars/custom_kitchen_type_appbar.dart';
+import '../../../../core/components/toast/toast.dart';
 import '../../../../core/config/const/enums.dart';
+import '../../home/widgets/custom_text_title/custom_title_text.dart';
 import '../../products/products_screen.dart';
+import '../../products/test_products_pagination.dart';
 
 class KitchensSubCategoryType extends StatelessWidget {
   final String companyName;
   final String categoryName;
   final String companyImage;
   final String companyLogo;
-  final String? brandId;
+  final int? brandId;
   final String brandDescription;
 
 
@@ -25,7 +28,7 @@ class KitchensSubCategoryType extends StatelessWidget {
   KitchensSubCategoryType(
       {super.key,
       required this.companyName,
-      this.companyLogo = lubeLogo,
+      this.companyLogo = "",
       this.brandId,
       required this.companyImage, required this.categoryName, required this.brandDescription});
 
@@ -45,10 +48,14 @@ class KitchensSubCategoryType extends StatelessWidget {
               categoryName: categoryName,
             ),
           );
-          print("2 ============= ${homeCubit.productsModel!.products.type} =============");
-          print("$brandId");
+
         } else if (state is ErrorGetAllProductsStates) {
           EasyLoading.dismiss();
+          showErrorToast(
+            context,
+            msg: "Check your internet connection!",
+            time: 3,
+          );
           print("================================ ERROR =======================================");
         }
       },
@@ -117,15 +124,13 @@ class KitchensSubCategoryType extends StatelessWidget {
                       backgroundImage: homeCubit.kitchenTypesImage[index],
                       title: homeCubit.kitchenTypes[index],
                       onTap: () {
-
                         homeCubit.getAllProducts(
                           brandId: "$brandId",
                           type: homeCubit.kitchenTypes[index],
-                         // pageNumber: "1"
+                          //pageNumber: homeCubit.currentPageNumber
                         );
                         print(homeCubit.kitchenTypes[index]);
-                        // print("TYPE: =====${homeCubit.productsModel!.products.type[index]}");
-                        //context.push(const ProductsScreen());
+
                       },
                     );
                   },

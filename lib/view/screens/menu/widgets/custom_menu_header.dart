@@ -1,11 +1,10 @@
-import 'package:amisa/view_model/database/network/end_points.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/config/const/app_strings.dart';
 
 
+// ignore: must_be_immutable
 class CustomMenuHeaderWidget extends StatelessWidget
     implements PreferredSizeWidget {
   @override
@@ -14,18 +13,18 @@ class CustomMenuHeaderWidget extends StatelessWidget
   final double sizeHeight;
   final String title;
   final String imageUrl;
-  final String description;
+
   FontWeight? fontWeight;
   bool center;
 
   CustomMenuHeaderWidget({
     super.key,
-    this.sizeHeight = 220,
+    this.sizeHeight = 270,
     this.center = true,
     this.title = "",
     this.fontWeight,
     required this.imageUrl,
-    required this.description,
+
   });
 
   @override
@@ -33,6 +32,7 @@ class CustomMenuHeaderWidget extends StatelessWidget
     return Container(
       height: sizeHeight.h,
       decoration: BoxDecoration(
+       borderRadius: BorderRadius.vertical(bottom: Radius.circular(25.r)),
           image: DecorationImage(
               colorFilter: ColorFilter.mode(
                 Colors.black.withOpacity(0.5),
@@ -42,18 +42,12 @@ class CustomMenuHeaderWidget extends StatelessWidget
                 imageUrl,
               ),
               fit: BoxFit.cover)),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image(
-              image: AssetImage(appLogo,),
-              fit: BoxFit.contain,
-              height: 100,
-              width: 100,
-            ),
-
-          ],
+      child:  Center(
+        child: Image(
+          image: const AssetImage(appLogo,),
+          fit: BoxFit.contain,
+          height: 100.h,
+          width: 100.w,
         ),
       ),
     );

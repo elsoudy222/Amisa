@@ -28,7 +28,7 @@ class MenuScreen extends StatelessWidget {
         return Scaffold(
           appBar: CustomMenuHeaderWidget(
             imageUrl: header,
-            description: '© Amisa Kitchens & Ceramics',
+
           ),
           body: Padding(
             padding: EdgeInsets.all(12.0.r),
@@ -36,7 +36,7 @@ class MenuScreen extends StatelessWidget {
               children: [
                 SizedBox(
                   // color: Colors.orange,
-                  height: MediaQuery.of(context).size.height - 340.h,
+                  height: MediaQuery.of(context).size.height - 420.h,
                   child: SingleChildScrollView(
                     child: Column(
                       // shrinkWrap: true,
@@ -45,7 +45,7 @@ class MenuScreen extends StatelessWidget {
                           title: "Profile",
                           icon: IconlyBold.profile,
                           onTap: () {
-                            context.push(const ProfileScreen());
+                            context.push( ProfileScreen());
                           },
                         ),
                         SizedBox(

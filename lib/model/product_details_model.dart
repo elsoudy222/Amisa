@@ -38,9 +38,9 @@ class Collection {
   });
 
   factory Collection.fromJson(Map<String, dynamic> json) => Collection(
-    collectionsId: json["collections_id"],
-    collectionName: json["collectionName"],
-    collectionphoto: json["collectionphoto"],
+    collectionsId: json["collections_id"]?? 0,
+    collectionName: json["collectionName"]??"",
+    collectionphoto: json["collectionphoto"]??"",
   );
 
   Map<String, dynamic> toJson() => {
@@ -66,11 +66,11 @@ class Info {
   });
 
   factory Info.fromJson(Map<String, dynamic> json) => Info(
-    id: json["id"],
-    infoTitle: json["infoTitle"],
-    infoValue: json["infoValue"],
-    productId: json["product_id"],
-    matrPhoto: json["matrPhoto"],
+    id: json["id"]?? 0,
+    infoTitle: json["infoTitle"]?? "",
+    infoValue: json["infoValue"] ?? "",
+    productId: json["product_id"] ?? "",
+    matrPhoto: json["matrPhoto"] ??"",
   );
 
   Map<String, dynamic> toJson() => {
@@ -98,11 +98,11 @@ class Product {
   });
 
   factory Product.fromJson(Map<String, dynamic> json) => Product(
-    productId: json["product_id"],
-    productName: json["productName"],
-    coverImages: List<String>.from(json["coverImages"].map((x) => x)),
-    type: json["type"],
-    description: json['description'],
+    productId: json["product_id"] ?? 0,
+    productName: json["productName"] ?? "",
+    coverImages: List<String>.from(json["coverImages"].map((x) => x)?? []).toList(),
+    type: json["type"] ?? '',
+    description: json['description'] ?? "",
   );
 
   Map<String, dynamic> toJson() => {

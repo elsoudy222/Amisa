@@ -1,14 +1,12 @@
-import 'package:amisa/core/config/config_path.dart';
-import 'package:amisa/photo_view.dart';
-import 'package:amisa/view/screens/home/widgets/custom_new_arrivals/custom_new_arrivals_card.dart';
+import 'package:amisa/view/screens/product_details/photo_view/photo_view.dart';
 import 'package:amisa/view/screens_path.dart';
 import 'package:amisa/view_model/cubits/home_cubit/home_cubit.dart';
 import 'package:amisa/view_model/database/network/end_points.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CollectionsScreen extends StatelessWidget {
-  const CollectionsScreen({super.key});
+class CollectionsDetailsScreen extends StatelessWidget {
+  const CollectionsDetailsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +30,7 @@ class CollectionsScreen extends StatelessWidget {
             ),
             title: Text(
               homeCubit.collectionModel!.collections.collectionName,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
@@ -42,19 +40,6 @@ class CollectionsScreen extends StatelessWidget {
           body: SingleChildScrollView(
             child: Column(
               children: [
-                // Container(
-                //   height: 250.h,
-                //   width: double.infinity,
-                //   // color: Colors.grey,
-                //   decoration:  BoxDecoration(
-                //     image: DecorationImage(
-                //       image: CachedNetworkImageProvider(
-                //         "homeCubit.productsDetailsModel!.collections,"
-                //       ),
-                //       fit: BoxFit.cover,
-                //     ),
-                //   ),
-                // ),
                 SizedBox(
                   height: 10.h,
                 ),
@@ -87,12 +72,7 @@ class CollectionsScreen extends StatelessWidget {
                           fit: BoxFit.cover,
                         ),
                       ),
-                        // child: CustomNewArrivalsCard(
-                        //   title: "",
-                        //   subtitle: "",
-                        //   image: homeCubit.collectionModel!.collections.collectionsimages[index],
-                        //   fit: BoxFit.fill,
-                        // ),
+
                     );
                   },
                 ),

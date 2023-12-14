@@ -4,9 +4,11 @@ class CustomProductAppbar extends StatelessWidget implements PreferredSizeWidget
   @override
   Size get preferredSize => Size.fromHeight(sizeHeight.h);
 
+  final VoidCallback onTap;
   final double sizeHeight;
   final String title;
   FontWeight? fontWeight;
+
 
 
   CustomProductAppbar({
@@ -14,7 +16,7 @@ class CustomProductAppbar extends StatelessWidget implements PreferredSizeWidget
     this.sizeHeight = 170,
 
     this.title = " ",
-    this.fontWeight,
+    this.fontWeight, required this.onTap,
 
 
   });
@@ -66,9 +68,7 @@ class CustomProductAppbar extends StatelessWidget implements PreferredSizeWidget
             top: 40.h,
             left: 20.w,
             child: IconButton(
-              onPressed: (){
-                Navigator.of(context).pop();
-              },
+              onPressed: onTap,
               icon: const Icon(
                 Icons.arrow_back_ios_new,
                 color: Colors.white,

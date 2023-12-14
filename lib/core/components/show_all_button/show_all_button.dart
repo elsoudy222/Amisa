@@ -1,5 +1,3 @@
-
-
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/config/config_path.dart';
@@ -7,7 +5,8 @@ import '../../../view/screens_path.dart';
 
 class CustomShowAllButton extends StatelessWidget {
   final VoidCallback onTap;
-  const CustomShowAllButton({super.key, required this.onTap});
+  final String title;
+  const CustomShowAllButton({super.key, required this.onTap, required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -17,12 +16,12 @@ class CustomShowAllButton extends StatelessWidget {
         height: 40.h,
         width: 330.w,
         decoration: BoxDecoration(
-            border: Border.all(color: Colors.white, width: 2)),
+            border: Border.all(color: Colors.white, width: 1)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "Show All".toUpperCase(),
+              title.toUpperCase(),
               style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.w500,

@@ -1,4 +1,6 @@
 import 'package:amisa/view_model/cubits/home_cubit/home_cubit.dart';
+import 'package:amisa/view_model/cubits/product_cubit/products_cubit.dart';
+import 'package:amisa/view_model/cubits/product_cubit/products_state.dart';
 import 'package:amisa/view_model/database/local/cache_helper.dart';
 import 'package:amisa/view_model/database/local/observer.dart';
 import 'package:amisa/view_model/database/network/dio_helper.dart';
@@ -12,36 +14,41 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'core/config/config_path.dart';
 
-
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  DioHelper.init();
+  await CacheHelper.init();
+  Bloc.observer = MyBlocObserver();
+
+
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
-
-  DioHelper.init();
-  await CacheHelper.init();
-
-  Bloc.observer = MyBlocObserver();
   runApp(const MyApp());
-
 }
 
 class MyApp extends StatelessWidget {
-
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
+
 
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => LayoutCubit()..getTimeline()..getDesignHub()..getShowRooms(),
+          create: (context) => LayoutCubit()
+            ..getTimeline()
+            ..getDesignHub()
+            ..getShowRooms(),
         ),
+
         BlocProvider(
           create: (context) => HomeCubit()..getHomeData(),
+        ),
+        BlocProvider(
+          create: (context) => ProductCubit(ProductRepository()),
         ),
 
       ],
@@ -52,11 +59,10 @@ class MyApp extends StatelessWidget {
         builder: (context, state) {
           // To Change StatusBar Color:
           SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-            statusBarColor: AppColors.scaffoldBackground,
-              statusBarBrightness: Brightness.dark
-          ));
+              statusBarColor: AppColors.scaffoldBackground,
+              statusBarBrightness: Brightness.dark));
           return ScreenUtilInit(
-            designSize: const Size(400,800),
+            designSize: const Size(400, 800),
             minTextAdapt: true,
             splitScreenMode: true,
             child: MaterialApp(
@@ -66,23 +72,17 @@ class MyApp extends StatelessWidget {
               themeMode: ThemeMode.dark,
               theme: ThemeData(
                 appBarTheme: const AppBarTheme(
-                  centerTitle: true,
-                  backgroundColor: AppColors.scaffoldBackground,
-
-                  iconTheme: IconThemeData(
-                    color: Colors.white
-                  ),
-                  elevation: 0.0
-                ),
+                    centerTitle: true,
+                    backgroundColor: AppColors.scaffoldBackground,
+                    iconTheme: IconThemeData(color: Colors.white),
+                    elevation: 0.0),
                 scaffoldBackgroundColor: AppColors.scaffoldBackground,
                 primaryColor: AppColors.white,
                 // primarySwatch: Colors.grey,
-                 // fontFamily: "Montserrat-Black",
+                // fontFamily: "Montserrat-Black",
                 textTheme: GoogleFonts.montserratTextTheme(),
-
-
               ),
-              home:   const LayoutScreen(),
+              home: const LayoutScreen(),
             ),
           );
         },
@@ -90,5 +90,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-

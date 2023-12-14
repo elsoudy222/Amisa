@@ -7,21 +7,42 @@ class HomeInitialState extends HomeStates {}
 
 class ChangeIndexState extends HomeStates {}
 
+class ChangeBrandIndexState extends HomeStates {}
+
+class ChangeCurrentPageNumber extends HomeStates {}
+
 class ChangeKitchenTypeToModernState extends HomeStates {}
 class ChangeKitchenTypeToClassicState extends HomeStates {}
 
 class LoadingHomeDataStates extends HomeStates{}
-class SuccessHomeDataStates extends HomeStates{}
+class SuccessHomeDataStates extends HomeStates{
+  HomeModel model;
+  SuccessHomeDataStates(this.model);
+}
 class ErrorHomeDataStates extends HomeStates{
   final String error;
   ErrorHomeDataStates(this.error);
 }
+
+class LoadingSearchState extends HomeStates{}
+class SuccessSearchState extends HomeStates{}
+class ErrorSearchState extends HomeStates{
+  String error;
+  ErrorSearchState(this.error);
+}
+
+
+
 class LoadingGetAllProductsStates extends HomeStates{}
 class SuccessGetAllProductsStates extends HomeStates{}
 class ErrorGetAllProductsStates extends HomeStates{
   final String error;
   ErrorGetAllProductsStates(this.error);
 }
+
+
+
+
 
 
 
@@ -48,7 +69,10 @@ class ErrorGetCollectionDetailsStates extends HomeStates{
 }
 
 class LoadingGetProductDetailsStates extends HomeStates{}
-class SuccessGetProductDetailsStates extends HomeStates{}
+class SuccessGetProductDetailsStates extends HomeStates{
+  // ProductsDetailsModel model;
+  // SuccessGetProductDetailsStates(this.model);
+}
 class ErrorGetProductDetailsStates extends HomeStates{
   final String error;
   ErrorGetProductDetailsStates(this.error);

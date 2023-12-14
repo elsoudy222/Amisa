@@ -6,16 +6,12 @@ abstract class LayoutStates {}
 class LayoutInitialState extends LayoutStates {}
 
 class LayoutChangeNavBarState extends LayoutStates{}
+class LayoutChangeTimeLineIndexState extends LayoutStates{}
 class LayoutChangeNExpansionTileIconState extends LayoutStates{}
 class LayoutChangeNExpansionTileIcon1State extends LayoutStates{}
 
 
-class LoadingSearchState extends LayoutStates{}
-class SuccessSearchState extends LayoutStates{}
-class ErrorSearchState extends LayoutStates{
-  String error;
-  ErrorSearchState(this.error);
-}
+
 class LoadingGetTimelineState extends LayoutStates{}
 class SuccessGetTimelineState extends LayoutStates{}
 class ErrorGetTimelineState extends LayoutStates{

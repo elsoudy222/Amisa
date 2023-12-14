@@ -22,11 +22,22 @@ class CustomNewArrivalsCard extends StatelessWidget {
       child: SizedBox(
         height: 160.h,
         width: 260.w,
+
         child: Column(
           children: [
           Container(
           height: 120.h,
           decoration: BoxDecoration(
+
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.3),
+                    spreadRadius: 2,
+                    blurRadius: 10,
+                  ),
+                ],
+
+
             image: DecorationImage(
               image: CachedNetworkImageProvider("$baseImage$image",),fit:fit,)
             ),

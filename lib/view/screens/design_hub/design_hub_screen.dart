@@ -1,5 +1,5 @@
 import 'package:amisa/core/const/extensions.dart';
-import 'package:amisa/photo_view.dart';
+import 'package:amisa/view/screens/product_details/photo_view/photo_view.dart';
 import 'package:amisa/view/screens_path.dart';
 import 'package:amisa/view_model/cubits/layout_cubit/layout_cubit.dart';
 import 'package:amisa/view_model/database/network/end_points.dart';
