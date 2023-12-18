@@ -14,13 +14,7 @@ import '../../screens_path.dart';
 import '../home/widgets/custom_text_title/custom_title_text.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
- // final String brandName;
-
-  ProductDetailsScreen({super.key,
-   // required this.brandName
-  });
-
-
+  const ProductDetailsScreen({super.key,});
 
   @override
   Widget build(BuildContext context) {
@@ -33,9 +27,9 @@ class ProductDetailsScreen extends StatelessWidget {
       listener: (context, state) {
         if (state is SuccessGetCollectionDetailsStates) {
           context.push(const  CollectionsDetailsScreen());
-
+          debugPrint("======================== SUCCESS ========================");
         }
-        debugPrint("======================== SUCCESS ========================");
+
       },
       builder: (context, state) {
         return Scaffold(
