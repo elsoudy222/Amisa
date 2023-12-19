@@ -1,12 +1,6 @@
-import 'dart:convert';
-
 import 'package:amisa/core/config/config_path.dart';
-import 'package:amisa/core/config/const/enums.dart';
-import 'package:amisa/model/brand_details_model.dart';
 import 'package:amisa/model/category_model.dart';
-import 'package:amisa/model/home_model.dart';
 import 'package:amisa/model/products_model.dart';
-import 'package:amisa/view_model/cubits/product_cubit/products_cubit.dart';
 import 'package:amisa/view_model/database/network/dio_helper.dart';
 import 'package:amisa/view_model/database/network/end_points.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,28 +30,14 @@ class HomeCubit extends Cubit<HomeStates> {
   int categoryCurrentIndex = 0;
   void changeIndex(int index) {
     categoryCurrentIndex = index;
-   // emit(ChangeIndexState());
+    emit(ChangeIndexState());
   }
 
   List<String> kitchenTypes=["modern" , "classic"];
   List<String> kitchenTypesImage=[modern , classic];
 
 
-  /// Get Home Data from API :
-  HomeModel? homeModel;
-  void getHomeData() {
-    emit(LoadingHomeDataStates());
-    DioHelper.getData(
-      url: HOME,
-    ).then((value) {
-      homeModel = HomeModel.fromJson(value.data);
-      print(homeModel.toString());
-      emit(SuccessHomeDataStates(homeModel!));
-    }).catchError((error) {
-      print(error.toString());
-      emit(ErrorHomeDataStates(error.toString()));
-    });
-  }
+
 
   TextEditingController searchController = TextEditingController();
   SearchModel? searchDetailsModel;
@@ -71,19 +51,14 @@ class HomeCubit extends Cubit<HomeStates> {
         "search": searchText,
       },
     ).then((value) {
-      // for(var product in value.data){
-      //   productsModel?.add(ProductsModel.fromJson(product) );
-      // }
-      searchDetailsModel = SearchModel.fromJson(value.data);
-      // productsModel = value.data.map((e) => ProductsModel.fromJson(e)).toList();
 
-      print(searchDetailsModel.toString());
-      // print(productsModel?.products.type.toString());
+      searchDetailsModel = SearchModel.fromJson(value.data);
+      debugPrint(searchDetailsModel.toString());
       emit(SuccessSearchState());
-      print("====================== SUCCESS ==========================");
+      debugPrint("====================== SUCCESS ==========================");
     }).catchError((error) {
       emit(ErrorSearchState(error.toString()));
-      print("==========ERROR =========== ${error.toString()}");
+      debugPrint("==========ERROR =========== ${error.toString()}");
     });
   }
 
@@ -98,19 +73,15 @@ class HomeCubit extends Cubit<HomeStates> {
       data: {
         "brand_id" : brandId,
         "type" : type,
-        "pagenum" : "",
       },
     ).then((value) {
-
     productsModel = ProductsModel.fromJson(value.data);
-
-      print(productsModel.toString());
-
+    debugPrint(productsModel as String?);
     emit(SuccessGetAllProductsStates());
-      print("====================== SUCCESS ==========================");
+    debugPrint("====================== SUCCESS ==========================");
 
     }).catchError((error){
-       print("==========ERROR =========== ${error}");
+      debugPrint("==========ERROR =========== $error");
        emit(ErrorGetAllProductsStates(error.toString()));
     })
     ;
@@ -122,13 +93,13 @@ class HomeCubit extends Cubit<HomeStates> {
     emit(LoadingGetAllBrandsStates());
     DioHelper.getData(
       url: BRANDS + catId.toString(),
-     // url: "$BRANDS${homeModel!.categories[index].id}",
+
     ).then((value) {
       brandModel = CategoryModel.fromJson(value.data);
       emit(SuccessGetAllBrandsStates());
     }).catchError((error) {
       emit(ErrorGetAllBrandsStates(error.toString()));
-      print(error.toString());
+      debugPrint(error.toString());
     });
   }
 
@@ -141,10 +112,10 @@ class HomeCubit extends Cubit<HomeStates> {
     ).then((value) {
       productsDetailsModel = ProductsDetailsModel.fromJson(value.data);
       emit(SuccessGetProductDetailsStates());
-      print(value.data.toString());
+      debugPrint(value.data.toString());
     }).catchError((error) {
       emit(ErrorGetProductDetailsStates(error.toString()));
-      print("(Product Details ERROR) => ${error.toString()}");
+      debugPrint("(Product Details ERROR) => $error");
     });
   }
 
@@ -156,12 +127,11 @@ class HomeCubit extends Cubit<HomeStates> {
         url: COLLECTION + collectionID.toString(),
     ).then((value) {
        collectionModel = CollectionModel.fromJson(value.data);
-      //collectionModel = value.data.map((e) => CollectionModel.fromJson(e)).toList();
-       print(value.data.toString());
+       debugPrint(value.data.toString());
       emit(SuccessGetCollectionDetailsStates());
     }).catchError((error) {
       emit(ErrorGetCollectionDetailsStates(error.toString()));
-      print(error.toString());
+      debugPrint(error.toString());
     });
   }
 

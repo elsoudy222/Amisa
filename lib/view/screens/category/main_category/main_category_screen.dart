@@ -1,6 +1,7 @@
 import 'package:amisa/core/components/components.dart';
 import 'package:amisa/core/const/extensions.dart';
 import 'package:amisa/view/screens/category/main_category/widgets/carousel_item_card.dart';
+import 'package:amisa/view_model/cubits/layout_cubit/layout_cubit.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:dots_indicator/dots_indicator.dart';
@@ -23,14 +24,16 @@ class _CategoryScreenState extends State<CategoryScreen> {
   @override
   Widget build(BuildContext context) {
     var homeCubit = HomeCubit.get(context);
+    var layoutCubit = LayoutCubit.get(context);
     return BlocConsumer<HomeCubit, HomeStates>(
       listener: (context, state) {
         if(state is SuccessGetAllBrandsStates){
           EasyLoading.dismiss();
-          context.push(SubCategoryScreen(
-            categoryTitle: homeCubit.homeModel!.categories[homeCubit.categoryCurrentIndex].catName,
-            categoryDes: homeCubit.homeModel!.categories[homeCubit.categoryCurrentIndex].description,
-            categoryImage: homeCubit.homeModel!.categories[homeCubit.categoryCurrentIndex].image,
+          context.push(
+            SubCategoryScreen(
+            categoryTitle: layoutCubit.homeModel!.categories[homeCubit.categoryCurrentIndex].catName,
+            categoryDes: layoutCubit.homeModel!.categories[homeCubit.categoryCurrentIndex].description,
+            categoryImage: layoutCubit.homeModel!.categories[homeCubit.categoryCurrentIndex].image,
           ),);
         }
         else if(state is LoadingGetAllBrandsStates){
@@ -39,7 +42,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
           EasyLoading.dismiss();
           showErrorToast(
             context,
-            msg: "Check your internet connection!",
+            msg: "There is no products yet!",
             time: 3,
           );
         }
@@ -47,7 +50,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
       builder: (context, state) {
 
         return ConditionalBuilder(
-          condition: homeCubit.homeModel != null,
+          condition: layoutCubit.homeModel != null,
           builder: (context) {
             return Scaffold(
               body: Padding(
@@ -76,14 +79,14 @@ class _CategoryScreenState extends State<CategoryScreen> {
                     ),
                     CarouselSlider(
                       items: List.generate(
-                        homeCubit.homeModel!.categories.length,
+                        layoutCubit.homeModel!.categories.length,
                         (index) => carouselItemCard(
-                          image: homeCubit.homeModel!.categories[index].image,
-                          title: homeCubit.homeModel!.categories[index].catName,
+                          image: layoutCubit.homeModel!.categories[index].image,
+                          title: layoutCubit.homeModel!.categories[index].catName,
                           onTap: () {
                            // homeCubit.changeIndex(index);
                            //  homeCubit.chosenCategoryType = Cate;
-                            homeCubit.getAllBrands(homeCubit.homeModel!.categories[index].id);
+                            homeCubit.getAllBrands(layoutCubit.homeModel!.categories[index].id);
                           //  homeCubit.getBrandDetails(homeCubit.brandModel!.category.brands[index].brandId);
 
 
@@ -109,7 +112,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                       height: 25.h,
                     ),
                     DotsIndicator(
-                      dotsCount: homeCubit.homeModel!.categories.length,
+                      dotsCount: layoutCubit.homeModel!.categories.length,
                       position: homeCubit.categoryCurrentIndex,
                       decorator: DotsDecorator(
                         color: Colors.grey,

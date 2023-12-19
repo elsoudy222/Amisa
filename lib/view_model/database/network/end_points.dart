@@ -1,4 +1,4 @@
-///End Points that's Used in API
+//End Points that's Used in API
 
 /// Network Connection Details
 const String baseUrl = 'https://amisa.aspire-4edu.com/';

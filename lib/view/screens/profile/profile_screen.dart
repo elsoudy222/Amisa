@@ -82,29 +82,28 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     height: 15.h,
                   ),
                   SizedBox(
-                    height: 30.h,
+                    // height: 50.h,
                     //width: double.infinity,
-                    child: ListView.builder(
+                    child: GridView.builder(
                       itemCount: cubit.timelineModel!.timeline.length,
                       shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
+                      physics: const NeverScrollableScrollPhysics(),
+                      //scrollDirection: Axis.horizontal,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 4,
+                        mainAxisExtent: 30.h,
+                        mainAxisSpacing: 10
+                      ),
                       itemBuilder: (context, index) {
                         return GestureDetector(
                           onTap: () {
                             cubit.changeTimeLineIndex(index);
                           },
                           child: Container(
-                            height: 30.h,
-                            width: 70.w,
+                            height: 50.h,
+                            //width: 80.w,
                             margin: EdgeInsets.only(left: 10.w),
                             decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 2,
-                                  blurRadius: 15,
-                                ),
-                              ],
                               color: cubit.currentTimeLineIndex == index
                                   ? Colors.white
                                   : Colors.black,
@@ -161,6 +160,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
                       ],
                     ),
+                  ),
+                  Text(
+                    "Contact Us",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 19.sp,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(
+                    height: 15.h,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,

@@ -1,10 +1,11 @@
 import '../../../view/screens_path.dart';
 
+// ignore: must_be_immutable
 class CustomProductAppbar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Size get preferredSize => Size.fromHeight(sizeHeight.h);
 
-  final VoidCallback onTap;
+ // final VoidCallback onTap;
   final double sizeHeight;
   final String title;
   FontWeight? fontWeight;
@@ -16,14 +17,15 @@ class CustomProductAppbar extends StatelessWidget implements PreferredSizeWidget
     this.sizeHeight = 170,
 
     this.title = " ",
-    this.fontWeight, required this.onTap,
+    this.fontWeight,
+   // required this.onTap,
 
 
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: sizeHeight.h,
       child: Stack(
         children: [
@@ -34,7 +36,7 @@ class CustomProductAppbar extends StatelessWidget implements PreferredSizeWidget
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Container(
+                SizedBox(
                  // color: Colors.red,
 
                   width: 310.w,
@@ -68,7 +70,9 @@ class CustomProductAppbar extends StatelessWidget implements PreferredSizeWidget
             top: 40.h,
             left: 20.w,
             child: IconButton(
-              onPressed: onTap,
+              onPressed: (){
+                Navigator.pop(context);
+              },
               icon: const Icon(
                 Icons.arrow_back_ios_new,
                 color: Colors.white,

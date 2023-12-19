@@ -14,15 +14,7 @@ class ChangeCurrentPageNumber extends HomeStates {}
 class ChangeKitchenTypeToModernState extends HomeStates {}
 class ChangeKitchenTypeToClassicState extends HomeStates {}
 
-class LoadingHomeDataStates extends HomeStates{}
-class SuccessHomeDataStates extends HomeStates{
-  HomeModel model;
-  SuccessHomeDataStates(this.model);
-}
-class ErrorHomeDataStates extends HomeStates{
-  final String error;
-  ErrorHomeDataStates(this.error);
-}
+
 
 class LoadingSearchState extends HomeStates{}
 class SuccessSearchState extends HomeStates{}

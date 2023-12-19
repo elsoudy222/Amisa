@@ -19,7 +19,7 @@ class SocialLinksWidget extends StatelessWidget {
       builder: (context , followLink){
         return InkWell(
           onTap: followLink,
-          child: SvgPicture.asset(imageUrl),
+          child: SvgPicture.asset(imageUrl,height: 25.h,),
         );
       },
     );

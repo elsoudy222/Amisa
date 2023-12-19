@@ -5,12 +5,22 @@ abstract class LayoutStates {}
 
 class LayoutInitialState extends LayoutStates {}
 
+
+
 class LayoutChangeNavBarState extends LayoutStates{}
 class LayoutChangeTimeLineIndexState extends LayoutStates{}
 class LayoutChangeNExpansionTileIconState extends LayoutStates{}
 class LayoutChangeNExpansionTileIcon1State extends LayoutStates{}
 
-
+class LoadingHomeDataStates extends LayoutStates{}
+class SuccessHomeDataStates extends LayoutStates{
+  HomeModel model;
+  SuccessHomeDataStates(this.model);
+}
+class ErrorHomeDataStates extends LayoutStates{
+  final String error;
+  ErrorHomeDataStates(this.error);
+}
 
 class LoadingGetTimelineState extends LayoutStates{}
 class SuccessGetTimelineState extends LayoutStates{}

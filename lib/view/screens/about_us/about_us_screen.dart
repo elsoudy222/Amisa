@@ -1,5 +1,6 @@
 import 'package:amisa/view/screens/about_us/widgets/about_us_wigdet.dart';
 import 'package:amisa/view/screens_path.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../core/config/const/app_strings.dart';
 import '../home/widgets/custom_text_title/custom_title_text.dart';
@@ -25,13 +26,27 @@ class AboutUsScreen extends StatelessWidget {
               ),
               SizedBox(height: 25.h,),
               const Divider(),
-              customTitleText(title: "Our Vision"),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SvgPicture.asset(vision),
+                  SizedBox(width: 5.w,),
+                  customTitleText(title: "Our Vision"),
+                ],
+              ),
               const AboutUsCustomCard(
                 text: ourVisionText,
               ),
               SizedBox(height: 25.h,),
               const Divider(),
-              customTitleText(title: "Our Mission"),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SvgPicture.asset(mission),
+                  SizedBox(width: 5.w,),
+                  customTitleText(title: "Our Mission"),
+                ],
+              ),
               const AboutUsCustomCard(
                 text: ourMissionText,
               ),

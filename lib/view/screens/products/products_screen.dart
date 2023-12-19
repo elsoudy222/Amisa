@@ -8,7 +8,6 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import '../../../core/components/components.dart';
 import '../../../core/components/toast/toast.dart';
-import '../category/sub_category/sub_category_screen.dart';
 import '../product_details/product_details_screen.dart';
 
 class ProductsScreen extends StatelessWidget {
@@ -34,9 +33,7 @@ class ProductsScreen extends StatelessWidget {
           else if (state is SuccessGetProductDetailsStates) {
             EasyLoading.dismiss();
             context.push(
-              ProductDetailsScreen(
-                //  brandName: brandName,
-              ),
+              const ProductDetailsScreen(),
             );
           }
           else if (state is ErrorGetProductDetailsStates) {
@@ -53,10 +50,8 @@ class ProductsScreen extends StatelessWidget {
         builder: (context, state) {
           return Scaffold(
             appBar: CustomProductAppbar(
-              title: "$brandName ${type == "type" ? "" : type}".toUpperCase(),
-              onTap: () {
-                context.pop();
-                },
+              title: "$brandName $type".toUpperCase(),
+
             ),
             body: Padding(
               padding: EdgeInsets.symmetric(vertical: 15.0.h),

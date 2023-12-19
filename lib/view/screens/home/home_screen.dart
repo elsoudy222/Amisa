@@ -65,12 +65,12 @@ class _HomeScreenState extends State<HomeScreen> {
           EasyLoading.dismiss();
           context.push(
             SubCategoryScreen(
-              categoryTitle: homeCubit
+              categoryTitle: layoutCubit
                   .homeModel!.categories[homeCubit.categoryCurrentIndex].catName,
-              categoryDes: homeCubit
+              categoryDes: layoutCubit
                   .homeModel!.categories[homeCubit.categoryCurrentIndex].description,
               categoryImage:
-                  homeCubit.homeModel!.categories[homeCubit.categoryCurrentIndex].image,
+                  layoutCubit.homeModel!.categories[homeCubit.categoryCurrentIndex].image,
             ),
           );
         } else if (state is LoadingGetAllBrandsStates) {
@@ -93,7 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
           );
         } else {
           return ConditionalBuilder(
-            condition: homeCubit.homeModel != null,
+            condition: layoutCubit.homeModel != null,
             builder: (context) {
               return Scaffold(
                 // appBar: CustomHeaderWidget(),
@@ -158,7 +158,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       // ),
                       ///------------------------------------------------------------------------------------------
                       /// Section 2 : (New Arrivals) .
-                      homeCubit.homeModel!.newArrival.isNotEmpty
+                      layoutCubit.homeModel!.newArrival.isNotEmpty
                       ? Column(
                         children: [
                           Padding(
@@ -189,19 +189,19 @@ class _HomeScreenState extends State<HomeScreen> {
                                       shrinkWrap: true,
                                       scrollDirection: Axis.horizontal,
                                       itemCount:
-                                          homeCubit.homeModel!.newArrival.length,
+                                          layoutCubit.homeModel!.newArrival.length,
                                       itemBuilder: (context, i) {
                                         return InkWell(
                                           onTap: () async {
-                                            homeCubit.getProductDetails(homeCubit
+                                            homeCubit.getProductDetails(layoutCubit
                                                 .homeModel!.newArrival[i].id);
                                           },
                                           child: CustomNewArrivalsCard(
-                                            title: homeCubit
+                                            title: layoutCubit
                                                 .homeModel!.newArrival[i].brandName,
-                                            subtitle: homeCubit.homeModel!
+                                            subtitle: layoutCubit.homeModel!
                                                 .newArrival[i].productName,
-                                            image: homeCubit
+                                            image: layoutCubit
                                                 .homeModel!.newArrival[i].photo,
                                           ),
                                         );
@@ -222,7 +222,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         child: customTitleText(title: "Categories"),
                       ),
-                      homeCubit.homeModel!.categories.length > 2
+                      layoutCubit.homeModel!.categories.length > 2
                           ? Column(
                               children: [
                                 ListView.builder(
@@ -236,7 +236,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         badgeBackgroundColor:
                                             Colors.black.withOpacity(0.5),
                                         badgeWidget: Text(
-                                          homeCubit
+                                          layoutCubit
                                               .homeModel!.categories[i].catName
                                               .toUpperCase(),
                                           textAlign: TextAlign.center,
@@ -245,13 +245,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                               fontSize: 19.sp,
                                               fontWeight: FontWeight.w500),
                                         ),
-                                        description: homeCubit.homeModel!
+                                        description: layoutCubit.homeModel!
                                             .categories[i].description,
-                                        backgroundImage: homeCubit
+                                        backgroundImage: layoutCubit
                                             .homeModel!.categories[i].image,
                                         onTap: () {
                                           homeCubit.changeIndex(i);
-                                          homeCubit.getAllBrands(homeCubit
+                                          homeCubit.getAllBrands(layoutCubit
                                               .homeModel!.categories[i].id);
                                         },
                                         buttonText: 'shop now',
@@ -283,7 +283,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           : ListView.builder(
                               shrinkWrap: true,
                               physics: const NeverScrollableScrollPhysics(),
-                              itemCount: homeCubit.homeModel!.categories.length,
+                              itemCount: layoutCubit.homeModel!.categories.length,
                               itemBuilder: (context, i) {
                                 return Padding(
                                   padding: EdgeInsets.only(bottom: 12.h),
@@ -291,7 +291,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     badgeBackgroundColor:
                                         Colors.black.withOpacity(0.5),
                                     badgeWidget: Text(
-                                      homeCubit
+                                      layoutCubit
                                           .homeModel!.categories[i].catName,
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
@@ -300,13 +300,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                         fontWeight: FontWeight.w500,
                                       ),
                                     ),
-                                    description: homeCubit
+                                    description: layoutCubit
                                         .homeModel!.categories[i].description,
-                                    backgroundImage: homeCubit
+                                    backgroundImage: layoutCubit
                                         .homeModel!.categories[i].image,
                                     onTap: () {
                                       homeCubit.changeIndex(i);
-                                      homeCubit.getAllBrands(homeCubit
+                                      homeCubit.getAllBrands(layoutCubit
                                           .homeModel!.categories[i].id);
                                     },
                                     buttonText: 'shop now',
@@ -327,7 +327,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         child: customTitleText(title: "latest NEWS"),
                       ),
-                      homeCubit.homeModel!.news.length > 2
+                      layoutCubit.homeModel!.news.length > 2
                           ? Column(
                               children: [
                                 ListView.builder(
@@ -338,10 +338,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                     return Padding(
                                       padding: EdgeInsets.only(bottom: 10.h),
                                       child: CustomNewsCard(
-                                        newsDesc: homeCubit
+                                        newsDesc: layoutCubit
                                             .homeModel!.news[i].description,
                                         backgroundImage:
-                                            homeCubit.homeModel!.news[i].image,
+                                            layoutCubit.homeModel!.news[i].image,
                                       ),
                                     );
                                   },
@@ -358,15 +358,15 @@ class _HomeScreenState extends State<HomeScreen> {
                           : ListView.builder(
                               shrinkWrap: true,
                               physics: const NeverScrollableScrollPhysics(),
-                              itemCount: homeCubit.homeModel!.news.length,
+                              itemCount: layoutCubit.homeModel!.news.length,
                               itemBuilder: (context, i) {
                                 return Padding(
                                   padding: EdgeInsets.only(bottom: 12.h),
                                   child: CustomNewsCard(
-                                    newsDesc: homeCubit
+                                    newsDesc: layoutCubit
                                         .homeModel!.news[i].description,
                                     backgroundImage:
-                                        homeCubit.homeModel!.news[i].image,
+                                        layoutCubit.homeModel!.news[i].image,
                                   ),
                                 );
                               },

@@ -1,4 +1,6 @@
 import 'package:amisa/core/config/config_path.dart';
+import 'package:amisa/core/const/extensions.dart';
+import 'package:amisa/view/screens/showroom_screen/video_screen.dart';
 import 'package:amisa/view/screens_path.dart';
 import 'package:amisa/view_model/cubits/home_cubit/home_cubit.dart';
 import 'package:amisa/view_model/cubits/layout_cubit/layout_cubit.dart';
@@ -22,64 +24,7 @@ class ShowRoomsScreen extends StatefulWidget {
 }
 
 class _ShowRoomsScreenState extends State<ShowRoomsScreen> {
-  late VideoPlayerController _controller;
-  late CustomVideoPlayerController customVideoPlayerController;
 
-  String lessonDuration = '0';
-  String lessonPosition = '';
-  bool isVideoCompleted = false;
-  bool isLoading = true;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = VideoPlayerController.networkUrl(
-        Uri.parse(
-        "$baseImage${LayoutCubit.get(context).showRoomsModel!.rooms[widget.showRoomId].video}")
-    )..initialize().then((_) {
-        // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
-        debugPrint("Successfully initialized");
-
-        setState(() {});
-      });
-    customVideoPlayerController = CustomVideoPlayerController(
-      context: context,
-      videoPlayerController: _controller,
-      customVideoPlayerSettings: const CustomVideoPlayerSettings(
-        exitFullscreenOnEnd: true,
-
-      ),
-    );
-    _controller.play();
-
-    isLoading = false;
-    _controller.addListener(() {
-      if (_controller.value.isPlaying &&
-          _controller.value.isInitialized &&
-          (_controller.value.duration == _controller.value.position)) {
-        print('Done');
-        isVideoCompleted = true;
-        print(_controller.value.duration);
-      } else {
-        // print('NotYet');
-        // print(videoPlayerController.value.duration.toString());
-      }
-      lessonDuration = _controller.value.duration.toString();
-      lessonPosition = _controller.value.position.toString();
-      // print(lessonPosition);
-      // print(lessonDuration);
-      // print(isLessonCompleted);
-      // print(videoPlayerController.value.duration);
-      // print(videoPlayerController.value.position);
-      // print(videoPlayerController.value.isCompleted);
-    });
-  }
-
-  @override
-  void dispose() {
-    customVideoPlayerController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -101,32 +46,45 @@ class _ShowRoomsScreenState extends State<ShowRoomsScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                cubit.showRoomsModel!.rooms[widget.showRoomId].video
-                        .isNotEmpty
-                    ? Stack(
-                      children: [
 
-                        SizedBox(
-                            height: 300.h,
-                            child: Center(
-                              child: CircularProgressIndicator(color: Colors.grey,),
-                            )
-                          ),
-                        SizedBox(
-                            height: 300.h,
-                            child: CustomVideoPlayer(
-                              customVideoPlayerController:
-                                  customVideoPlayerController,
-                            ),
-                          ),
-                      ],
-                    )
-                    : CachedNetworkImage(
-                        height: 300.h,
+                CachedNetworkImage(
+                        height: 250.h,
                         imageUrl:
                             "$baseImage${cubit.showRoomsModel!.rooms[widget.showRoomId].image}",
-                        fit: BoxFit.cover,
+                        fit: BoxFit.contain,
                       ),
+
+                InkWell(
+                  onTap: (){
+                    context.push(
+                      ShowRoomVideoScreen(showRoomId: widget.showRoomId)
+                    );
+                  },
+                  child: Container(
+                    height: 50.h,
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20.r)
+                    ),
+                    child: Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Show Room Video",
+                            style: TextStyle(
+                              fontSize: 17.sp,
+                              fontWeight: FontWeight.bold
+                            ),
+                          ),
+                          SizedBox(width: 5.w,),
+                          const Image(image: AssetImage(arrow2,),color: AppColors.scaffoldBackground,width: 30,)
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
                 SizedBox(
                   height: 20.h,
                 ),
@@ -137,12 +95,26 @@ class _ShowRoomsScreenState extends State<ShowRoomsScreen> {
                       IconlyBold.location,
                       color: Colors.white,
                     ),
-                    Text(
-                      cubit.showRoomsModel!.rooms[widget.showRoomId].location,
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.bold),
+                    Column(
+                      children: [
+                        SizedBox(
+                          height: 19.h,
+                          width: MediaQuery.of(context).size.width*0.8,
+                          child: ListView(
+                            shrinkWrap: true,
+                            scrollDirection: Axis.horizontal,
+                            children: [
+                              Text(
+                                cubit.showRoomsModel!.rooms[widget.showRoomId].location,
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 15.sp,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -165,15 +137,15 @@ class _ShowRoomsScreenState extends State<ShowRoomsScreen> {
                 ),
 
                 /// PoBox =============================================================
-                cubit.showRoomsModel!.rooms[widget.showRoomId].pobox.isNotEmpty
-                    ? Text(
-                        cubit.showRoomsModel!.rooms[widget.showRoomId].pobox,
-                        style: TextStyle(color: Colors.white, fontSize: 17.sp),
-                      )
-                    : Container(),
-                SizedBox(
-                  height: 20.h,
-                ),
+                // cubit.showRoomsModel!.rooms[widget.showRoomId].pobox.isNotEmpty
+                //     ? Text(
+                //         cubit.showRoomsModel!.rooms[widget.showRoomId].pobox,
+                //         style: TextStyle(color: Colors.white, fontSize: 17.sp),
+                //       )
+                //     : Container(),
+                // SizedBox(
+                //   height: 20.h,
+                // ),
 
                 /// Open Time =============================================================
                 SizedBox(

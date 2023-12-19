@@ -1,5 +1,4 @@
 import 'package:amisa/core/components/components.dart';
-import 'package:amisa/core/config/config_path.dart';
 import 'package:amisa/core/const/extensions.dart';
 import 'package:amisa/view/screens/category/kitchens_type/kitchens_sub_category_type.dart';
 import 'package:amisa/view/screens_path.dart';
@@ -9,16 +8,13 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../../../core/components/custom_appbars/custom_sub_category_appbar.dart';
 import '../../../../core/components/custom_sub_category_card/custom_sub_category_card.dart';
 import '../../../../core/components/toast/toast.dart';
-import '../../../../view_model/cubits/product_cubit/products_cubit.dart';
 import '../../products/products_screen.dart';
-import '../../products/test_products_pagination.dart';
 
+// ignore: must_be_immutable
 class SubCategoryScreen extends StatelessWidget {
   final String categoryTitle;
   final String categoryDes;
@@ -35,7 +31,7 @@ class SubCategoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var homeCubit = HomeCubit.get(context);
-    var productCubit = ProductCubit.get(context);
+
     return BlocConsumer<HomeCubit, HomeStates>(
       listener: (context, state) {
         if (state is LoadingGetAllProductsStates) {
@@ -89,10 +85,9 @@ class SubCategoryScreen extends StatelessWidget {
                               buttonText:
                                   'Show ${homeCubit.brandModel!.category.brands[i].brandName}',
                               onTap: ()  {
-                                print(categoryTitle);
+                                debugPrint(categoryTitle);
                                 if (categoryTitle == "Kitchens") {
-                                  context.push(
-                                    KitchensSubCategoryType(
+                                  context.push(KitchensSubCategoryType(
                                       companyName: homeCubit.brandModel!
                                           .category.brands[i].brandName,
                                       brandId: homeCubit.brandModel!.category
@@ -104,12 +99,10 @@ class SubCategoryScreen extends StatelessWidget {
                                       categoryName: categoryTitle,
                                       brandDescription: homeCubit.brandModel!
                                           .category.brands[i].brandDescription,
-                                    ),
-                                  );
+                                    ),);
                                   homeCubit.changeBrandIndex(i);
-                                  debugPrint("=================INDEX=====${i}");
-
-                                  print("==========  ${homeCubit.brandModel!.category.brands[i].brandName}");
+                                  debugPrint("=================INDEX=====$i");
+                                  debugPrint("==========  ${homeCubit.brandModel!.category.brands[i].brandName}");
 
                                 } else if (categoryTitle != "Kitchens") {
                                   homeCubit.getAllProducts(
@@ -117,11 +110,10 @@ class SubCategoryScreen extends StatelessWidget {
                                         "${homeCubit.brandModel!.category.brands[i].brandId}",
                                   );
                                   homeCubit.changeBrandIndex(i);
-                                  debugPrint("=================INDEX=====${i}");
-
-                                  print(
+                                  debugPrint("=================INDEX=====$i");
+                                  debugPrint(
                                       "===ID =======  ${homeCubit.brandModel!.category.brands[i].brandId}");
-                                  print(
+                                  debugPrint(
                                       "===cat name =======  ${homeCubit.brandModel!.category.categoryName}");
                                 }
                               },
@@ -129,13 +121,13 @@ class SubCategoryScreen extends StatelessWidget {
                           );
                         },
                       )
-                    : const Center(
+                    :  Center(
                         child: Text(
                         "There are no brands in this category",
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
-                          fontSize: 20,
+                          fontSize: 20.sp,
                         ),
                       )),
               );

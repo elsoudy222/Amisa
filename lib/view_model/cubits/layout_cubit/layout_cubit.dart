@@ -6,6 +6,7 @@ import 'package:amisa/model/timeline_model.dart';
 import 'package:amisa/view_model/database/network/end_points.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../../../model/home_model.dart';
 import '../../../view/screens_path.dart';
 import '../../database/network/dio_helper.dart';
 
@@ -60,8 +61,23 @@ class LayoutCubit extends Cubit<LayoutStates> {
     emit(LayoutChangeTimeLineIndexState());
   }
 
-  TimelineModel? timelineModel;
+  /// Get Home Data from API :
+  HomeModel? homeModel;
+  void getHomeData() {
+    emit(LoadingHomeDataStates());
+    DioHelper.getData(
+      url: HOME,
+    ).then((value) {
+      homeModel = HomeModel.fromJson(value.data);
+      print(homeModel.toString());
+      emit(SuccessHomeDataStates(homeModel!));
+    }).catchError((error) {
+      print(error.toString());
+      emit(ErrorHomeDataStates(error.toString()));
+    });
+  }
 
+  TimelineModel? timelineModel;
   void getTimeline() {
     emit(LoadingGetTimelineState());
     DioHelper.getData(

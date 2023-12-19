@@ -13,11 +13,13 @@ const String sizes = "assets/icons/sizes.png";
 /// SVG :
 const String facebook = "assets/svg/facebook.svg";
 const String whatsapp = "assets/svg/whatsapp.svg";
-const String instagram = "assets/svg/instagram.svg";
-const String gmail = "assets/svg/gmail.svg";
+const String instagram = "assets/svg/insta.svg";
+const String gmail = "assets/svg/mail.svg";
 const String youtube = "assets/svg/youtube.svg";
 const String clock = "assets/svg/clock.svg";
 const String call = "assets/svg/call.svg";
+const String vision = "assets/svg/vision.svg";
+const String mission = "assets/svg/mission.svg";
 
 /// Image paths :
 

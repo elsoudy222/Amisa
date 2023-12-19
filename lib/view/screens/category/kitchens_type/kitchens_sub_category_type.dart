@@ -3,7 +3,6 @@ import 'package:amisa/core/const/extensions.dart';
 import 'package:amisa/view/screens/category/kitchens_type/widgets/custom_kitchen-Type_card.dart';
 import 'package:amisa/view/screens_path.dart';
 import 'package:amisa/view_model/cubits/home_cubit/home_cubit.dart';
-import 'package:amisa/view_model/cubits/product_cubit/products_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
@@ -53,7 +52,7 @@ class KitchensSubCategoryType extends StatelessWidget {
           EasyLoading.dismiss();
           showErrorToast(
             context,
-            msg: "Check your internet connection!",
+            msg: "There is no products yet!",
             time: 3,
           );
           print("================================ ERROR =======================================");
