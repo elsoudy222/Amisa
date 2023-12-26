@@ -5,14 +5,12 @@ import 'package:amisa/view/screens_path.dart';
 import 'package:amisa/view_model/cubits/home_cubit/home_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-
 import '../../../../core/components/components.dart';
 import '../../../../core/components/custom_appbars/custom_kitchen_type_appbar.dart';
 import '../../../../core/components/toast/toast.dart';
 import '../../../../core/config/const/enums.dart';
 import '../../home/widgets/custom_text_title/custom_title_text.dart';
 import '../../products/products_screen.dart';
-import '../../products/test_products_pagination.dart';
 
 class KitchensSubCategoryType extends StatelessWidget {
   final String companyName;
@@ -24,7 +22,7 @@ class KitchensSubCategoryType extends StatelessWidget {
 
 
 
-  KitchensSubCategoryType(
+  const KitchensSubCategoryType(
       {super.key,
       required this.companyName,
       this.companyLogo = "",
@@ -38,7 +36,7 @@ class KitchensSubCategoryType extends StatelessWidget {
       listener: (context, state) {
         if (state is LoadingGetAllProductsStates) {
           MyDialog.showLoadingDialog();
-        } else if (state is SuccessGetAllProductsStates) {
+        } else if (state is SuccessGetAllProductsStates ) {
           EasyLoading.dismiss();
           context.push(
             ProductsScreen(
@@ -126,7 +124,7 @@ class KitchensSubCategoryType extends StatelessWidget {
                         homeCubit.getAllProducts(
                           brandId: "$brandId",
                           type: homeCubit.kitchenTypes[index],
-                          //pageNumber: homeCubit.currentPageNumber
+
                         );
                         print(homeCubit.kitchenTypes[index]);
 

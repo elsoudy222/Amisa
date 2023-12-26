@@ -73,10 +73,11 @@ class HomeCubit extends Cubit<HomeStates> {
       data: {
         "brand_id" : brandId,
         "type" : type,
+        "pagenum" : "",
       },
     ).then((value) {
     productsModel = ProductsModel.fromJson(value.data);
-    debugPrint(productsModel as String?);
+    print(productsModel );
     emit(SuccessGetAllProductsStates());
     debugPrint("====================== SUCCESS ==========================");
 

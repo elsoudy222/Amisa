@@ -12,9 +12,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'core/config/config_path.dart';
 
-//TODO: 1: Fix Error for navigation in Kitchens Type.
-//TODO: 2: Change Video Player for show rooms.
-//TODO: 3:
+//TODO: 1: Fix Error for navigation in Kitchens Type. (DONE)
+//TODO: 2: Change Video Player for show rooms. (on Process)
+//TODO: 3: Create Onboarding Screen .(Next Step),
 //TODO: 4:
 
 void main() async {

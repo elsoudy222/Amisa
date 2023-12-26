@@ -7,19 +7,42 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:photo_view/photo_view.dart';
 
 
-class PhotoViewScreen extends StatelessWidget {
+class PhotoViewScreen extends StatefulWidget {
   final String image;
   const PhotoViewScreen({super.key, required this.image});
 
   @override
+  State<PhotoViewScreen> createState() => _PhotoViewScreenState();
+}
+
+class _PhotoViewScreenState extends State<PhotoViewScreen> {
+  bool rotation = false;
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: (){
+              setState(() {
+                rotation = true;
+              });
+            }, icon: const Text(
+            "Rotate",
+            style: TextStyle(
+              color: Colors.white
+            ),
+
+          ),)
+        ],
+      ),
       body: RotatedBox(
-        quarterTurns: -3,
+        quarterTurns: !rotation ? -3 : 0,
         child: Container(
           height: MediaQuery.of(context).size.height,
             child: PhotoView(
-              imageProvider: CachedNetworkImageProvider(baseImage+image),
+              imageProvider: CachedNetworkImageProvider(baseImage+widget.image),
               filterQuality: FilterQuality.high,
 
             )

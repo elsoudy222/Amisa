@@ -34,17 +34,17 @@ class SubCategoryScreen extends StatelessWidget {
 
     return BlocConsumer<HomeCubit, HomeStates>(
       listener: (context, state) {
-        if (state is LoadingGetAllProductsStates) {
+        if (state is LoadingGetAllProductsStates && categoryTitle != "Kitchens") {
           MyDialog.showLoadingDialog();
-        } else if (state is SuccessGetAllProductsStates) {
+        } else if (state is SuccessGetAllProductsStates && categoryTitle != "Kitchens" ) {
           EasyLoading.dismiss();
           context.push(
             ProductsScreen(
-              type: "type",
+              type: "",
               brandName: homeCubit.brandModel!.category.brands[homeCubit.brandCurrentIndex].brandName,
             ),
           );
-        } else if (state is ErrorGetAllProductsStates) {
+        } else if (state is ErrorGetAllProductsStates && categoryTitle != "Kitchens") {
           EasyLoading.dismiss();
           showErrorToast(
             context,

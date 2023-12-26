@@ -50,7 +50,7 @@ class ProductsScreen extends StatelessWidget {
         builder: (context, state) {
           return Scaffold(
             appBar: CustomProductAppbar(
-              title: "$brandName $type".toUpperCase(),
+              title: "$brandName ${type == "type" ? "" : type}".toUpperCase(),
 
             ),
             body: Padding(
