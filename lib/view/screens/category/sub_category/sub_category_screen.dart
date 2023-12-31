@@ -48,7 +48,7 @@ class SubCategoryScreen extends StatelessWidget {
           EasyLoading.dismiss();
           showErrorToast(
             context,
-            msg: "Check your internet connection!",
+            msg: "There is No Products Yet!",
             time: 3,
           );
         }

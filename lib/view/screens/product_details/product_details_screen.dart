@@ -167,21 +167,42 @@ class ProductDetailsScreen extends StatelessWidget {
                         ],
                       )
                       :Container(),
-
+                      SizedBox(
+                        height: 15.h,
+                      ),
                       homeCubit.productsDetailsModel!.matrialinfo.isNotEmpty
-                          ? Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: List.generate(
-                            homeCubit
-                                .productsDetailsModel!.matrialinfo.length,
-                                (index) => SizedBox(
-                                height: 60.h,
-                                width: 60.w,
-                                child: CachedNetworkImage(
-                                  // color: Colors.white,
-                                    imageUrl:
-                                    "$baseImage${homeCubit.productsDetailsModel!.matrialinfo[index].matrPhoto!}")),
-                          ))
+                          ? Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Characteristic:",
+                                style: TextStyle(
+                                  color: AppColors.white,
+                                  fontSize: 17.sp,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 10.h,
+                              ),
+                              Wrap(
+                              //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                spacing: 15.w,
+
+
+                              children: List.generate(
+                                homeCubit
+                                    .productsDetailsModel!.matrialinfo.length,
+                                    (index) => SizedBox(
+                                    height: 60.h,
+                                    width: 60.w,
+                                    child: CachedNetworkImage(
+                                      // color: Colors.white,
+                                        imageUrl:
+                                        "$baseImage${homeCubit.productsDetailsModel!.matrialinfo[index].matrPhoto!}")),
+                              )),
+                            ],
+                          )
                           : Container(),
 
                       SizedBox(
@@ -192,7 +213,7 @@ class ProductDetailsScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "More Information:",
+                                  "Sizes & Info:",
                                   style: TextStyle(
                                     color: AppColors.white,
                                     fontSize: 17.sp,
@@ -203,7 +224,7 @@ class ProductDetailsScreen extends StatelessWidget {
                                   height: 10.h,
                                 ),
                                 Row(
-                                  //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     const Image(image: AssetImage(sizes)),
@@ -212,10 +233,9 @@ class ProductDetailsScreen extends StatelessWidget {
                                           left: 20.0.w),
                                       child: SizedBox(
                                         width: 300.w,
-                                        // margin: EdgeInsets.only(left: 10.w),
-                                        //color: Colors.orange,
+
                                         child: Wrap(
-                                          spacing: 8.w,
+                                          spacing: 15.w,
                                           children: List.generate(
                                             homeCubit.productsDetailsModel!.info
                                                 .length,
@@ -223,6 +243,7 @@ class ProductDetailsScreen extends StatelessWidget {
                                               padding: EdgeInsets.only(
                                                   bottom: 7.0.h),
                                               child: Column(
+                                                crossAxisAlignment: CrossAxisAlignment.center,
                                                 mainAxisAlignment:
                                                     MainAxisAlignment
                                                         .spaceEvenly,

@@ -21,6 +21,7 @@ class _PhotoViewScreenState extends State<PhotoViewScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       appBar: AppBar(
         actions: [
           IconButton(

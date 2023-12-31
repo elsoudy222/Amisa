@@ -20,7 +20,7 @@ class CustomCollectionsWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        customTitleText(title: "DESIGN COLLECTIONS"),
+        customTitleText(title: "COLLECTIONS"),
         SizedBox(
           height: 15.h,
         ),
@@ -61,7 +61,7 @@ class CustomCollectionsWidget extends StatelessWidget {
                       child: Center(
                         child: Text(
                           homeCubit.productsDetailsModel!.collections[index]
-                              .collectionName,
+                              .collectionName.toUpperCase(),
                           style: const TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.w600,
