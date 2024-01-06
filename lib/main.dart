@@ -1,33 +1,45 @@
+import 'package:amisa/view/screens/layout/layout_screen.dart';
+import 'package:amisa/view/screens/onboarding/onboarding_screen.dart';
 import 'package:amisa/view/screens/splash_screen/splash_screen.dart';
 import 'package:amisa/view_model/cubits/home_cubit/home_cubit.dart';
 import 'package:amisa/view_model/database/local/cache_helper.dart';
 import 'package:amisa/view_model/database/local/observer.dart';
 import 'package:amisa/view_model/database/network/dio_helper.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:amisa/view_model/cubits/layout_cubit/layout_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'core/config/config_path.dart';
+import 'firebase_options.dart';
 
-//TODO: 1: Fix Error for navigation in Kitchens Type. (DONE)
-//TODO: 2: Change Video Player for show rooms. (on Process)
-//TODO: 3: Create Onboarding Screen .(Next Step),
+//TODO: 1: Edit OnBoarding Screen Details .(Next Step),
+//TODO: 2:
+//TODO: 3:
 //TODO: 4:
 
 void main() async {
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   WidgetsFlutterBinding.ensureInitialized();
   DioHelper.init();
   await CacheHelper.init();
   Bloc.observer = MyBlocObserver();
+
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp,]);
-  runApp(const MyApp());
+
+
+
+
+  runApp( MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+
+  const MyApp({super.key, });
 
   @override
   Widget build(BuildContext context){
@@ -79,6 +91,7 @@ class MyApp extends StatelessWidget {
                // textTheme: GoogleFonts.montserratTextTheme(),
               ),
               home: const SplashScreen(),
+              //home: OnBoardingScreen(),
             ),
           );
         },

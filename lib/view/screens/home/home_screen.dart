@@ -1,5 +1,6 @@
 import 'package:amisa/core/config/config_path.dart';
 import 'package:amisa/core/const/extensions.dart';
+import 'package:amisa/view/screens/home/widgets/custom_discounts/custom_discount_widget.dart';
 import 'package:amisa/view/screens/home/widgets/custom_header_widget/custom_header_widget.dart';
 import 'package:amisa/view/screens/home/widgets/custom_new_arrivals/custom_new_arrivals_card.dart';
 import 'package:amisa/view/screens/home/widgets/custom_news_card/custom_news_card.dart';
@@ -30,9 +31,6 @@ class HomeScreen extends StatefulWidget {
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
-
-
-
 }
 
 class _HomeScreenState extends State<HomeScreen> {
@@ -50,11 +48,9 @@ class _HomeScreenState extends State<HomeScreen> {
           MyDialog.showLoadingDialog();
         } else if (state is SuccessGetProductDetailsStates) {
           EasyLoading.dismiss();
-          //debugPrint("${state.model.toString()}");
+
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return ProductDetailsScreen(
-                //brandName:homeCubit.homeModel!.newArrival[i].brandName,
-                );
+            return const ProductDetailsScreen();
           }));
         } else if (state is ErrorGetProductDetailsStates) {
           EasyLoading.dismiss();
@@ -65,12 +61,12 @@ class _HomeScreenState extends State<HomeScreen> {
           EasyLoading.dismiss();
           context.push(
             SubCategoryScreen(
-              categoryTitle: layoutCubit
-                  .homeModel!.categories[homeCubit.categoryCurrentIndex].catName,
-              categoryDes: layoutCubit
-                  .homeModel!.categories[homeCubit.categoryCurrentIndex].description,
-              categoryImage:
-                  layoutCubit.homeModel!.categories[homeCubit.categoryCurrentIndex].image,
+              categoryTitle: layoutCubit.homeModel!
+                  .categories[homeCubit.categoryCurrentIndex].catName,
+              categoryDes: layoutCubit.homeModel!
+                  .categories[homeCubit.categoryCurrentIndex].description,
+              categoryImage: layoutCubit
+                  .homeModel!.categories[homeCubit.categoryCurrentIndex].image,
             ),
           );
         } else if (state is LoadingGetAllBrandsStates) {
@@ -104,115 +100,77 @@ class _HomeScreenState extends State<HomeScreen> {
                       /// Section 1 : Image
                       CustomHeaderWidget(),
 
-                      // Column(
-                      //   crossAxisAlignment: CrossAxisAlignment.center,
-                      //   children: [
-                      //     // Carousel Slider :
-                      //     SizedBox(
-                      //       height: 180.h,
-                      //       width: double.infinity,
-                      //       child: PageView.builder(
-                      //         controller: homeCubit.imageController,
-                      //         itemBuilder: (context, index) => InkWell(
-                      //           onTap: () {
-                      //             Navigator.push(
-                      //               context,
-                      //               MaterialPageRoute(
-                      //                 builder: (context) {
-                      //                   return PhotoViewScreen(
-                      //                     image: homeCubit.productsDetailsModel!
-                      //                         .product.coverImages[index],
-                      //                   );
-                      //                 },
-                      //               ),
-                      //             );
-                      //           },
-                      //           child: CachedNetworkImage(
-                      //             imageUrl:
-                      //             "$baseImage${homeCubit.productsDetailsModel!.product.coverImages[index]}",
-                      //             fit: BoxFit.fill,
-                      //           ),
-                      //         ),
-                      //         itemCount: homeCubit
-                      //             .productsDetailsModel!.product.coverImages.length,
-                      //         allowImplicitScrolling: true,
-                      //       ),
-                      //     ),
-                      //     SizedBox(
-                      //       height: 10.h,
-                      //     ),
-                      //     SmoothPageIndicator(
-                      //       controller: homeCubit.imageController,
-                      //       count: homeCubit
-                      //           .productsDetailsModel!.product.coverImages.length,
-                      //       effect: const WormEffect(
-                      //         dotColor: Colors.grey,
-                      //         activeDotColor: Colors.white,
-                      //         dotWidth: 25,
-                      //         dotHeight: 4,
-                      //         spacing: 3,
-                      //         type: WormType.thin,
-                      //       ),
-                      //     ),
-                      //   ],
-                      // ),
                       ///------------------------------------------------------------------------------------------
+                      layoutCubit.homeModel!.ads.isNotEmpty
+                          ? const CustomDiscountWidget()
+                          : Container(),
+
+                      ///------------------------------------------------------------------------------------------,
                       /// Section 2 : (New Arrivals) .
                       layoutCubit.homeModel!.newArrival.isNotEmpty
-                      ? Column(
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.only(top: 25.0.h, bottom: 10.h),
-                            child: customTitleText(title: "new arrivals"),
-                          ),
-                          Theme(
-                            data: Theme.of(context).copyWith(
-                                scrollbarTheme: ScrollbarThemeData(
-                              thumbColor: MaterialStateProperty.all(Colors.white),
-                              trackBorderColor:
-                                  MaterialStateProperty.all(Colors.grey),
-                            )),
-                            child: Scrollbar(
-                              thumbVisibility: true,
-                              trackVisibility: true,
-                              scrollbarOrientation: ScrollbarOrientation.bottom,
-                              thickness: 4.h,
-                              radius: const Radius.circular(20),
-                              interactive: true,
-                              controller: homeCubit.newArrivalsScrollController,
-                              child: SizedBox(
-                                height: 156.h,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(bottom: 5.0),
-                                  child: ListView.builder(
-                                      controller: homeCubit.newArrivalsScrollController,
-                                      shrinkWrap: true,
-                                      scrollDirection: Axis.horizontal,
-                                      itemCount:
-                                          layoutCubit.homeModel!.newArrival.length,
-                                      itemBuilder: (context, i) {
-                                        return InkWell(
-                                          onTap: () async {
-                                            homeCubit.getProductDetails(layoutCubit
-                                                .homeModel!.newArrival[i].id);
-                                          },
-                                          child: CustomNewArrivalsCard(
-                                            title: layoutCubit
-                                                .homeModel!.newArrival[i].brandName,
-                                            subtitle: layoutCubit.homeModel!
-                                                .newArrival[i].productName,
-                                            image: layoutCubit
-                                                .homeModel!.newArrival[i].photo,
-                                          ),
-                                        );
-                                      }),
+                          ? Column(
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.only(
+                                      top: 25.0.h, bottom: 10.h),
+                                  child: customTitleText(title: "new arrivals"),
                                 ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      )
-                      : Container(),
+                                Theme(
+                                  data: Theme.of(context).copyWith(
+                                      scrollbarTheme: ScrollbarThemeData(
+                                    thumbColor:
+                                        MaterialStateProperty.all(Colors.white),
+                                    trackBorderColor:
+                                        MaterialStateProperty.all(Colors.grey),
+                                  )),
+                                  child: Scrollbar(
+                                    thumbVisibility: true,
+                                    trackVisibility: true,
+                                    scrollbarOrientation:
+                                        ScrollbarOrientation.bottom,
+                                    thickness: 4.h,
+                                    radius: const Radius.circular(20),
+                                    interactive: true,
+                                    controller:
+                                        homeCubit.newArrivalsScrollController,
+                                    child: SizedBox(
+                                      height: 156.h,
+                                      child: Padding(
+                                        padding:
+                                            const EdgeInsets.only(bottom: 5.0),
+                                        child: ListView.builder(
+                                            controller: homeCubit
+                                                .newArrivalsScrollController,
+                                            shrinkWrap: true,
+                                            scrollDirection: Axis.horizontal,
+                                            itemCount: layoutCubit
+                                                .homeModel!.newArrival.length,
+                                            itemBuilder: (context, i) {
+                                              return InkWell(
+                                                onTap: () async {
+                                                  homeCubit.getProductDetails(
+                                                      layoutCubit.homeModel!
+                                                          .newArrival[i].id);
+                                                },
+                                                child: CustomNewArrivalsCard(
+                                                  title: layoutCubit.homeModel!
+                                                      .newArrival[i].brandName,
+                                                  subtitle: layoutCubit
+                                                      .homeModel!
+                                                      .newArrival[i]
+                                                      .productName,
+                                                  image: layoutCubit.homeModel!
+                                                      .newArrival[i].photo,
+                                                ),
+                                              );
+                                            }),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            )
+                          : Container(),
 
                       ///-------------------------------------------------------------------------------------------
                       /// Section 3 : (Categories) .
@@ -273,8 +231,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                     layoutCubit.changeBottomNavBar(
                                         layoutCubit.currentIndex);
                                     homeCubit.categoryCurrentIndex = 0;
-                                    homeCubit
-                                        .changeIndex(homeCubit.categoryCurrentIndex);
+                                    homeCubit.changeIndex(
+                                        homeCubit.categoryCurrentIndex);
                                   },
                                   title: 'show all',
                                 ),
@@ -283,7 +241,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           : ListView.builder(
                               shrinkWrap: true,
                               physics: const NeverScrollableScrollPhysics(),
-                              itemCount: layoutCubit.homeModel!.categories.length,
+                              itemCount:
+                                  layoutCubit.homeModel!.categories.length,
                               itemBuilder: (context, i) {
                                 return Padding(
                                   padding: EdgeInsets.only(bottom: 12.h),
@@ -340,8 +299,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                       child: CustomNewsCard(
                                         newsDesc: layoutCubit
                                             .homeModel!.news[i].description,
-                                        backgroundImage:
-                                            layoutCubit.homeModel!.news[i].image,
+                                        backgroundImage: layoutCubit
+                                            .homeModel!.news[i].image,
                                       ),
                                     );
                                   },

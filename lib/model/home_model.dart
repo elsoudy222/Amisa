@@ -1,5 +1,6 @@
 class HomeModel {
   List<NewArrival> newArrival;
+  List<Ads> ads;
   List<Category> categories;
   List<News> news;
 
@@ -7,12 +8,14 @@ class HomeModel {
     required this.newArrival,
     required this.categories,
     required this.news,
+    required this.ads,
   });
 
   factory HomeModel.fromJson(Map<String, dynamic> json) => HomeModel(
     newArrival: List<NewArrival>.from(json["NewArrival"].map((x) => NewArrival.fromJson(x)) ??[]).toList(),
     categories: List<Category>.from(json["categories"].map((x) => Category.fromJson(x))?? []).toList(),
     news: List<News>.from(json["news"].map((x) => News.fromJson(x))??[]).toList(),
+    ads: List<Ads>.from(json["ads"].map((x) => Ads.fromJson(x))??[]).toList(),
   );
 
   Map<String, dynamic> toJson() => {
@@ -47,6 +50,26 @@ class Category {
     "catName": catName,
     "description": description,
     "image": image,
+  };
+}
+
+class Ads {
+  int id;
+  String photo;
+
+  Ads({
+    required this.id,
+    required this.photo,
+  });
+
+  factory Ads.fromJson(Map<String, dynamic> json) => Ads(
+    id: json["id"],
+    photo: json["photo"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "photo": photo,
   };
 }
 

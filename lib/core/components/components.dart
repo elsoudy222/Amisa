@@ -1,3 +1,4 @@
+import 'package:amisa/core/config/config_path.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import '../../view/screens_path.dart';
@@ -14,11 +15,17 @@ Widget customCircularProgressIndicator() {
 class MyDialog{
 
   static showLoadingDialog() {
+
     EasyLoading.show(
-      maskType: EasyLoadingMaskType.none,
+      maskType: EasyLoadingMaskType.clear,
       dismissOnTap: false,
-      indicator: const CircularProgressIndicator.adaptive(backgroundColor: Colors.white,strokeWidth: 2,),
-      status: "loading",
+      indicator: const Column(
+        children: [
+          Image(image: AssetImage(appLogo,),height: 70,),
+          CircularProgressIndicator.adaptive(backgroundColor: Colors.white,strokeWidth: 2,),
+        ],
+      ),
+      status: "loading..",
     );
   }
 }

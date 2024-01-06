@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:overlay_loader_with_app_icon/overlay_loader_with_app_icon.dart';
 import '../../../../core/components/toast/toast.dart';
 import '../../../../view_model/cubits/home_cubit/home_cubit.dart';
 import '../sub_category/sub_category_screen.dart';
@@ -38,6 +39,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
         }
         else if(state is LoadingGetAllBrandsStates){
           MyDialog.showLoadingDialog();
+
+
         } else if (state is ErrorGetAllBrandsStates) {
           EasyLoading.dismiss();
           showErrorToast(

@@ -1,0 +1,175 @@
+import 'package:amisa/core/config/config_path.dart';
+import 'package:amisa/core/const/extensions.dart';
+import 'package:amisa/view/screens/layout/layout_screen.dart';
+import 'package:amisa/view/screens_path.dart';
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
+import '../../../model/onboarding_model.dart';
+import '../../../view_model/database/local/cache_helper.dart';
+
+
+
+
+var boardController = PageController();
+
+class OnBoardingScreen extends StatefulWidget {
+
+  @override
+  State<OnBoardingScreen> createState() => _OnBoardingScreenState();
+}
+
+class _OnBoardingScreenState extends State<OnBoardingScreen> {
+  List<BoardingModel> boarding = [
+    BoardingModel(
+        image:'assets/images/kitchenonboarding.jpg',
+        title: 'Kitchens',
+        body: 'The Number One Of Italian Kitchens Company You Will Find Here', ),
+    BoardingModel(
+        image:'assets/images/ceramicsonboarding.png',
+        title: 'Ceramics',
+        body: 'Discover The Best Ceramics Creations, Unparalleled in Elegance and Quality', ),
+    BoardingModel(
+        image:'assets/images/wardrobesonboarding.jpg',
+        title: 'Wardrobes',
+        body: 'Body Screen 3'),
+    BoardingModel(
+        image:'assets/images/snatiryonboarding.jpg',
+        title: 'Sanitary Ware',
+        body: 'Body Screen 3'),
+  ];
+
+  bool isLast = false;
+
+  void submit(){
+    CacheHelper.saveData(key: 'onBoarding', value: true).then((value) {
+      if(value){
+        context.pushReplacement(const LayoutScreen());
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+
+          actions: [
+            TextButton(
+                child: const Text(
+                    'SKIP',
+                  style:  TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                ),
+                 onPressed: () { submit(); },
+            ),
+            SizedBox(width: 10.w,),
+          ],
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(30.0),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: PageView.builder(
+                    controller: boardController,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, index) => buildOnBoardin(boarding[index]),
+                    itemCount: boarding.length,
+                    onPageChanged: (int index){
+                      if(index == boarding.length - 1){
+                        setState(() {
+                          isLast = true;
+                        });
+                      }else{
+                        isLast = false;
+                      }
+                    },
+                  ),
+                ),
+
+
+                Row(
+                  children: [
+                    SmoothPageIndicator(
+                      controller: boardController,
+                      count: boarding.length,
+                      effect: const ExpandingDotsEffect(
+                          dotColor: Colors.grey,
+                          activeDotColor: AppColors.white,
+                          dotHeight: 10,
+                          dotWidth: 10,
+                          spacing: 5,
+                          expansionFactor: 4
+                      ),
+                    ),
+                    const Spacer(),
+                    FloatingActionButton(
+                      backgroundColor: AppColors.white,
+                      onPressed: (){
+                        if(isLast){
+                          setState(() {
+                            submit();
+                          });
+                        }else{
+                          boardController.nextPage(
+                              duration: const Duration(
+                                  milliseconds: 750
+                              ),
+                              curve: Curves.fastLinearToSlowEaseIn);
+                        }
+                      },
+
+                      child: const Icon(Icons.arrow_forward_ios),
+                    )
+                  ],
+                )
+              ],
+            ),
+          ),
+        )
+    );
+  }
+
+  Widget buildOnBoardin(BoardingModel model) =>Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Container(
+        height: 400,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(20)),
+          image: DecorationImage(
+              image:
+              AssetImage(
+                  model.image
+              ),
+              fit: BoxFit.fill
+          ),
+        ),
+      ),
+       SizedBox(
+        height: 30.h,
+      ),
+      Text(
+        model.title,
+        style: TextStyle(fontWeight: FontWeight.bold,fontSize: 30.sp,color: AppColors.white),
+      ),
+
+      Text(
+        model.body,
+        style:  TextStyle(fontWeight: FontWeight.bold,fontSize: 20.sp,color: AppColors.white.withOpacity(.7)),
+      ),
+ 
+    ],
+  );
+
+}
