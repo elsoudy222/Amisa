@@ -35,6 +35,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
             categoryTitle: layoutCubit.homeModel!.categories[homeCubit.categoryCurrentIndex].catName,
             categoryDes: layoutCubit.homeModel!.categories[homeCubit.categoryCurrentIndex].description,
             categoryImage: layoutCubit.homeModel!.categories[homeCubit.categoryCurrentIndex].image,
+
           ),);
         }
         else if(state is LoadingGetAllBrandsStates){
@@ -45,7 +46,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
           EasyLoading.dismiss();
           showErrorToast(
             context,
-            msg: "There is no products yet!",
+            msg: "There is no brands yet!",
             time: 3,
           );
         }
@@ -87,10 +88,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
                           image: layoutCubit.homeModel!.categories[index].image,
                           title: layoutCubit.homeModel!.categories[index].catName,
                           onTap: () {
-                           // homeCubit.changeIndex(index);
-                           //  homeCubit.chosenCategoryType = Cate;
-                            homeCubit.getAllBrands(layoutCubit.homeModel!.categories[index].id);
-                          //  homeCubit.getBrandDetails(homeCubit.brandModel!.category.brands[index].brandId);
+
+                            homeCubit.getAllBrands(
+                                layoutCubit.homeModel!.categories[index].id);
 
 
                           },

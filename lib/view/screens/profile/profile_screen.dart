@@ -223,7 +223,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           blurRadius: 8,
                         ),
                       ],
-                      image: DecorationImage(image: AssetImage(header),fit: BoxFit.cover)
+                      image: const DecorationImage(image: AssetImage(header1),fit: BoxFit.cover)
                     ),
                     child: Center(
                       child: Container(

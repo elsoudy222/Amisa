@@ -1,5 +1,6 @@
 import 'package:amisa/core/components/components.dart';
 import 'package:amisa/core/const/extensions.dart';
+import 'package:amisa/view/screens/category/abode_brand_types/abode_brand_types.dart';
 import 'package:amisa/view/screens/category/kitchens_type/kitchens_sub_category_type.dart';
 import 'package:amisa/view/screens_path.dart';
 import 'package:amisa/view_model/cubits/home_cubit/home_cubit.dart';
@@ -21,6 +22,8 @@ class SubCategoryScreen extends StatelessWidget {
   final String categoryImage;
   Function()? onTap;
 
+
+
   SubCategoryScreen(
       {super.key,
       this.onTap,
@@ -31,12 +34,15 @@ class SubCategoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var homeCubit = HomeCubit.get(context);
-
+    var brandName = homeCubit.brandModel!.category.brands[homeCubit.brandCurrentIndex].brandName;
     return BlocConsumer<HomeCubit, HomeStates>(
       listener: (context, state) {
-        if (state is LoadingGetAllProductsStates && categoryTitle != "Kitchens") {
+        if (state is LoadingGetAllProductsStates && categoryTitle != "Kitchens" && brandName != "ABODE")
+        {
           MyDialog.showLoadingDialog();
-        } else if (state is SuccessGetAllProductsStates && categoryTitle != "Kitchens" ) {
+        }
+        else if (state is SuccessGetAllProductsStates && categoryTitle != "Kitchens"&& brandName != "ABODE")
+        {
           EasyLoading.dismiss();
           context.push(
             ProductsScreen(
@@ -44,7 +50,8 @@ class SubCategoryScreen extends StatelessWidget {
               brandName: homeCubit.brandModel!.category.brands[homeCubit.brandCurrentIndex].brandName,
             ),
           );
-        } else if (state is ErrorGetAllProductsStates && categoryTitle != "Kitchens") {
+        }
+        else if (state is ErrorGetAllProductsStates && categoryTitle != "Kitchens" && brandName != "ABODE") {
           EasyLoading.dismiss();
           showErrorToast(
             context,
@@ -104,15 +111,41 @@ class SubCategoryScreen extends StatelessWidget {
                                   debugPrint("=================INDEX=====$i");
                                   debugPrint("==========  ${homeCubit.brandModel!.category.brands[i].brandName}");
 
-                                } else if (categoryTitle != "Kitchens") {
+                                }
+                                else if (homeCubit.brandModel!.category.brands[i].brandName == "ABODE") {
+                                  homeCubit.changeBrandIndex(i);
+                                  debugPrint("=================Brand INDEX=====$i");
+                                  debugPrint(
+                                      "===ID =======  ${homeCubit.brandModel!.category.brands[i].brandId}");
+                                  debugPrint(
+                                      "===Brand Name =======  ${homeCubit.brandModel!.category.brands[i].brandName}");
+                                  debugPrint(
+                                      "===cat name =======  ${homeCubit.brandModel!.category.categoryName}");
+                                  context.push(AbodeBrandTypes(
+                                    companyName: homeCubit.brandModel!
+                                        .category.brands[i].brandName,
+                                    brandId: homeCubit.brandModel!.category
+                                        .brands[i].brandId,
+                                    companyLogo: homeCubit.brandModel!
+                                        .category.brands[i].brandPhoto,
+                                    companyImage: homeCubit.brandModel!
+                                        .category.brands[i].brandCover,
+                                    categoryName: categoryTitle,
+                                    brandDescription: homeCubit.brandModel!
+                                        .category.brands[i].brandDescription,
+                                  ),);
+                                }
+                                else if (categoryTitle != "Kitchens") {
                                   homeCubit.getAllProducts(
                                     brandId:
                                         "${homeCubit.brandModel!.category.brands[i].brandId}",
                                   );
                                   homeCubit.changeBrandIndex(i);
-                                  debugPrint("=================INDEX=====$i");
+                                  debugPrint("=================Brand INDEX=====$i");
                                   debugPrint(
                                       "===ID =======  ${homeCubit.brandModel!.category.brands[i].brandId}");
+                                  debugPrint(
+                                      "===Brand Name =======  ${homeCubit.brandModel!.category.brands[i].brandName}");
                                   debugPrint(
                                       "===cat name =======  ${homeCubit.brandModel!.category.categoryName}");
                                 }

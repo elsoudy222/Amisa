@@ -27,7 +27,7 @@ class MenuScreen extends StatelessWidget {
       builder: (context, state) {
         return Scaffold(
           appBar: CustomMenuHeaderWidget(
-            imageUrl: header,
+            imageUrl: header1,
 
           ),
           body: Padding(

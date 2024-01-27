@@ -9,42 +9,42 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../../model/onboarding_model.dart';
 import '../../../view_model/database/local/cache_helper.dart';
 
-
-
-
 var boardController = PageController();
 
 class OnBoardingScreen extends StatefulWidget {
-
   @override
   State<OnBoardingScreen> createState() => _OnBoardingScreenState();
 }
 
 class _OnBoardingScreenState extends State<OnBoardingScreen> {
+
   List<BoardingModel> boarding = [
     BoardingModel(
-        image:'assets/images/kitchenonboarding.jpg',
-        title: 'Kitchens',
-        body: 'The Number One Of Italian Kitchens Company You Will Find Here', ),
+      image: kitchen,
+      title: 'Kitchens',
+      body: 'The Number One Of Italian Kitchens Company You Will Find Here',
+    ),
     BoardingModel(
-        image:'assets/images/ceramicsonboarding.png',
-        title: 'Ceramics',
-        body: 'Discover The Best Ceramics Creations, Unparalleled in Elegance and Quality', ),
+      image: ceramics,
+      title: 'Ceramics',
+      body:
+          'Discover The Best Ceramics Creations, Unparalleled in Elegance and Quality',
+    ),
     BoardingModel(
-        image:'assets/images/wardrobesonboarding.jpg',
+        image: wardrobes,
         title: 'Wardrobes',
         body: 'Body Screen 3'),
     BoardingModel(
-        image:'assets/images/snatiryonboarding.jpg',
+        image: sanitary,
         title: 'Sanitary Ware',
         body: 'Body Screen 3'),
   ];
 
   bool isLast = false;
 
-  void submit(){
+  void submit() {
     CacheHelper.saveData(key: 'onBoarding', value: true).then((value) {
-      if(value){
+      if (value) {
         context.pushReplacement(const LayoutScreen());
       }
     });
@@ -54,20 +54,23 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-
           actions: [
             TextButton(
-                child: const Text(
-                    'SKIP',
-                  style:  TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                  ),
+              child: const Text(
+                'SKIP',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
                 ),
-                 onPressed: () { submit(); },
+              ),
+              onPressed: () {
+                submit();
+              },
             ),
-            SizedBox(width: 10.w,),
+            SizedBox(
+              width: 10.w,
+            ),
           ],
           backgroundColor: Colors.transparent,
           elevation: 0,
@@ -81,22 +84,21 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 Expanded(
                   child: PageView.builder(
                     controller: boardController,
-                    physics: NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) => buildOnBoardin(boarding[index]),
+                    physics: const BouncingScrollPhysics(),
+                    itemBuilder: (context, index) =>
+                        buildOnBoarding(boarding[index]),
                     itemCount: boarding.length,
-                    onPageChanged: (int index){
-                      if(index == boarding.length - 1){
+                    onPageChanged: (int index) {
+                      if (index == boarding.length - 1) {
                         setState(() {
                           isLast = true;
                         });
-                      }else{
+                      } else {
                         isLast = false;
                       }
                     },
                   ),
                 ),
-
-
                 Row(
                   children: [
                     SmoothPageIndicator(
@@ -108,26 +110,22 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           dotHeight: 10,
                           dotWidth: 10,
                           spacing: 5,
-                          expansionFactor: 4
-                      ),
+                          expansionFactor: 4),
                     ),
                     const Spacer(),
                     FloatingActionButton(
                       backgroundColor: AppColors.white,
-                      onPressed: (){
-                        if(isLast){
+                      onPressed: () {
+                        if (isLast) {
                           setState(() {
                             submit();
                           });
-                        }else{
+                        } else {
                           boardController.nextPage(
-                              duration: const Duration(
-                                  milliseconds: 750
-                              ),
+                              duration: const Duration(milliseconds: 750),
                               curve: Curves.fastLinearToSlowEaseIn);
                         }
                       },
-
                       child: const Icon(Icons.arrow_forward_ios),
                     )
                   ],
@@ -135,41 +133,39 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               ],
             ),
           ),
-        )
-    );
+        ));
   }
 
-  Widget buildOnBoardin(BoardingModel model) =>Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Container(
-        height: 400,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(20)),
-          image: DecorationImage(
-              image:
-              AssetImage(
-                  model.image
-              ),
-              fit: BoxFit.fill
+  Widget buildOnBoarding(BoardingModel model) => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            height: 380.h,
+            width: double.infinity,
+            margin: const EdgeInsets.symmetric(horizontal: 10.0),
+            decoration: BoxDecoration(
+              borderRadius: const BorderRadius.all(Radius.circular(20)),
+              image: DecorationImage(
+                  image: AssetImage(model.image), fit: BoxFit.fill),
+            ),
           ),
-        ),
-      ),
-       SizedBox(
-        height: 30.h,
-      ),
-      Text(
-        model.title,
-        style: TextStyle(fontWeight: FontWeight.bold,fontSize: 30.sp,color: AppColors.white),
-      ),
-
-      Text(
-        model.body,
-        style:  TextStyle(fontWeight: FontWeight.bold,fontSize: 20.sp,color: AppColors.white.withOpacity(.7)),
-      ),
- 
-    ],
-  );
-
+          SizedBox(
+            height: 20.h,
+          ),
+          Text(
+            model.title,
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 30.sp,
+                color: AppColors.white),
+          ),
+          Text(
+            model.body,
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20.sp,
+                color: AppColors.white.withOpacity(.7)),
+          ),
+        ],
+      );
 }

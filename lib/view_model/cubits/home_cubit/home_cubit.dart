@@ -36,6 +36,12 @@ class HomeCubit extends Cubit<HomeStates> {
   List<String> kitchenTypes=["modern" , "classic"];
   List<String> kitchenTypesImage=[modern , classic];
 
+  List<String> abodeTypes=["Taps" , "Pronteau"];
+  List<String> abodeTypesImage=[kitchenTaps , pronteau];
+
+  List<String> pronteauTypes=["3in1" , "4in1"];
+  List<String> pronteauTypesImage=[modern , classic];
+
 
 
 

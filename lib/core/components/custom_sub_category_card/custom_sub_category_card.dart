@@ -1,17 +1,18 @@
-
 import 'package:cached_network_image/cached_network_image.dart';
 import '../../../core/config/config_path.dart';
 import '../../../view/screens_path.dart';
 import '../../../view_model/database/network/end_points.dart';
 
 class CustomSubCategoryCard extends StatelessWidget {
-
   final Widget badgeWidget;
   final Color badgeBackgroundColor;
   final String description;
   final String buttonText;
   final String backgroundImage;
   final VoidCallback onTap;
+  final int badgeHeight;
+  final int badgeWidth;
+  final double badgePadding;
 
   const CustomSubCategoryCard({
     super.key,
@@ -21,7 +22,9 @@ class CustomSubCategoryCard extends StatelessWidget {
     required this.buttonText,
     required this.badgeWidget,
     this.badgeBackgroundColor = Colors.transparent,
-
+     this.badgeHeight = 120,
+     this.badgeWidth= 120,
+     this.badgePadding = 30.0,
   });
 
   @override
@@ -34,7 +37,9 @@ class CustomSubCategoryCard extends StatelessWidget {
               Colors.black.withOpacity(0.7), BlendMode.dstATop),
 
           /// This Image will be changes :--------------
-          image: CachedNetworkImageProvider("$baseImage$backgroundImage",),
+          image: CachedNetworkImageProvider(
+            "$baseImage$backgroundImage",
+          ),
           fit: BoxFit.fill,
         ),
       ),
@@ -45,10 +50,10 @@ class CustomSubCategoryCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsets.only(left: 30.0.w),
+                padding: EdgeInsets.only(left: badgePadding.w),
                 child: Container(
-                  height: 120.h,
-                  width: 120.w,
+                  height: badgeHeight.h,
+                  width: badgeWidth.w,
                   color: badgeBackgroundColor,
                   child: Center(
                     child: badgeWidget,
@@ -83,21 +88,34 @@ class CustomSubCategoryCard extends StatelessWidget {
                     height: 40.h,
                     width: 330.w,
                     decoration: BoxDecoration(
+
+                        /// //////////////////////////////////
+                        color: Colors.black.withOpacity(0.0),
                         border: Border.all(color: Colors.white, width: .5)),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          buttonText.toUpperCase(),
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w400,
-                              fontSize: 15.sp),
+                        SizedBox(
+                          width: 270.w,
+                          child: Center(
+                            child: Text(
+                              buttonText.toUpperCase(),
+                              overflow: TextOverflow.ellipsis,
+                              // maxLines: 1,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 15.sp),
+                            ),
+                          ),
                         ),
                         SizedBox(
                           width: 10.w,
                         ),
-                        const Image(image: AssetImage(arrow))
+                        const Image(
+                          image: AssetImage(arrow),
+                          width: 20,
+                        )
                       ],
                     ),
                   ),

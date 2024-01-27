@@ -5,6 +5,8 @@ import 'package:amisa/view/screens/home/widgets/custom_header_widget/custom_head
 import 'package:amisa/view/screens/home/widgets/custom_new_arrivals/custom_new_arrivals_card.dart';
 import 'package:amisa/view/screens/home/widgets/custom_news_card/custom_news_card.dart';
 import 'package:amisa/view/screens/home/widgets/custom_text_title/custom_title_text.dart';
+import 'package:amisa/view/screens/news/all_news/all_news_screen.dart';
+import 'package:amisa/view/screens/news/news_details/news_details_screen.dart';
 import 'package:amisa/view_model/cubits/home_cubit/home_cubit.dart';
 import 'package:amisa/view_model/cubits/layout_cubit/layout_cubit.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -280,62 +282,77 @@ class _HomeScreenState extends State<HomeScreen> {
                       ///-------------------------------------------------------------------------------------------
 
                       /// Section 3 : (Latest News) .
-                      Padding(
-                        padding: EdgeInsets.only(
-                          top: 25.0.h,
-                        ),
-                        child: customTitleText(title: "latest NEWS"),
-                      ),
-                      layoutCubit.homeModel!.news.length > 2
-                          ? Column(
-                              children: [
-                                ListView.builder(
+                      ///
+                      layoutCubit.homeModel!.news.isNotEmpty
+                      ?Column(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(
+                              top: 25.0.h,
+                            ),
+                            child: customTitleText(title: "latest NEWS"),
+                          ),
+                          layoutCubit.homeModel!.news.length > 2
+                              ? Column(
+                                  children: [
+                                    ListView.builder(
+                                      shrinkWrap: true,
+                                      physics: const NeverScrollableScrollPhysics(),
+                                      itemCount: 2,
+                                      itemBuilder: (context, i) {
+                                        return Padding(
+                                          padding: EdgeInsets.only(bottom: 10.h),
+                                          child: InkWell(
+                                            onTap: () {
+                                              context.push(NewsDetails(index: i));
+                                            },
+                                            child: CustomNewsCard(
+                                              newsDesc: layoutCubit
+                                                  .homeModel!.news[i].title,
+                                              backgroundImage: layoutCubit
+                                                  .homeModel!.news[i].image,
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                    SizedBox(
+                                      height: 15.h,
+                                    ),
+                                    CustomShowAllButton(
+                                      onTap: () {
+                                        context.push(const AllNewsScreen());
+                                      },
+                                      title: 'show all',
+                                    ),
+                                  ],
+                                )
+                              : ListView.builder(
                                   shrinkWrap: true,
                                   physics: const NeverScrollableScrollPhysics(),
-                                  itemCount: 2,
+                                  itemCount: layoutCubit.homeModel!.news.length,
                                   itemBuilder: (context, i) {
                                     return Padding(
-                                      padding: EdgeInsets.only(bottom: 10.h),
+                                      padding: EdgeInsets.only(bottom: 12.h),
                                       child: CustomNewsCard(
                                         newsDesc: layoutCubit
                                             .homeModel!.news[i].description,
-                                        backgroundImage: layoutCubit
-                                            .homeModel!.news[i].image,
+                                        backgroundImage:
+                                            layoutCubit.homeModel!.news[i].image,
                                       ),
                                     );
                                   },
                                 ),
-                                SizedBox(
-                                  height: 15.h,
-                                ),
-                                CustomShowAllButton(
-                                  onTap: () {},
-                                  title: 'show all',
-                                ),
-                              ],
-                            )
-                          : ListView.builder(
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              itemCount: layoutCubit.homeModel!.news.length,
-                              itemBuilder: (context, i) {
-                                return Padding(
-                                  padding: EdgeInsets.only(bottom: 12.h),
-                                  child: CustomNewsCard(
-                                    newsDesc: layoutCubit
-                                        .homeModel!.news[i].description,
-                                    backgroundImage:
-                                        layoutCubit.homeModel!.news[i].image,
-                                  ),
-                                );
-                              },
-                            ),
+                        ],
+                      )
+                      :Container(),
                     ],
                   ),
                 ),
               );
             },
-            fallback: (context) => customCircularProgressIndicator(),
+            fallback: (context) => MyDialog.showLoadingDialog(),
+            // fallback: (context) => customCircularProgressIndicator(),
           );
         }
       },

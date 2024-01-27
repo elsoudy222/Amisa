@@ -11,11 +11,11 @@ class CustomHeaderWidget extends StatelessWidget
 
   int sizeHeight = 300;
   List<String> imageHeader = [
-    header,
-    newArrivals,
-    news,
+    header1,
+   kitchen,
     ceramics,
-    kitchen,
+    wardrobes,
+    sanitary
   ];
 
   CustomHeaderWidget({

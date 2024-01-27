@@ -1,4 +1,3 @@
-import 'package:amisa/view/screens/layout/layout_screen.dart';
 import 'package:amisa/view/screens/onboarding/onboarding_screen.dart';
 import 'package:amisa/view/screens/splash_screen/splash_screen.dart';
 import 'package:amisa/view_model/cubits/home_cubit/home_cubit.dart';
@@ -12,29 +11,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'core/config/config_path.dart';
 import 'firebase_options.dart';
 
 //TODO: 1: Edit OnBoarding Screen Details .(Next Step),
-//TODO: 2:
+//TODO: 2: Edit Abode Types Navigation .(Next Step)
 //TODO: 3:
 //TODO: 4:
 
 void main() async {
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
   WidgetsFlutterBinding.ensureInitialized();
   DioHelper.init();
   await CacheHelper.init();
   Bloc.observer = MyBlocObserver();
-
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp,]);
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
 
 
-
-  runApp( MyApp());
+  runApp( const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -87,8 +85,8 @@ class MyApp extends StatelessWidget {
                 scaffoldBackgroundColor: AppColors.scaffoldBackground,
                 primaryColor: AppColors.white,
                 // primarySwatch: Colors.grey,
-                 fontFamily: "Montserrat-Black",
-               // textTheme: GoogleFonts.montserratTextTheme(),
+               //  fontFamily: "Montserrat-Black",
+                textTheme: GoogleFonts.montserratTextTheme(),
               ),
               home: const SplashScreen(),
               //home: OnBoardingScreen(),

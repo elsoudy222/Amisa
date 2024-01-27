@@ -41,7 +41,7 @@ class CustomKitchenTypeCard extends StatelessWidget {
                 title.toUpperCase(),
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 18.sp,
+                  fontSize: 16.sp,
                   fontWeight: FontWeight.w600,
                 ),
               ),

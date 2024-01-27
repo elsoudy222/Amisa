@@ -70,12 +70,14 @@ class ProductsScreen extends StatelessWidget {
                         backgroundImage: product.productImage,
                         buttonText: product.productName,
                         badgeBackgroundColor: Colors.black.withOpacity(0.5),
+                        badgePadding: brandName == "ABODE" ? 0 : 30.0,
+                        badgeWidth: brandName == "ABODE" ? 250 : 120,
                         badgeWidget: Text(
                           product.productName.toUpperCase(),
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               color: Colors.white,
-                              fontSize: 19.sp,
+                              fontSize: 17.sp,
                               fontWeight: FontWeight.w500),
                         ),
                         onTap: () {

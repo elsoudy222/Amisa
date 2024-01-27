@@ -18,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
   bool? onBoarding = CacheHelper.get(key: 'onBoarding');
   @override
   void initState() {
-    Timer(const Duration(seconds: 4), () {
+    Timer(const Duration(seconds: 1), () {
       if (onBoarding != null) {
         context.pushReplacement(const LayoutScreen(),);
       }else{
@@ -58,7 +58,7 @@ class _SplashScreenState extends State<SplashScreen> {
             SizedBox(
               height: 20.h,
             ),
-            const CircularProgressIndicator()
+             CircularProgressIndicator.adaptive(),
           ],
         ),
       ),

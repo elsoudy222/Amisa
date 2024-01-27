@@ -26,14 +26,20 @@ const String mission = "assets/svg/mission.svg";
 const String appLogo = "assets/images/amisa-logo.png";
 const String search = "assets/images/search.png";
 const String noProduct = "assets/images/noproduct.png";
-const String header = "assets/images/amisa-header.jpg";
+
+
 const String header1 = "assets/images/amisa-header.jpg";
 const String newArrivals = "assets/images/new-arrival.png";
-const String ceramics = "assets/images/ceramic.png";
-const String kitchen = "assets/images/kitchen.png";
+const String ceramics = "assets/images/ceramicsonboarding.png";
+const String kitchen = "assets/images/kitchenonboarding.jpg";
+const String wardrobes = "assets/images/wardrobesonboarding.jpg";
+const String sanitary = "assets/images/snatiryonboarding.jpg";
 const String news = "assets/images/news.png";
 const String modern = "assets/images/modern.jpg";
 const String classic = "assets/images/classic.jpg";
+
+const String kitchenTaps = "assets/images/KitchenTaps.jpg";
+const String pronteau = "assets/images/ptonteau.jpg";
 
 
 /// Icons Path :
