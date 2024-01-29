@@ -13,10 +13,10 @@ import '../../../view/screens_path.dart';
 part 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeStates> {
-
   HomeCubit() : super(HomeInitialState());
 
   static HomeCubit get(context) => BlocProvider.of(context);
+
   // Scrollbar in home Screen:
   final ScrollController newArrivalsScrollController = ScrollController();
   final PageController imageController = PageController();
@@ -25,31 +25,31 @@ class HomeCubit extends Cubit<HomeStates> {
 
   void changeBrandIndex(int index) {
     brandCurrentIndex = index;
-     emit(ChangeBrandIndexState());
+    emit(ChangeBrandIndexState());
   }
+
   int categoryCurrentIndex = 0;
+
   void changeIndex(int index) {
     categoryCurrentIndex = index;
     emit(ChangeIndexState());
   }
 
-  List<String> kitchenTypes=["modern" , "classic"];
-  List<String> kitchenTypesImage=[modern , classic];
+  List<String> kitchenTypes = ["modern", "classic"];
+  List<String> kitchenTypesImage = [modern, classic];
 
-  List<String> abodeTypes=["Taps" , "Pronteau"];
-  List<String> abodeTypesImage=[kitchenTaps , pronteau];
+  List<String> abodeTypes = ["Taps", "Pronteau"];
+  List<String> abodeTypesImage = [kitchenTaps, pronteau];
 
-  List<String> pronteauTypes=["3in1" , "4in1"];
-  List<String> pronteauTypesImage=[modern , classic];
-
-
-
+  List<String> pronteauTypes = ["3in1", "4in1"];
+  List<String> pronteauTypesImage = [modern, classic];
 
   TextEditingController searchController = TextEditingController();
   SearchModel? searchDetailsModel;
+
   void searchProductsList({
     required String searchText,
-  }){
+  }) {
     emit(LoadingSearchState());
     DioHelper.postData(
       url: SEARCH,
@@ -57,7 +57,6 @@ class HomeCubit extends Cubit<HomeStates> {
         "search": searchText,
       },
     ).then((value) {
-
       searchDetailsModel = SearchModel.fromJson(value.data);
       debugPrint(searchDetailsModel.toString());
       emit(SuccessSearchState());
@@ -68,39 +67,37 @@ class HomeCubit extends Cubit<HomeStates> {
     });
   }
 
-
   /// Get All Products Data from API :
 
   ProductsModel? productsModel;
-  void getAllProducts({required String brandId, String type = ""  }) {
+
+  void getAllProducts({required String brandId, String type = ""}) {
     emit(LoadingGetAllProductsStates());
     DioHelper.postData(
       url: ALL_PRODUCTS,
       data: {
-        "brand_id" : brandId,
-        "type" : type,
-        "pagenum" : "",
+        "brand_id": brandId,
+        "type": type,
+        "pagenum": "",
       },
     ).then((value) {
-    productsModel = ProductsModel.fromJson(value.data);
-    print(productsModel );
-    emit(SuccessGetAllProductsStates());
-    debugPrint("====================== SUCCESS ==========================");
-
-    }).catchError((error){
+      productsModel = ProductsModel.fromJson(value.data);
+      print(productsModel);
+      emit(SuccessGetAllProductsStates());
+      debugPrint("====================== SUCCESS ==========================");
+    }).catchError((error) {
       debugPrint("==========ERROR =========== $error");
-       emit(ErrorGetAllProductsStates(error.toString()));
-    })
-    ;
+      emit(ErrorGetAllProductsStates(error.toString()));
+    });
   }
 
   /// Get All Brands Data from API :
   CategoryModel? brandModel;
+
   void getAllBrands(int? catId) {
     emit(LoadingGetAllBrandsStates());
     DioHelper.getData(
       url: BRANDS + catId.toString(),
-
     ).then((value) {
       brandModel = CategoryModel.fromJson(value.data);
       emit(SuccessGetAllBrandsStates());
@@ -112,6 +109,7 @@ class HomeCubit extends Cubit<HomeStates> {
 
   /// Get Product Details Data from API :
   ProductsDetailsModel? productsDetailsModel;
+
   void getProductDetails(int productID) {
     emit(LoadingGetProductDetailsStates());
     DioHelper.getData(
@@ -128,19 +126,18 @@ class HomeCubit extends Cubit<HomeStates> {
 
   /// Get All Collections Data from API :
   CollectionModel? collectionModel;
+
   void getCollectionDetails(int collectionID) {
     emit(LoadingGetCollectionDetailsStates());
     DioHelper.getData(
-        url: COLLECTION + collectionID.toString(),
+      url: COLLECTION + collectionID.toString(),
     ).then((value) {
-       collectionModel = CollectionModel.fromJson(value.data);
-       debugPrint(value.data.toString());
+      collectionModel = CollectionModel.fromJson(value.data);
+      debugPrint(value.data.toString());
       emit(SuccessGetCollectionDetailsStates());
     }).catchError((error) {
       emit(ErrorGetCollectionDetailsStates(error.toString()));
       debugPrint(error.toString());
     });
   }
-
-
 }

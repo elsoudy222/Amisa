@@ -20,14 +20,14 @@ class KitchensSubCategoryType extends StatelessWidget {
   final int? brandId;
   final String brandDescription;
 
-
-
   const KitchensSubCategoryType(
       {super.key,
       required this.companyName,
       this.companyLogo = "",
       this.brandId,
-      required this.companyImage, required this.categoryName, required this.brandDescription});
+      required this.companyImage,
+      required this.categoryName,
+      required this.brandDescription});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,7 @@ class KitchensSubCategoryType extends StatelessWidget {
       listener: (context, state) {
         if (state is LoadingGetAllProductsStates) {
           MyDialog.showLoadingDialog();
-        } else if (state is SuccessGetAllProductsStates ) {
+        } else if (state is SuccessGetAllProductsStates) {
           EasyLoading.dismiss();
           context.push(
             ProductsScreen(
@@ -45,7 +45,6 @@ class KitchensSubCategoryType extends StatelessWidget {
               categoryName: categoryName,
             ),
           );
-
         } else if (state is ErrorGetAllProductsStates) {
           EasyLoading.dismiss();
           showErrorToast(
@@ -53,7 +52,8 @@ class KitchensSubCategoryType extends StatelessWidget {
             msg: "There is no products yet!",
             time: 3,
           );
-          print("================================ ERROR =======================================");
+          print(
+              "================================ ERROR =======================================");
         }
       },
       builder: (context, state) {
@@ -124,10 +124,8 @@ class KitchensSubCategoryType extends StatelessWidget {
                         homeCubit.getAllProducts(
                           brandId: "$brandId",
                           type: homeCubit.kitchenTypes[index],
-
                         );
                         print(homeCubit.kitchenTypes[index]);
-
                       },
                     );
                   },

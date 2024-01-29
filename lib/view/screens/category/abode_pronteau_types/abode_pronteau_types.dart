@@ -34,9 +34,9 @@ class AbodePronteauTypes extends StatelessWidget {
     var homeCubit = HomeCubit.get(context);
     return BlocConsumer<HomeCubit, HomeStates>(
       listener: (context, state) {
-        if (state is LoadingGetAllProductsStates ) {
+        if (state is LoadingGetAllProductsStates) {
           MyDialog.showLoadingDialog();
-        } else if (state is SuccessGetAllProductsStates ) {
+        } else if (state is SuccessGetAllProductsStates) {
           EasyLoading.dismiss();
           context.push(
             ProductsScreen(
@@ -45,7 +45,7 @@ class AbodePronteauTypes extends StatelessWidget {
               categoryName: categoryName,
             ),
           );
-        } else if (state is ErrorGetAllProductsStates ) {
+        } else if (state is ErrorGetAllProductsStates) {
           EasyLoading.dismiss();
           showErrorToast(
             context,
@@ -83,7 +83,6 @@ class AbodePronteauTypes extends StatelessWidget {
                           color: AppColors.white,
                           fontSize: 16.sp,
                           fontWeight: FontWeight.w300,
-
                         ),
                       ),
                     )
@@ -117,17 +116,14 @@ class AbodePronteauTypes extends StatelessWidget {
                   itemCount: homeCubit.kitchenTypes.length,
                   itemBuilder: (BuildContext context, int index) {
                     return CustomKitchenTypeCard(
-
                       backgroundImage: homeCubit.abodeTypesImage[index],
                       title: homeCubit.pronteauTypes[index],
                       onTap: () {
                         homeCubit.getAllProducts(
                           brandId: "$brandId",
                           type: homeCubit.pronteauTypes[index],
-
                         );
                         debugPrint(homeCubit.kitchenTypes[index]);
-
                       },
                     );
                   },
