@@ -9,27 +9,19 @@ import 'package:amisa/view/screens/news/all_news/all_news_screen.dart';
 import 'package:amisa/view/screens/news/news_details/news_details_screen.dart';
 import 'package:amisa/view_model/cubits/home_cubit/home_cubit.dart';
 import 'package:amisa/view_model/cubits/layout_cubit/layout_cubit.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:url_launcher/link.dart';
-import 'package:url_launcher/url_launcher.dart';
 import '../../../core/components/components.dart';
 import '../../../core/components/custom_sub_category_card/custom_sub_category_card.dart';
 import '../../../core/components/show_all_button/show_all_button.dart';
 import '../../../core/components/toast/toast.dart';
-import '../../../view_model/database/network/end_points.dart';
 import '../../screens_path.dart';
 import '../category/sub_category/sub_category_screen.dart';
-import '../product_details/photo_view/photo_view.dart';
 import '../product_details/product_details_screen.dart';
-import '../profile/widgets/social_links_widget.dart';
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen({super.key});
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -56,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
           }));
         } else if (state is ErrorGetProductDetailsStates) {
           EasyLoading.dismiss();
-          print("============= Error get product details ===============");
+          debugPrint("============= Error get product details ===============");
         }
 
         if (state is SuccessGetAllBrandsStates) {
@@ -351,7 +343,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               );
             },
-            fallback: (context) => MyDialog.showLoadingDialog(),
+            fallback: (context) => Container(
+              color: AppColors.scaffoldBackground,
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              child: Center(
+                child: MyDialog.showLoadingDialog(),
+              ),
+            ),
             // fallback: (context) => customCircularProgressIndicator(),
           );
         }

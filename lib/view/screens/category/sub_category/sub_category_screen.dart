@@ -37,11 +37,14 @@ class SubCategoryScreen extends StatelessWidget {
     var brandName = homeCubit.brandModel!.category.brands[homeCubit.brandCurrentIndex].brandName;
     return BlocConsumer<HomeCubit, HomeStates>(
       listener: (context, state) {
-        if (state is LoadingGetAllProductsStates && categoryTitle != "Kitchens" && brandName != "ABODE")
+        if (state is LoadingGetAllProductsStates && categoryTitle != "Kitchens"
+            && brandName != "ABODE")
         {
           MyDialog.showLoadingDialog();
         }
-        else if (state is SuccessGetAllProductsStates && categoryTitle != "Kitchens"&& brandName != "ABODE")
+        else if (state is SuccessGetAllProductsStates && categoryTitle != "Kitchens"
+            && brandName != "ABODE"
+        )
         {
           EasyLoading.dismiss();
           context.push(
@@ -51,7 +54,8 @@ class SubCategoryScreen extends StatelessWidget {
             ),
           );
         }
-        else if (state is ErrorGetAllProductsStates && categoryTitle != "Kitchens" && brandName != "ABODE") {
+        else if (state is ErrorGetAllProductsStates && categoryTitle != "Kitchens"
+            && brandName != "ABODE") {
           EasyLoading.dismiss();
           showErrorToast(
             context,

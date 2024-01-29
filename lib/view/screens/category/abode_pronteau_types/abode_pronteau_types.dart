@@ -36,9 +36,11 @@ class AbodePronteauTypes extends StatelessWidget {
       listener: (context, state) {
         if (state is LoadingGetAllProductsStates) {
           MyDialog.showLoadingDialog();
-        } else if (state is SuccessGetAllProductsStates) {
+        } else if (state is SuccessGetAllProductsStates
+            && homeCubit.productsModel!.products.type != "Taps"
+            ) {
           EasyLoading.dismiss();
-          context.push(
+          context.pushReplacement(
             ProductsScreen(
               type: homeCubit.productsModel!.products.type,
               brandName: companyName,

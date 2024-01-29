@@ -15,7 +15,6 @@ class CustomProductAppbar extends StatelessWidget implements PreferredSizeWidget
   CustomProductAppbar({
     super.key,
     this.sizeHeight = 170,
-
     this.title = " ",
     this.fontWeight,
    // required this.onTap,

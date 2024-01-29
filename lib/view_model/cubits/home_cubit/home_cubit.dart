@@ -22,10 +22,10 @@ class HomeCubit extends Cubit<HomeStates> {
   final PageController imageController = PageController();
 
   int brandCurrentIndex = 0;
-
   void changeBrandIndex(int index) {
     brandCurrentIndex = index;
     emit(ChangeBrandIndexState());
+
   }
 
   int categoryCurrentIndex = 0;

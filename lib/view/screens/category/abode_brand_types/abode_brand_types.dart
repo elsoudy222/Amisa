@@ -8,7 +8,6 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import '../../../../core/components/components.dart';
 import '../../../../core/components/custom_appbars/custom_kitchen_type_appbar.dart';
 import '../../../../core/components/toast/toast.dart';
-import '../../../../core/config/const/enums.dart';
 import '../../home/widgets/custom_text_title/custom_title_text.dart';
 import '../../products/products_screen.dart';
 import '../abode_pronteau_types/abode_pronteau_types.dart';
@@ -36,13 +35,13 @@ class AbodeBrandTypes extends StatelessWidget {
 
     return BlocConsumer<HomeCubit, HomeStates>(
       listener: (context, state) {
-        if (state is LoadingGetAllProductsStates &&
-            homeCubit.productsModel!.products.type != "3 in 1" &&
-            homeCubit.productsModel!.products.type != "4 in 1") {
+        if (state is LoadingGetAllProductsStates
+           ) {
           MyDialog.showLoadingDialog();
-        } else if (state is SuccessGetAllProductsStates &&
-            homeCubit.productsModel!.products.type != "3 in 1" &&
-            homeCubit.productsModel!.products.type != "4 in 1") {
+        } else if (state is SuccessGetAllProductsStates
+
+            && homeCubit.productsModel!.products.type != "3 in 1"
+            && homeCubit.productsModel!.products.type != "4 in 1") {
           EasyLoading.dismiss();
           context.push(
             ProductsScreen(
@@ -51,9 +50,8 @@ class AbodeBrandTypes extends StatelessWidget {
               categoryName: categoryName,
             ),
           );
-        } else if (state is ErrorGetAllProductsStates &&
-            homeCubit.productsModel!.products.type != "3 in 1" &&
-            homeCubit.productsModel!.products.type != "4 in 1") {
+          debugPrint("++++++++++++++++++++($companyName)++++++++++++++++++++++++++++");
+        } else if (state is ErrorGetAllProductsStates) {
           EasyLoading.dismiss();
           showErrorToast(
             context,
@@ -140,7 +138,7 @@ class AbodeBrandTypes extends StatelessWidget {
                             ),
                           );
                           debugPrint(homeCubit.abodeTypes[index]);
-                        } else {
+                        } else if(homeCubit.abodeTypes[index] == "Taps"){
                           homeCubit.getAllProducts(
                             brandId: "$brandId",
                             type: homeCubit.abodeTypes[index],

@@ -28,7 +28,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
     var layoutCubit = LayoutCubit.get(context);
     return BlocConsumer<HomeCubit, HomeStates>(
       listener: (context, state) {
-        if(state is SuccessGetAllBrandsStates){
+        if(state is SuccessGetAllBrandsStates ){
           EasyLoading.dismiss();
           context.push(
             SubCategoryScreen(
