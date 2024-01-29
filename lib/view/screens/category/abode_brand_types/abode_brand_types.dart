@@ -39,9 +39,9 @@ class AbodeBrandTypes extends StatelessWidget {
            ) {
           MyDialog.showLoadingDialog();
         } else if (state is SuccessGetAllProductsStates
+            && homeCubit.productsModel!.products.type == "Taps"
 
-            && homeCubit.productsModel!.products.type != "3 in 1"
-            && homeCubit.productsModel!.products.type != "4 in 1") {
+        ) {
           EasyLoading.dismiss();
           context.push(
             ProductsScreen(
@@ -120,14 +120,14 @@ class AbodeBrandTypes extends StatelessWidget {
                     crossAxisSpacing: 10.w,
                     mainAxisSpacing: 10.w,
                   ),
-                  itemCount: homeCubit.kitchenTypes.length,
+                  itemCount: homeCubit.abodeTypes.length,
                   itemBuilder: (BuildContext context, int index) {
                     return CustomKitchenTypeCard(
                       /// will change the image:
                       backgroundImage: homeCubit.abodeTypesImage[index],
                       title: homeCubit.abodeTypes[index],
                       onTap: () {
-                        if (homeCubit.abodeTypes[index] == "Pronteau") {
+                        if (homeCubit.abodeTypes[index] != "Taps") {
                           context.push(
                             AbodePronteauTypes(
                               companyName: companyName,
@@ -138,7 +138,7 @@ class AbodeBrandTypes extends StatelessWidget {
                             ),
                           );
                           debugPrint(homeCubit.abodeTypes[index]);
-                        } else if(homeCubit.abodeTypes[index] == "Taps"){
+                        } else {
                           homeCubit.getAllProducts(
                             brandId: "$brandId",
                             type: homeCubit.abodeTypes[index],

@@ -67,7 +67,7 @@ class CustomPronteauTypeAppbar extends StatelessWidget implements PreferredSizeW
           ),
           Positioned(
             top: 50.h,
-            left: ScreenUtil.defaultSize.width / 2.0,
+            left: ScreenUtil.defaultSize.width / 2.7,
             child:   Text(
               title.toUpperCase(),
               style: TextStyle(

@@ -37,7 +37,7 @@ class AbodePronteauTypes extends StatelessWidget {
         if (state is LoadingGetAllProductsStates) {
           MyDialog.showLoadingDialog();
         } else if (state is SuccessGetAllProductsStates
-            && homeCubit.productsModel!.products.type != "Taps"
+
             ) {
           EasyLoading.dismiss();
           context.pushReplacement(
@@ -61,7 +61,8 @@ class AbodePronteauTypes extends StatelessWidget {
       builder: (context, state) {
         return Scaffold(
           appBar: CustomPronteauTypeAppbar(
-            title: companyName,
+            center: true,
+            title: "Pronteau",
             imageUrl: companyImage,
             companyLogo: pronteauLogo,
           ),

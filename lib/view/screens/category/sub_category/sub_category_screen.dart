@@ -43,8 +43,7 @@ class SubCategoryScreen extends StatelessWidget {
           MyDialog.showLoadingDialog();
         }
         else if (state is SuccessGetAllProductsStates && categoryTitle != "Kitchens"
-            && brandName != "ABODE"
-        )
+            && brandName != "ABODE")
         {
           EasyLoading.dismiss();
           context.push(
