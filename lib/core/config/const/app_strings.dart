@@ -40,6 +40,7 @@ const String classic = "assets/images/classic.jpg";
 
 const String kitchenTaps = "assets/images/KitchenTaps.jpg";
 const String pronteau = "assets/images/ptonteau.jpg";
+const String pronteauLogo = "assets/images/pronteau.png";
 
 
 /// Icons Path :

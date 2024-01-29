@@ -11,32 +11,38 @@ import '../../../../core/components/toast/toast.dart';
 import '../../../../core/config/const/enums.dart';
 import '../../home/widgets/custom_text_title/custom_title_text.dart';
 import '../../products/products_screen.dart';
+import '../abode_pronteau_types/abode_pronteau_types.dart';
 
 class AbodeBrandTypes extends StatelessWidget {
   final String companyName;
   final String categoryName;
   final String companyImage;
   final String companyLogo;
-  final int? brandId;
+  final int brandId;
   final String brandDescription;
-
-
 
   const AbodeBrandTypes(
       {super.key,
-        required this.companyName,
-        this.companyLogo = "",
-        this.brandId,
-        required this.companyImage, required this.categoryName, required this.brandDescription});
+      required this.companyName,
+      this.companyLogo = "",
+      required this.brandId,
+      required this.companyImage,
+      required this.categoryName,
+      required this.brandDescription});
 
   @override
   Widget build(BuildContext context) {
     var homeCubit = HomeCubit.get(context);
+
     return BlocConsumer<HomeCubit, HomeStates>(
       listener: (context, state) {
-        if (state is LoadingGetAllProductsStates) {
+        if (state is LoadingGetAllProductsStates &&
+            homeCubit.productsModel!.products.type != "3 in 1" &&
+            homeCubit.productsModel!.products.type != "4 in 1") {
           MyDialog.showLoadingDialog();
-        } else if (state is SuccessGetAllProductsStates ) {
+        } else if (state is SuccessGetAllProductsStates &&
+            homeCubit.productsModel!.products.type != "3 in 1" &&
+            homeCubit.productsModel!.products.type != "4 in 1") {
           EasyLoading.dismiss();
           context.push(
             ProductsScreen(
@@ -45,15 +51,17 @@ class AbodeBrandTypes extends StatelessWidget {
               categoryName: categoryName,
             ),
           );
-
-        } else if (state is ErrorGetAllProductsStates) {
+        } else if (state is ErrorGetAllProductsStates &&
+            homeCubit.productsModel!.products.type != "3 in 1" &&
+            homeCubit.productsModel!.products.type != "4 in 1") {
           EasyLoading.dismiss();
           showErrorToast(
             context,
             msg: "There is no products yet!",
             time: 3,
           );
-          print("================================ ERROR =======================================");
+          debugPrint(
+              "================================ ERROR =======================================");
         }
       },
       builder: (context, state) {
@@ -121,23 +129,24 @@ class AbodeBrandTypes extends StatelessWidget {
                       backgroundImage: homeCubit.abodeTypesImage[index],
                       title: homeCubit.abodeTypes[index],
                       onTap: () {
-                        // if(homeCubit.abodeTypes[index] == "Pronteau"){
-                        //   homeCubit.getAllProducts(
-                        //     brandId: "$brandId",
-                        //     type: homeCubit.abodeTypes[index],
-                        //   );
-                        //   debugPrint(homeCubit.abodeTypes[index]);
-                        // }
-                        // else{
-                        //     debugPrint(homeCubit.abodeTypes[index]);
-                        // }
-
-                        homeCubit.getAllProducts(
-                          brandId: "$brandId",
-                          type: homeCubit.abodeTypes[index],
-                        );
-                        debugPrint(homeCubit.abodeTypes[index]);
-
+                        if (homeCubit.abodeTypes[index] == "Pronteau") {
+                          context.push(
+                            AbodePronteauTypes(
+                              companyName: companyName,
+                              brandId: brandId,
+                              companyImage: companyImage,
+                              categoryName: categoryName,
+                              brandDescription: brandDescription,
+                            ),
+                          );
+                          debugPrint(homeCubit.abodeTypes[index]);
+                        } else {
+                          homeCubit.getAllProducts(
+                            brandId: "$brandId",
+                            type: homeCubit.abodeTypes[index],
+                          );
+                          debugPrint(homeCubit.abodeTypes[index]);
+                        }
                       },
                     );
                   },
