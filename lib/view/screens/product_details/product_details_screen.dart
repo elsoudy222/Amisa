@@ -288,46 +288,41 @@ Widget sizesAndInfoWidget(HomeCubit homeCubit){
       Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: List.generate(
-          homeCubit.productsDetailsModel!.info.length,
-              (index) => InkWell(
-            onTap: () {
-              // context.push(DesignHubScreen(designId: index));
-            },
-            child: Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.white),
-             //   color: Colors.white.withOpacity(.1)
-              ),
-              // color: Colors.orange,
-              padding: EdgeInsets.only(left: 10.w, top: 5.h),
-              margin: EdgeInsets.only(bottom: 5.h),
-              //height: 50.h,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    homeCubit.productsDetailsModel!.info[index].infoTitle,
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 17.sp,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-
-                    "${homeCubit.productsDetailsModel!.info[index].infoValue}",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 13.sp,
-                     //   fontWeight: FontWeight.bold
+           homeCubit.productsDetailsModel!.info.length,
+              (index) => Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.white),
+                 // color: Colors.white.withOpacity(.1)
+                ),
+                // color: Colors.orange,
+                padding: EdgeInsets.only(left: 10.w, top: 5.h),
+                margin: EdgeInsets.only(bottom: 5.h),
+                //height: 50.h,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      homeCubit.productsDetailsModel!.info[index].infoTitle,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 17.sp,
+                          fontWeight: FontWeight.bold),
                     ),
-                  ),
-                ],
+                    Text(
+
+                      "${homeCubit.productsDetailsModel!.info[index].infoValue}",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 13.sp,
+                       //   fontWeight: FontWeight.bold
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ),
         ),
       ),
     ],
