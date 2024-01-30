@@ -12,7 +12,7 @@ import '../../home/widgets/custom_text_title/custom_title_text.dart';
 import '../../products/products_screen.dart';
 
 class AbodePronteauTypes extends StatelessWidget {
-  final String companyName;
+
   final String categoryName;
   final String companyImage;
   final String companyLogo;
@@ -21,7 +21,7 @@ class AbodePronteauTypes extends StatelessWidget {
 
   const AbodePronteauTypes({
     super.key,
-    required this.companyName,
+
     this.companyLogo = "",
     required this.brandId,
     required this.companyImage,
@@ -43,7 +43,7 @@ class AbodePronteauTypes extends StatelessWidget {
           context.pushReplacement(
             ProductsScreen(
               type: homeCubit.productsModel!.products.type,
-              brandName: companyName,
+              brandName: "Pronteau",
               categoryName: categoryName,
             ),
           );
@@ -61,7 +61,7 @@ class AbodePronteauTypes extends StatelessWidget {
       builder: (context, state) {
         return Scaffold(
           appBar: CustomPronteauTypeAppbar(
-            center: true,
+
             title: "Pronteau",
             imageUrl: companyImage,
             companyLogo: pronteauLogo,

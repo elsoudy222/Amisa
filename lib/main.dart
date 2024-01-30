@@ -84,12 +84,11 @@ class MyApp extends StatelessWidget {
                 ),
                 scaffoldBackgroundColor: AppColors.scaffoldBackground,
                 primaryColor: AppColors.white,
-                // primarySwatch: Colors.grey,
-               //  fontFamily: "Montserrat-Black",
+
                 textTheme: GoogleFonts.montserratTextTheme(),
               ),
               home: const SplashScreen(),
-              //home: OnBoardingScreen(),
+             // home: OnBoardingScreen(),
             ),
           );
         },

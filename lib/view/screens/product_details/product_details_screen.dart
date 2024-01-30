@@ -254,10 +254,7 @@ Widget sizesAndInfoWidget(HomeCubit homeCubit){
   return ExpansionTile(
     backgroundColor: Colors.white.withOpacity(.1),
     expandedCrossAxisAlignment: CrossAxisAlignment.start,
-    // leading: Icon(
-    //   leadingIcon,
-    //   color: Colors.white,
-    // ),
+
     trailing: const Icon(
        IconlyBold.arrowDown3,
       color: Colors.white,
@@ -318,8 +315,9 @@ Widget sizesAndInfoWidget(HomeCubit homeCubit){
                         fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    "${homeCubit.productsDetailsModel!.info[index].infoValue}",
 
+                    "${homeCubit.productsDetailsModel!.info[index].infoValue}",
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 13.sp,

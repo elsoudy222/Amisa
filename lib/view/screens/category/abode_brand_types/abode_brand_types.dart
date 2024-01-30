@@ -39,7 +39,9 @@ class AbodeBrandTypes extends StatelessWidget {
            ) {
           MyDialog.showLoadingDialog();
         } else if (state is SuccessGetAllProductsStates
-            && homeCubit.productsModel!.products.type == "Taps"
+          //  && homeCubit.productsModel!.products.type == "Taps"
+            && homeCubit.productsModel!.products.type != "3in1"
+            && homeCubit.productsModel!.products.type != "4in1"
 
         ) {
           EasyLoading.dismiss();
@@ -130,7 +132,7 @@ class AbodeBrandTypes extends StatelessWidget {
                         if (homeCubit.abodeTypes[index] != "Taps") {
                           context.push(
                             AbodePronteauTypes(
-                              companyName: companyName,
+
                               brandId: brandId,
                               companyImage: companyImage,
                               categoryName: categoryName,

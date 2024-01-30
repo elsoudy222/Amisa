@@ -33,7 +33,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     BoardingModel(
         image: wardrobes,
         title: 'Wardrobes',
-        body: 'Body Screen 3'),
+        body: 'Italian Luxury Wardrobes Meet All Clients Needs'),
     BoardingModel(
         image: sanitary,
         title: 'Sanitary Ware',
@@ -55,18 +55,28 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     return Scaffold(
         appBar: AppBar(
           actions: [
-            TextButton(
-              child: const Text(
-                'SKIP',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
+            Container(
+              // width: 75.w,
+              //
+              // decoration: BoxDecoration(
+              //   borderRadius: BorderRadius.circular(25.r),
+              //   color: Colors.white,
+              //
+              // ),
+              child: TextButton(
+                child: const Text(
+                  'SKIP',
+                  style: TextStyle(
+                    color: Colors.white,
+                  //  color: AppColors.scaffoldBackground,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
                 ),
+                onPressed: () {
+                  submit();
+                },
               ),
-              onPressed: () {
-                submit();
-              },
             ),
             SizedBox(
               width: 10.w,
