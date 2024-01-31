@@ -22,6 +22,7 @@ class MyDialog{
       indicator: const Column(
         children: [
           Image(image: AssetImage(appLogo,),height: 70,),
+          SizedBox(height: 10,),
           CircularProgressIndicator.adaptive(backgroundColor: Colors.white,strokeWidth: 2,),
         ],
       ),
