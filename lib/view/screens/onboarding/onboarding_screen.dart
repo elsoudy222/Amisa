@@ -55,28 +55,19 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     return Scaffold(
         appBar: AppBar(
           actions: [
-            Container(
-              // width: 75.w,
-              //
-              // decoration: BoxDecoration(
-              //   borderRadius: BorderRadius.circular(25.r),
-              //   color: Colors.white,
-              //
-              // ),
-              child: TextButton(
-                child: const Text(
-                  'SKIP',
-                  style: TextStyle(
-                    color: Colors.white,
-                  //  color: AppColors.scaffoldBackground,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                  ),
+            TextButton(
+              child: const Text(
+                'SKIP',
+                style: TextStyle(
+                  color: Colors.white,
+                //  color: AppColors.scaffoldBackground,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
                 ),
-                onPressed: () {
-                  submit();
-                },
               ),
+              onPressed: () {
+                submit();
+              },
             ),
             SizedBox(
               width: 10.w,
