@@ -31,6 +31,12 @@ class ErrorGetAllProductsStates extends HomeStates{
   final String error;
   ErrorGetAllProductsStates(this.error);
 }
+class LoadingGetAbodeTapsProductsStates extends HomeStates{}
+class SuccessGetAbodeTapsProductsStates extends HomeStates{}
+class ErrorGetAbodeTapsProductsStates extends HomeStates{
+  final String error;
+  ErrorGetAbodeTapsProductsStates(this.error);
+}
 
 
 

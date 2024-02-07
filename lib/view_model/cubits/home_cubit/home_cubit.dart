@@ -91,6 +91,28 @@ class HomeCubit extends Cubit<HomeStates> {
     });
   }
 
+
+  ProductsModel? aboutProductsModel;
+  void getAbodeTapsProducts({required String brandId}) {
+    emit(LoadingGetAbodeTapsProductsStates());
+    DioHelper.postData(
+      url: ALL_PRODUCTS,
+      data: {
+        "brand_id": brandId,
+        "type": "Taps",
+        "pagenum": "",
+      },
+    ).then((value) {
+      productsModel = ProductsModel.fromJson(value.data);
+      print(productsModel);
+      emit(SuccessGetAbodeTapsProductsStates());
+      debugPrint("====================== SUCCESS ==========================");
+    }).catchError((error) {
+      debugPrint("==========ERROR =========== $error");
+      emit(ErrorGetAbodeTapsProductsStates(error.toString()));
+    });
+  }
+
   /// Get All Brands Data from API :
   CategoryModel? brandModel;
 
