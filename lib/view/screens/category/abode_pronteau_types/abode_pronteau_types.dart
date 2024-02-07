@@ -37,7 +37,6 @@ class AbodePronteauTypes extends StatelessWidget {
         if (state is LoadingGetAllProductsStates) {
           MyDialog.showLoadingDialog();
         } else if (state is SuccessGetAllProductsStates
-
             ) {
           EasyLoading.dismiss();
           context.pushReplacement(

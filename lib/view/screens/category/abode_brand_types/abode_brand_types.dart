@@ -1,6 +1,7 @@
 import 'package:amisa/core/config/config_path.dart';
 import 'package:amisa/core/const/extensions.dart';
 import 'package:amisa/view/screens/category/kitchens_type/widgets/custom_kitchen-Type_card.dart';
+import 'package:amisa/view/screens/products/abode_taps_products_screen.dart';
 import 'package:amisa/view/screens_path.dart';
 import 'package:amisa/view_model/cubits/home_cubit/home_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -35,25 +36,22 @@ class AbodeBrandTypes extends StatelessWidget {
 
     return BlocConsumer<HomeCubit, HomeStates>(
       listener: (context, state) {
-        if (state is LoadingGetAllProductsStates
+        if (state is LoadingGetAbodeTapsProductsStates
            ) {
           MyDialog.showLoadingDialog();
-        } else if (state is SuccessGetAllProductsStates
-          //  && homeCubit.productsModel!.products.type == "Taps"
-            && homeCubit.productsModel!.products.type != "3in1"
-            && homeCubit.productsModel!.products.type != "4in1"
-
-        ) {
+        }
+        else if (state is SuccessGetAbodeTapsProductsStates
+            //&& homeCubit.productsModel!.products.type == "Taps"
+            //  && homeCubit.productsModel!.products.type != "3in1"
+            //  && homeCubit.productsModel!.products.type != "4in1"
+        ){
           EasyLoading.dismiss();
           context.push(
-            ProductsScreen(
-              type: homeCubit.productsModel!.products.type,
-              brandName: companyName,
-              categoryName: categoryName,
-            ),
+            const AbodeTapsProductScreen(),
           );
           debugPrint("++++++++++++++++++++($companyName)++++++++++++++++++++++++++++");
-        } else if (state is ErrorGetAllProductsStates
+        }
+        else if (state is ErrorGetAbodeTapsProductsStates
 
         ) {
           EasyLoading.dismiss();
@@ -134,7 +132,6 @@ class AbodeBrandTypes extends StatelessWidget {
                         if (homeCubit.abodeTypes[index] != "Taps") {
                           context.push(
                             AbodePronteauTypes(
-
                               brandId: brandId,
                               companyImage: companyImage,
                               categoryName: categoryName,
@@ -142,11 +139,10 @@ class AbodeBrandTypes extends StatelessWidget {
                             ),
                           );
                           debugPrint(homeCubit.abodeTypes[index]);
-                        } else {
-                          homeCubit.getAllProducts(
-                            brandId: "$brandId",
-                            type: homeCubit.abodeTypes[index],
-                          );
+                        }
+                        else {
+                          homeCubit.getAbodeTapsProducts(brandId: "$brandId",);
+
                           debugPrint(homeCubit.abodeTypes[index]);
                         }
                       },
