@@ -53,7 +53,9 @@ class AbodeBrandTypes extends StatelessWidget {
             ),
           );
           debugPrint("++++++++++++++++++++($companyName)++++++++++++++++++++++++++++");
-        } else if (state is ErrorGetAllProductsStates) {
+        } else if (state is ErrorGetAllProductsStates
+
+        ) {
           EasyLoading.dismiss();
           showErrorToast(
             context,
