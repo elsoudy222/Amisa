@@ -103,8 +103,8 @@ class HomeCubit extends Cubit<HomeStates> {
         "pagenum": "",
       },
     ).then((value) {
-      productsModel = ProductsModel.fromJson(value.data);
-      print(productsModel);
+      aboutProductsModel = ProductsModel.fromJson(value.data);
+      print(aboutProductsModel);
       emit(SuccessGetAbodeTapsProductsStates());
       debugPrint("====================== SUCCESS ==========================");
     }).catchError((error) {

@@ -53,12 +53,12 @@ class AbodeTapsProductScreen extends StatelessWidget {
               padding: EdgeInsets.symmetric(vertical: 15.0.h),
               child: ListView.builder(
                   itemCount:
-                  homeCubit.productsModel!.products.productsList.length ,
+                  homeCubit.aboutProductsModel!.products.productsList.length ,
                   shrinkWrap: true,
                   physics: const BouncingScrollPhysics(),
                   itemBuilder: (context, index) {
                     final product =
-                    homeCubit.productsModel!.products.productsList[index];
+                    homeCubit.aboutProductsModel!.products.productsList[index];
                     return Padding(
                       padding: EdgeInsets.only(bottom: 12.h),
                       child: CustomSubCategoryCard(
