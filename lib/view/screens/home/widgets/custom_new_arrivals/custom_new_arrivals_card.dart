@@ -1,6 +1,5 @@
-import 'package:amisa/view/screens_path.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import '../../../../../view_model/database/network/end_points.dart';
+import 'package:amisa/screens_path.dart';
+
 
 class CustomNewArrivalsCard extends StatelessWidget {
   final String title;

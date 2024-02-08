@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import '../../../screens_path.dart';
 
 class AppColors{
 

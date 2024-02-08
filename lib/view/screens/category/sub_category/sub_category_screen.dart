@@ -1,19 +1,7 @@
-import 'package:amisa/core/components/components.dart';
-import 'package:amisa/core/const/extensions.dart';
-import 'package:amisa/view/screens/category/abode_brand_types/abode_brand_types.dart';
-import 'package:amisa/view/screens/category/kitchens_type/kitchens_sub_category_type.dart';
-import 'package:amisa/view/screens_path.dart';
-import 'package:amisa/view_model/cubits/home_cubit/home_cubit.dart';
-import 'package:amisa/view_model/database/network/end_points.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 
-import '../../../../core/components/custom_appbars/custom_sub_category_appbar.dart';
-import '../../../../core/components/custom_sub_category_card/custom_sub_category_card.dart';
-import '../../../../core/components/toast/toast.dart';
-import '../../products/products_screen.dart';
+import 'package:amisa/screens_path.dart';
+
+
 
 // ignore: must_be_immutable
 class SubCategoryScreen extends StatelessWidget {
@@ -124,7 +112,8 @@ class SubCategoryScreen extends StatelessWidget {
                                       "===Brand Name =======  ${homeCubit.brandModel!.category.brands[i].brandName}");
                                   debugPrint(
                                       "===cat name =======  ${homeCubit.brandModel!.category.categoryName}");
-                                  context.push(AbodeBrandTypes(
+                                  context.push(
+                                    AbodeBrandTypes(
                                     companyName: homeCubit.brandModel!
                                         .category.brands[i].brandName,
                                     brandId: homeCubit.brandModel!.category
@@ -136,7 +125,7 @@ class SubCategoryScreen extends StatelessWidget {
                                     categoryName: categoryTitle,
                                     brandDescription: homeCubit.brandModel!
                                         .category.brands[i].brandDescription,
-                                  ),);
+                                  ));
                                 }
                                 else if (categoryTitle != "Kitchens") {
                                   homeCubit.getAllProducts(

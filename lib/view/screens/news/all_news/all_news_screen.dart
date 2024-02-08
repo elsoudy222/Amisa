@@ -1,11 +1,4 @@
-import 'package:amisa/core/const/extensions.dart';
-import 'package:amisa/view/screens/news/news_details/news_details_screen.dart';
-import 'package:amisa/view_model/cubits/layout_cubit/layout_cubit.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../screens_path.dart';
-import '../../home/widgets/custom_news_card/custom_news_card.dart';
-import '../widgets/custom_all_news.dart';
+import 'package:amisa/screens_path.dart';
 
 class AllNewsScreen extends StatelessWidget {
   const AllNewsScreen({super.key});

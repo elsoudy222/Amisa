@@ -1,18 +1,9 @@
-import 'package:amisa/core/components/components.dart';
-import 'package:amisa/core/components/custom_text_form_field/custom_text_form_filed.dart';
-import 'package:amisa/core/config/config_path.dart';
-import 'package:amisa/core/const/extensions.dart';
-import 'package:amisa/view/screens_path.dart';
-import 'package:amisa/view_model/cubits/home_cubit/home_cubit.dart';
-import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:flutter_iconly/flutter_iconly.dart';
-import '../../../core/components/custom_sub_category_card/custom_sub_category_card.dart';
-import '../product_details/product_details_screen.dart';
+
+import 'package:amisa/screens_path.dart';
+
 
 class SearchScreen extends StatelessWidget {
-  SearchScreen({super.key});
+  const SearchScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,16 +17,15 @@ class SearchScreen extends StatelessWidget {
         is SuccessGetProductDetailsStates) {
           EasyLoading.dismiss();
           context.push(
-            ProductDetailsScreen(
-              //  brandName: cubit.brandModel!.category.brands[index].brandName,
+            const ProductDetailsScreen(
             ),
           );
-          print(
+          debugPrint(
               "============= SUCCESS get product details ===============");
         } else if (state
         is ErrorGetProductDetailsStates) {
           EasyLoading.dismiss();
-          print(
+          debugPrint(
               "============= Error get product details ===============");
         }
       },
@@ -64,7 +54,7 @@ class SearchScreen extends StatelessWidget {
                           cubit.searchProductsList(
                               searchText: cubit.searchController.text);
                         },
-                        icon: Icon(
+                        icon: const Icon(
                           IconlyBold.search,
                           color: Colors.grey,
                           size: 20,

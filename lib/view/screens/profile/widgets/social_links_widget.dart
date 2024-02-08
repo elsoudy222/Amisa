@@ -1,8 +1,7 @@
 
-import 'package:flutter_svg/svg.dart';
-import 'package:url_launcher/link.dart';
 
-import '../../../screens_path.dart';
+
+import '../../../../screens_path.dart';
 
 class SocialLinksWidget extends StatelessWidget {
   final Uri uri;

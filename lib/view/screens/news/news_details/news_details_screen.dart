@@ -1,11 +1,5 @@
-import 'package:amisa/core/const/extensions.dart';
-import 'package:amisa/view_model/cubits/layout_cubit/layout_cubit.dart';
-import 'package:amisa/view_model/database/network/end_points.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:amisa/screens_path.dart';
 
-import '../../../screens_path.dart';
-import '../../home/widgets/custom_text_title/custom_title_text.dart';
 
 class NewsDetails extends StatelessWidget {
   final int index;

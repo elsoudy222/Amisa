@@ -1,10 +1,5 @@
-import 'package:amisa/view/screens_path.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:amisa/screens_path.dart';
 
-
-import '../../../core/components/custom_bottom_navbar/custom_bottom_navbar.dart';
-import '../../../view_model/cubits/layout_cubit/layout_cubit.dart';
 
 class LayoutScreen extends StatelessWidget {
   const LayoutScreen({super.key});

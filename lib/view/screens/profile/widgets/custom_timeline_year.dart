@@ -1,6 +1,5 @@
-import 'package:amisa/view_model/cubits/layout_cubit/layout_cubit.dart';
 
-import '../../../screens_path.dart';
+import '../../../../screens_path.dart';
 
 class CustomTimeLineWidget extends StatelessWidget {
   final LayoutCubit cubit;
@@ -8,7 +7,7 @@ class CustomTimeLineWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
       children: [
 
       ],

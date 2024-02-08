@@ -1,7 +1,5 @@
-import 'package:appinio_video_player/appinio_video_player.dart';
-import '../../../view_model/cubits/layout_cubit/layout_cubit.dart';
-import '../../../view_model/database/network/end_points.dart';
-import '../../screens_path.dart';
+import 'package:amisa/screens_path.dart';
+
 
 class ShowRoomVideoScreen extends StatefulWidget {
   final int showRoomId;

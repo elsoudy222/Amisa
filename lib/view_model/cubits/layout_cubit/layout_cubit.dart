@@ -1,14 +1,7 @@
-import 'package:amisa/model/design_hub_model.dart';
-import 'package:amisa/model/product_details_model.dart';
-import 'package:amisa/model/search_model.dart';
-import 'package:amisa/model/showroom_model.dart';
-import 'package:amisa/model/timeline_model.dart';
-import 'package:amisa/view_model/database/network/end_points.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:amisa/screens_path.dart';
+
 import '../../../model/home_model.dart';
-import '../../../view/screens_path.dart';
-import '../../database/network/dio_helper.dart';
+
 
 part 'layout_state.dart';
 
@@ -32,9 +25,9 @@ class LayoutCubit extends Cubit<LayoutStates> {
 
   int currentIndex = 0;
   List<Widget> screens = [
-     HomeScreen(),
+     const HomeScreen(),
     const CategoryScreen(),
-    SearchScreen(),
+    const SearchScreen(),
     const MenuScreen(),
   ];
 
@@ -69,10 +62,10 @@ class LayoutCubit extends Cubit<LayoutStates> {
       url: HOME,
     ).then((value) {
       homeModel = HomeModel.fromJson(value.data);
-      print(homeModel.toString());
+      debugPrint(homeModel.toString());
       emit(SuccessHomeDataStates(homeModel!));
     }).catchError((error) {
-      print(error.toString());
+      debugPrint(error.toString());
       emit(ErrorHomeDataStates(error.toString()));
     });
   }
@@ -84,10 +77,10 @@ class LayoutCubit extends Cubit<LayoutStates> {
       url: TIMELINE,
     ).then((value) {
       timelineModel = TimelineModel.fromJson(value.data);
-      print(timelineModel.toString());
+      debugPrint(timelineModel.toString());
       emit(SuccessGetTimelineState());
     }).catchError((error) {
-      print(error.toString());
+      debugPrint(error.toString());
       emit(ErrorGetTimelineState(error.toString()));
     });
   }
@@ -100,7 +93,7 @@ class LayoutCubit extends Cubit<LayoutStates> {
       designHubModel = DesignHubModel.fromJson(value.data);
       emit(SuccessGetDesignHubState());
     }).catchError((error) {
-      print(error.toString());
+      debugPrint(error.toString());
       emit(ErrorGetDesignHubState(error.toString()));
     });
   }
@@ -113,7 +106,7 @@ class LayoutCubit extends Cubit<LayoutStates> {
       showRoomsModel = ShowRoomsModel.fromJson(value.data);
       emit(SuccessGetShowRoomsState());
     }).catchError((error) {
-      print(error.toString());
+      debugPrint(error.toString());
       emit(ErrorGetShowRoomsState(error.toString()));
     });
   }

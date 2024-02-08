@@ -1,7 +1,6 @@
 
-import 'package:amisa/core/config/config_path.dart';
-import 'package:amisa/view/screens_path.dart';
-import 'package:flutter/services.dart';
+import '../../../screens_path.dart';
+
 
 
 // ignore: must_be_immutable

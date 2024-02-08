@@ -1,6 +1,6 @@
 
-import '../../../../../view_model/database/network/end_points.dart';
-import '../../../../screens_path.dart';
+import 'package:amisa/screens_path.dart';
+
 
 
 class CustomNewsCard extends StatelessWidget {

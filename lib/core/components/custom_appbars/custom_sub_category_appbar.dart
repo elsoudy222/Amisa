@@ -1,9 +1,7 @@
-import 'package:amisa/view_model/database/network/end_points.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../config/const/app_strings.dart';
+
+import '../../../screens_path.dart';
+
 
 class CustomSubCategoryAppBar extends StatelessWidget
     implements PreferredSizeWidget {

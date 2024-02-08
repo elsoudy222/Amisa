@@ -1,6 +1,5 @@
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../screens_path.dart';
+import '../../../../../screens_path.dart';
 
 class CustomKitchenTypeCard extends StatelessWidget {
   final String backgroundImage;

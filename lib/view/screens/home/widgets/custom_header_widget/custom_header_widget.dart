@@ -1,8 +1,5 @@
- import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+import 'package:amisa/screens_path.dart';
 
-import '../../../../../core/config/const/app_strings.dart';
-import '../../../../screens_path.dart';
 
 class CustomHeaderWidget extends StatelessWidget
     implements PreferredSizeWidget {

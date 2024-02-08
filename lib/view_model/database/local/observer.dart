@@ -2,7 +2,7 @@
 // this class used to show states
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../view/screens_path.dart';
+import '../../../screens_path.dart';
 
 class MyBlocObserver extends BlocObserver {
   @override

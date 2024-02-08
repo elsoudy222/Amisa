@@ -1,7 +1,5 @@
-import 'package:amisa/core/config/config_path.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
+import '../../../screens_path.dart';
 
-import '../../view/screens_path.dart';
 
 Widget customCircularProgressIndicator() {
   return const Center(

@@ -1,6 +1,5 @@
-import 'package:amisa/core/const/extensions.dart';
 
-import '../../../view/screens_path.dart';
+import '../../../screens_path.dart';
 
 // ignore: must_be_immutable
 class CustomProductAppbar extends StatelessWidget implements PreferredSizeWidget {

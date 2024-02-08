@@ -1,24 +1,5 @@
-import 'package:amisa/core/config/config_path.dart';
-import 'package:amisa/core/const/extensions.dart';
-import 'package:amisa/view/screens/home/widgets/custom_discounts/custom_discount_widget.dart';
-import 'package:amisa/view/screens/home/widgets/custom_header_widget/custom_header_widget.dart';
-import 'package:amisa/view/screens/home/widgets/custom_new_arrivals/custom_new_arrivals_card.dart';
-import 'package:amisa/view/screens/home/widgets/custom_news_card/custom_news_card.dart';
-import 'package:amisa/view/screens/home/widgets/custom_text_title/custom_title_text.dart';
-import 'package:amisa/view/screens/news/all_news/all_news_screen.dart';
-import 'package:amisa/view/screens/news/news_details/news_details_screen.dart';
-import 'package:amisa/view_model/cubits/home_cubit/home_cubit.dart';
-import 'package:amisa/view_model/cubits/layout_cubit/layout_cubit.dart';
-import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
-import '../../../core/components/components.dart';
-import '../../../core/components/custom_sub_category_card/custom_sub_category_card.dart';
-import '../../../core/components/show_all_button/show_all_button.dart';
-import '../../../core/components/toast/toast.dart';
-import '../../screens_path.dart';
-import '../category/sub_category/sub_category_screen.dart';
-import '../product_details/product_details_screen.dart';
+import 'package:amisa/screens_path.dart';
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

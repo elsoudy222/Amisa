@@ -1,18 +1,6 @@
-import 'package:amisa/core/components/components.dart';
-import 'package:amisa/core/const/extensions.dart';
-import 'package:amisa/view/screens/category/main_category/widgets/carousel_item_card.dart';
-import 'package:amisa/view_model/cubits/layout_cubit/layout_cubit.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
-import 'package:dots_indicator/dots_indicator.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:overlay_loader_with_app_icon/overlay_loader_with_app_icon.dart';
-import '../../../../core/components/toast/toast.dart';
-import '../../../../view_model/cubits/home_cubit/home_cubit.dart';
-import '../sub_category/sub_category_screen.dart';
+import 'package:amisa/screens_path.dart';
+
+
 
 class CategoryScreen extends StatefulWidget {
   const CategoryScreen({super.key});

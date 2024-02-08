@@ -1,9 +1,7 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../view/screens_path.dart';
-import '../../../view_model/database/network/end_points.dart';
-import '../../config/const/app_strings.dart';
+
+import '../../../screens_path.dart';
+
 
 class CustomKitchensTypeAppbar extends StatelessWidget implements PreferredSizeWidget {
   @override

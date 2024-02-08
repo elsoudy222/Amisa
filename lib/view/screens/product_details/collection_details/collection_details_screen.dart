@@ -1,9 +1,5 @@
-import 'package:amisa/view/screens/product_details/photo_view/photo_view.dart';
-import 'package:amisa/view/screens_path.dart';
-import 'package:amisa/view_model/cubits/home_cubit/home_cubit.dart';
-import 'package:amisa/view_model/database/network/end_points.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:amisa/screens_path.dart';
+
 
 class CollectionsDetailsScreen extends StatelessWidget {
   const CollectionsDetailsScreen({super.key});

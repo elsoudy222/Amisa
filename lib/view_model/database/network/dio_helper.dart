@@ -1,6 +1,5 @@
-import 'package:dio/dio.dart';
 
-import 'end_points.dart';
+import '../../../screens_path.dart';
 
 
 class DioHelper{

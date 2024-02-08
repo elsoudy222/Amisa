@@ -1,9 +1,5 @@
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:amisa/screens_path.dart';
 
-import '../../../../view_model/cubits/home_cubit/home_cubit.dart';
-import '../../../../view_model/database/network/end_points.dart';
-import '../../../screens_path.dart';
-import '../../home/widgets/custom_text_title/custom_title_text.dart';
 
 class CustomCollectionsWidget extends StatelessWidget {
   const CustomCollectionsWidget({

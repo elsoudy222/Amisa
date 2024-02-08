@@ -1,6 +1,5 @@
-import 'package:flutter_iconly/flutter_iconly.dart';
 
-import '../../../screens_path.dart';
+import '../../../../screens_path.dart';
 
 class CustomMenuCard extends StatelessWidget {
   final VoidCallback onTap;
@@ -9,7 +8,7 @@ class CustomMenuCard extends StatelessWidget {
 
 
 
-  CustomMenuCard({
+  const CustomMenuCard({
     super.key,
     required this.title, required this.icon, required this.onTap,
   });
@@ -29,7 +28,7 @@ class CustomMenuCard extends StatelessWidget {
           ),
         ),
       ),
-      trailing: Icon(IconlyBold.arrowRight3,color: Colors.white,),
+      trailing: const Icon(IconlyBold.arrowRight3,color: Colors.white,),
       onTap: onTap,
     );
   }

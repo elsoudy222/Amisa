@@ -1,20 +1,5 @@
-import 'package:amisa/core/config/config_path.dart';
-import 'package:amisa/core/const/extensions.dart';
-import 'package:amisa/view/screens/product_details/widgets/custom_collection_widget.dart';
-import 'package:amisa/view_model/cubits/home_cubit/home_cubit.dart';
-import 'package:amisa/view_model/database/network/end_points.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_iconly/flutter_iconly.dart';
-import 'package:readmore/readmore.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import '../menu/widgets/custom_expansion_tile.dart';
-import 'all_collections/all_collection_screen.dart';
-import 'collection_details/collection_details_screen.dart';
-import '../../../core/components/show_all_button/show_all_button.dart';
-import 'photo_view/photo_view.dart';
-import '../../screens_path.dart';
-import '../home/widgets/custom_text_title/custom_title_text.dart';
+import 'package:amisa/screens_path.dart';
+
 
 class ProductDetailsScreen extends StatelessWidget {
   const ProductDetailsScreen({
@@ -25,8 +10,6 @@ class ProductDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var homeCubit = HomeCubit.get(context);
     String productTitle = homeCubit.productsDetailsModel!.product.productName;
-    String productType = homeCubit.productsDetailsModel!.product.type;
-    //String categoryTitle = homeCubit.brandModel!.category.categoryName;
 
     return BlocConsumer<HomeCubit, HomeStates>(
       listener: (context, state) {

@@ -1,17 +1,11 @@
-import 'package:amisa/core/config/config_path.dart';
-import 'package:amisa/core/const/extensions.dart';
-import 'package:amisa/view/screens/layout/layout_screen.dart';
-import 'package:amisa/view/screens_path.dart';
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:amisa/screens_path.dart';
 
-import '../../../model/onboarding_model.dart';
-import '../../../view_model/database/local/cache_helper.dart';
 
 var boardController = PageController();
 
 class OnBoardingScreen extends StatefulWidget {
+  const OnBoardingScreen({super.key});
+
   @override
   State<OnBoardingScreen> createState() => _OnBoardingScreenState();
 }

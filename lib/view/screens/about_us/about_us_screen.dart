@@ -1,9 +1,5 @@
-import 'package:amisa/view/screens/about_us/widgets/about_us_wigdet.dart';
-import 'package:amisa/view/screens_path.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:amisa/screens_path.dart';
 
-import '../../../core/config/const/app_strings.dart';
-import '../home/widgets/custom_text_title/custom_title_text.dart';
 
 class AboutUsScreen extends StatelessWidget {
   const AboutUsScreen({super.key});

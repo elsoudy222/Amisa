@@ -1,11 +1,6 @@
-import 'dart:async';
 
-import 'package:amisa/core/config/config_path.dart';
-import 'package:amisa/core/const/extensions.dart';
-import 'package:amisa/view/screens/onboarding/onboarding_screen.dart';
-import 'package:amisa/view/screens_path.dart';
+import 'package:amisa/screens_path.dart';
 
-import '../../../view_model/database/local/cache_helper.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

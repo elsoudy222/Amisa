@@ -1,18 +1,5 @@
-import 'package:amisa/core/config/config_path.dart';
-import 'package:amisa/core/const/extensions.dart';
-import 'package:amisa/view/screens/showroom_screen/video_screen.dart';
-import 'package:amisa/view/screens_path.dart';
-import 'package:amisa/view_model/cubits/home_cubit/home_cubit.dart';
-import 'package:amisa/view_model/cubits/layout_cubit/layout_cubit.dart';
-import 'package:appinio_video_player/appinio_video_player.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_iconly/flutter_iconly.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:url_launcher/link.dart';
-import 'package:video_player/video_player.dart';
+import 'package:amisa/screens_path.dart';
 
-import '../../../view_model/database/network/end_points.dart';
 
 class ShowRoomsScreen extends StatefulWidget {
   final int showRoomId;

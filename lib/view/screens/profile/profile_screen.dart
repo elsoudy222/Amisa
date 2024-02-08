@@ -1,15 +1,8 @@
-import 'package:amisa/core/config/config_path.dart';
-import 'package:amisa/view/screens/profile/widgets/social_links_widget.dart';
-import 'package:amisa/view_model/cubits/layout_cubit/layout_cubit.dart';
-import 'package:amisa/view_model/database/network/end_points.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:url_launcher/url_launcher.dart';
-import '../../../core/const/functional.dart';
-import '../../screens_path.dart';
+
+import '../../../screens_path.dart';
 
 class ProfileScreen extends StatefulWidget {
-  ProfileScreen({super.key});
+  const ProfileScreen({super.key});
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
@@ -32,7 +25,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
-            title: Image(
+            title: const Image(
               image: AssetImage(appLogo),
               height: 60,
             ),
@@ -132,7 +125,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     margin: EdgeInsets.all(10.h),
                     child: Column(
                       children: [
-                        Container(
+                        SizedBox(
                           height: 140.h,
                           width: double.infinity,
 
@@ -145,7 +138,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         SizedBox(
                           height: 10.h,
                         ),
-                        Container(
+                        SizedBox(
                           height: 150.h,
                           child: Text(
                             cubit.timelineModel!

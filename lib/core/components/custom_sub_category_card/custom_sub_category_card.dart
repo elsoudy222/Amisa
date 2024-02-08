@@ -1,7 +1,5 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import '../../../core/config/config_path.dart';
-import '../../../view/screens_path.dart';
-import '../../../view_model/database/network/end_points.dart';
+import '../../../screens_path.dart';
+
 
 class CustomSubCategoryCard extends StatelessWidget {
   final Widget badgeWidget;

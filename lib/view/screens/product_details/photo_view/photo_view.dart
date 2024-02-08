@@ -1,10 +1,5 @@
-// ignore_for_file: sized_box_for_whitespace
+import 'package:amisa/screens_path.dart';
 
-import 'package:amisa/core/config/config_path.dart';
-import 'package:amisa/view/screens_path.dart';
-import 'package:amisa/view_model/database/network/end_points.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:photo_view/photo_view.dart';
 
 
 class PhotoViewScreen extends StatefulWidget {

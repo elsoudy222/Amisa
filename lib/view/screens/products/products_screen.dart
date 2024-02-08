@@ -1,14 +1,5 @@
-import 'package:amisa/core/components/custom_appbars/custom_products-appbar.dart';
-import 'package:amisa/core/components/custom_sub_category_card/custom_sub_category_card.dart';
-import 'package:amisa/core/const/extensions.dart';
-import 'package:amisa/view/screens_path.dart';
-import 'package:amisa/view_model/cubits/home_cubit/home_cubit.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:amisa/screens_path.dart';
 
-import '../../../core/components/components.dart';
-import '../../../core/components/toast/toast.dart';
-import '../product_details/product_details_screen.dart';
 
 class ProductsScreen extends StatelessWidget {
   final String type;

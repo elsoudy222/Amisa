@@ -1,11 +1,5 @@
-import 'package:amisa/core/const/extensions.dart';
-import 'package:amisa/view/screens/product_details/photo_view/photo_view.dart';
-import 'package:amisa/view/screens_path.dart';
-import 'package:amisa/view_model/cubits/layout_cubit/layout_cubit.dart';
-import 'package:amisa/view_model/database/network/end_points.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:amisa/screens_path.dart';
+
 
 class DesignHubScreen extends StatelessWidget {
   final int designId;

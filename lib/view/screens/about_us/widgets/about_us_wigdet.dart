@@ -1,5 +1,5 @@
 
-import '../../../screens_path.dart';
+import '../../../../screens_path.dart';
 
 class AboutUsCustomCard extends StatelessWidget {
   final String text;

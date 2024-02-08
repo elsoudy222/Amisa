@@ -1,14 +1,5 @@
-import 'package:amisa/core/config/config_path.dart';
-import 'package:amisa/model/category_model.dart';
-import 'package:amisa/model/products_model.dart';
-import 'package:amisa/view_model/database/network/dio_helper.dart';
-import 'package:amisa/view_model/database/network/end_points.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../model/collection_model.dart';
-import '../../../model/product_details_model.dart';
-import '../../../model/search_model.dart';
-import '../../../view/screens_path.dart';
+import '../../../screens_path.dart';
 
 part 'home_state.dart';
 
