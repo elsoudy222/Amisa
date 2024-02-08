@@ -2,9 +2,8 @@ import 'package:amisa/screens_path.dart';
 
 
 //TODO: 1: Edit OnBoarding Screen Details .(Next Step),
-//TODO: 2: Edit Abode Types Navigation .(Next Step)
-//TODO: 3:
-//TODO: 4:
+//TODO: 2: Edit Abode Types Navigation .(DONE)
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,9 +11,9 @@ void main() async {
   await CacheHelper.init();
   Bloc.observer = MyBlocObserver();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp,]);
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  // await Firebase.initializeApp(
+  //   options: DefaultFirebaseOptions.currentPlatform,
+  // );
 
 
 
