@@ -1,17 +1,7 @@
-import 'package:amisa/core/config/config_path.dart';
-import 'package:amisa/core/const/extensions.dart';
-import 'package:amisa/view/screens/category/kitchens_type/widgets/custom_kitchen-Type_card.dart';
-import 'package:amisa/view/screens/products/abode_taps_products_screen.dart';
-import 'package:amisa/view/screens_path.dart';
-import 'package:amisa/view_model/cubits/home_cubit/home_cubit.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
-import '../../../../core/components/components.dart';
-import '../../../../core/components/custom_appbars/custom_kitchen_type_appbar.dart';
-import '../../../../core/components/toast/toast.dart';
-import '../../home/widgets/custom_text_title/custom_title_text.dart';
-import '../../products/products_screen.dart';
-import '../abode_pronteau_types/abode_pronteau_types.dart';
+
+
+import '../../../../screens_path.dart';
+
 
 class AbodeBrandTypes extends StatelessWidget {
   final String companyName;
