@@ -92,7 +92,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                           scrollPhysics: const BouncingScrollPhysics(),
                           autoPlayInterval: const Duration(seconds: 3),
                           autoPlayAnimationDuration:
-                              const Duration(milliseconds: 800),
+                              const Duration(milliseconds: 700),
                           onPageChanged: (index, reason) {
                             setState(() {
                               homeCubit.categoryCurrentIndex = index;
