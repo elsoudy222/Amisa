@@ -26,7 +26,7 @@ class SubCategoryScreen extends StatelessWidget {
     return BlocConsumer<HomeCubit, HomeStates>(
       listener: (context, state) {
         if (state is LoadingGetAllProductsStates && categoryTitle != "Kitchens"
-           // && brandName != "ABODE"
+
         )
         {
           MyDialog.showLoadingDialog();
