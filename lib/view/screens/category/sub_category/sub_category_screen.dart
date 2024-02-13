@@ -44,7 +44,7 @@ class SubCategoryScreen extends StatelessWidget {
           );
         }
         else if (state is ErrorGetAllProductsStates && categoryTitle != "Kitchens"
-            //&& brandName != "ABODE"
+
         ) {
           EasyLoading.dismiss();
           showErrorToast(
