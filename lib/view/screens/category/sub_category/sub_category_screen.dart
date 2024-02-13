@@ -22,7 +22,6 @@ class SubCategoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var homeCubit = HomeCubit.get(context);
-    //var brandName = homeCubit.brandModel!.category.brands[homeCubit.brandCurrentIndex].brandName;
     return BlocConsumer<HomeCubit, HomeStates>(
       listener: (context, state) {
         if (state is LoadingGetAllProductsStates && categoryTitle != "Kitchens"
