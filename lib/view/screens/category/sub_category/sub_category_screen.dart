@@ -22,16 +22,18 @@ class SubCategoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var homeCubit = HomeCubit.get(context);
-    var brandName = homeCubit.brandModel!.category.brands[homeCubit.brandCurrentIndex].brandName;
+    //var brandName = homeCubit.brandModel!.category.brands[homeCubit.brandCurrentIndex].brandName;
     return BlocConsumer<HomeCubit, HomeStates>(
       listener: (context, state) {
         if (state is LoadingGetAllProductsStates && categoryTitle != "Kitchens"
-            && brandName != "ABODE")
+           // && brandName != "ABODE"
+        )
         {
           MyDialog.showLoadingDialog();
         }
         else if (state is SuccessGetAllProductsStates && categoryTitle != "Kitchens"
-            && brandName != "ABODE")
+        //    && brandName != "ABODE"
+        )
         {
           EasyLoading.dismiss();
           context.push(
@@ -42,7 +44,8 @@ class SubCategoryScreen extends StatelessWidget {
           );
         }
         else if (state is ErrorGetAllProductsStates && categoryTitle != "Kitchens"
-            && brandName != "ABODE") {
+            //&& brandName != "ABODE"
+        ) {
           EasyLoading.dismiss();
           showErrorToast(
             context,
@@ -85,7 +88,8 @@ class SubCategoryScreen extends StatelessWidget {
                               onTap: ()  {
                                 debugPrint(categoryTitle);
                                 if (categoryTitle == "Kitchens") {
-                                  context.push(KitchensSubCategoryType(
+                                  context.push(
+                                    KitchensSubCategoryType(
                                       companyName: homeCubit.brandModel!
                                           .category.brands[i].brandName,
                                       brandId: homeCubit.brandModel!.category
@@ -98,13 +102,27 @@ class SubCategoryScreen extends StatelessWidget {
                                       brandDescription: homeCubit.brandModel!
                                           .category.brands[i].brandDescription,
                                     ),);
-                                  homeCubit.changeBrandIndex(i);
+                                    homeCubit.changeBrandIndex(i);
                                   debugPrint("=================INDEX=====$i");
                                   debugPrint("==========  ${homeCubit.brandModel!.category.brands[i].brandName}");
 
                                 }
                                 else if (homeCubit.brandModel!.category.brands[i].brandName == "ABODE") {
                                   homeCubit.changeBrandIndex(i);
+                                  context.push(
+                                      AbodeBrandTypes(
+                                        companyName: homeCubit.brandModel!
+                                            .category.brands[i].brandName,
+                                        brandId: homeCubit.brandModel!.category
+                                            .brands[i].brandId,
+                                        companyLogo: homeCubit.brandModel!
+                                            .category.brands[i].brandPhoto,
+                                        companyImage: homeCubit.brandModel!
+                                            .category.brands[i].brandCover,
+                                        categoryName: categoryTitle,
+                                        brandDescription: homeCubit.brandModel!
+                                            .category.brands[i].brandDescription,
+                                      ));
                                   debugPrint("=================Brand INDEX=====$i");
                                   debugPrint(
                                       "===ID =======  ${homeCubit.brandModel!.category.brands[i].brandId}");
@@ -112,22 +130,9 @@ class SubCategoryScreen extends StatelessWidget {
                                       "===Brand Name =======  ${homeCubit.brandModel!.category.brands[i].brandName}");
                                   debugPrint(
                                       "===cat name =======  ${homeCubit.brandModel!.category.categoryName}");
-                                  context.push(
-                                    AbodeBrandTypes(
-                                    companyName: homeCubit.brandModel!
-                                        .category.brands[i].brandName,
-                                    brandId: homeCubit.brandModel!.category
-                                        .brands[i].brandId,
-                                    companyLogo: homeCubit.brandModel!
-                                        .category.brands[i].brandPhoto,
-                                    companyImage: homeCubit.brandModel!
-                                        .category.brands[i].brandCover,
-                                    categoryName: categoryTitle,
-                                    brandDescription: homeCubit.brandModel!
-                                        .category.brands[i].brandDescription,
-                                  ));
+
                                 }
-                                else if (categoryTitle != "Kitchens") {
+                                else if (categoryTitle != "Kitchens" && homeCubit.brandModel!.category.brands[i].brandName != "ABODE") {
                                   homeCubit.getAllProducts(
                                     brandId:
                                         "${homeCubit.brandModel!.category.brands[i].brandId}",
