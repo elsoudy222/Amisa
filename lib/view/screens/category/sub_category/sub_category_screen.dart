@@ -3,16 +3,15 @@ import 'package:amisa/screens_path.dart';
 
 
 
-// ignore: must_be_immutable
 class SubCategoryScreen extends StatelessWidget {
   final String categoryTitle;
   final String categoryDes;
   final String categoryImage;
-  Function()? onTap;
+  final Function()? onTap;
 
 
 
-  SubCategoryScreen(
+  const SubCategoryScreen(
       {super.key,
       this.onTap,
       required this.categoryTitle,
