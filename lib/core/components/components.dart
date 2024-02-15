@@ -1,3 +1,5 @@
+import 'package:lottie/lottie.dart';
+
 import '../../../screens_path.dart';
 
 
@@ -17,11 +19,11 @@ class MyDialog{
     EasyLoading.show(
       maskType: EasyLoadingMaskType.clear,
       dismissOnTap: false,
-      indicator: const Column(
+      indicator:  Column(
         children: [
-          Image(image: AssetImage(appLogo,),height: 70,),
-          SizedBox(height: 10,),
-          CircularProgressIndicator.adaptive(backgroundColor: Colors.white,strokeWidth: 2,),
+          const Image(image: AssetImage(appLogo,),height: 70,),
+          Lottie.asset(loadingLotti,height: 50.h,),
+         // CircularProgressIndicator.adaptive(backgroundColor: Colors.white,strokeWidth: 2,),
         ],
       ),
       status: "loading..",
