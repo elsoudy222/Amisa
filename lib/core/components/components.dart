@@ -1,5 +1,4 @@
 import 'package:lottie/lottie.dart';
-
 import '../../../screens_path.dart';
 
 
