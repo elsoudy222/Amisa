@@ -1,5 +1,6 @@
 
 import 'package:amisa/screens_path.dart';
+import 'package:lottie/lottie.dart';
 
 
 class SplashScreen extends StatefulWidget {
@@ -53,7 +54,8 @@ class _SplashScreenState extends State<SplashScreen> {
             SizedBox(
               height: 20.h,
             ),
-             const CircularProgressIndicator.adaptive(),
+            Lottie.asset(loadingLotti,height: 50.h,),
+            // const CircularProgressIndicator.adaptive(),
           ],
         ),
       ),

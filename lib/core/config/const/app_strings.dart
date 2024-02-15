@@ -10,6 +10,9 @@ const String appName = "Amisa";
 const String kitchenSizes = "assets/icons/kitchen_sizes.png";
 const String sizes = "assets/icons/sizes.png";
 
+/// LOTTI :
+const String loadingLotti = "assets/lotti/loading.json";
+
 /// SVG :
 const String facebook = "assets/svg/facebook.svg";
 const String whatsapp = "assets/svg/whatsapp.svg";
