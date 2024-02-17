@@ -14,7 +14,6 @@ Widget customCircularProgressIndicator() {
 class MyDialog{
 
   static showLoadingDialog() {
-
     EasyLoading.show(
       maskType: EasyLoadingMaskType.clear,
       dismissOnTap: false,
