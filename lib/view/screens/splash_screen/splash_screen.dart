@@ -54,7 +54,7 @@ class _SplashScreenState extends State<SplashScreen> {
             SizedBox(
               height: 20.h,
             ),
-            Lottie.asset(loadingLotti,height: 50.h,),
+            Lottie.asset(loadingLotti,height: 70.h,),
             // const CircularProgressIndicator.adaptive(),
           ],
         ),

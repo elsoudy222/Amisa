@@ -8,8 +8,8 @@ class CustomDiscountWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var layoutCubit = LayoutCubit.get(context);
-    return BlocConsumer<LayoutCubit, LayoutStates>(
+    var homeCubit = HomeCubit.get(context);
+    return BlocConsumer<HomeCubit, HomeStates>(
       listener: (context, state) {
         // TODO: implement listener
       },
@@ -18,7 +18,7 @@ class CustomDiscountWidget extends StatelessWidget {
           padding:  EdgeInsets.only(top: 15.0.h),
           child: CarouselSlider(
             items: List.generate(
-             layoutCubit.homeModel!.ads.length,
+             homeCubit.homeModel!.ads.length,
                   (index) => Container(
                 height: 180.h,
                 width: double.infinity,
@@ -26,7 +26,7 @@ class CustomDiscountWidget extends StatelessWidget {
                 decoration: BoxDecoration(
                   image: DecorationImage(
 
-                    image: CachedNetworkImageProvider("$baseImage${layoutCubit.homeModel!.ads[index].photo}"),
+                    image: CachedNetworkImageProvider("$baseImage${homeCubit.homeModel!.ads[index].photo}"),
                     fit: BoxFit.fill,
                   ),
                 ),

@@ -8,8 +8,8 @@ class NewsDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var cubit = LayoutCubit.get(context);
-    return BlocConsumer<LayoutCubit, LayoutStates>(
+    var cubit = HomeCubit.get(context);
+    return BlocConsumer<HomeCubit, HomeStates>(
       listener: (context, state) {
         // TODO: implement listener
       },

@@ -5,8 +5,8 @@ class AllNewsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var layoutCubit = LayoutCubit.get(context);
-    return BlocConsumer<LayoutCubit, LayoutStates>(
+    var homeCubit = HomeCubit.get(context);
+    return BlocConsumer<HomeCubit, HomeStates>(
       listener: (context, state) {
         // TODO: implement listener
       },
@@ -28,7 +28,7 @@ class AllNewsScreen extends StatelessWidget {
                 ListView.builder(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  itemCount: layoutCubit.homeModel!.news.length,
+                  itemCount: homeCubit.homeModel!.news.length,
                   itemBuilder: (context, i) {
                     return Padding(
                       padding: EdgeInsets.only(bottom: 10.h),
@@ -39,8 +39,8 @@ class AllNewsScreen extends StatelessWidget {
                           );
                         },
                         child: CustomAllNewsCard(
-                          newsDesc: layoutCubit.homeModel!.news[i].title,
-                          backgroundImage: layoutCubit.homeModel!.news[i].image,
+                          newsDesc: homeCubit.homeModel!.news[i].title,
+                          backgroundImage: homeCubit.homeModel!.news[i].image,
                         ),
                       ),
                     );

@@ -20,9 +20,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
           EasyLoading.dismiss();
           context.push(
             SubCategoryScreen(
-            categoryTitle: layoutCubit.homeModel!.categories[homeCubit.categoryCurrentIndex].catName,
-            categoryDes: layoutCubit.homeModel!.categories[homeCubit.categoryCurrentIndex].description,
-            categoryImage: layoutCubit.homeModel!.categories[homeCubit.categoryCurrentIndex].image,
+            categoryTitle: homeCubit.homeModel!.categories[homeCubit.categoryCurrentIndex].catName,
+            categoryDes: homeCubit.homeModel!.categories[homeCubit.categoryCurrentIndex].description,
+            categoryImage: homeCubit.homeModel!.categories[homeCubit.categoryCurrentIndex].image,
 
           ),);
         }
@@ -42,7 +42,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
       builder: (context, state) {
 
         return ConditionalBuilder(
-          condition: layoutCubit.homeModel != null,
+          condition: homeCubit.homeModel != null,
           builder: (context) {
             return Scaffold(
               body: Padding(
@@ -71,14 +71,14 @@ class _CategoryScreenState extends State<CategoryScreen> {
                     ),
                     CarouselSlider(
                       items: List.generate(
-                        layoutCubit.homeModel!.categories.length,
+                        homeCubit.homeModel!.categories.length,
                         (index) => carouselItemCard(
-                          image: layoutCubit.homeModel!.categories[index].image,
-                          title: layoutCubit.homeModel!.categories[index].catName,
+                          image: homeCubit.homeModel!.categories[index].image,
+                          title: homeCubit.homeModel!.categories[index].catName,
                           onTap: () {
 
                             homeCubit.getAllBrands(
-                                layoutCubit.homeModel!.categories[index].id);
+                                homeCubit.homeModel!.categories[index].id);
 
 
                           },
@@ -103,7 +103,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                       height: 25.h,
                     ),
                     DotsIndicator(
-                      dotsCount: layoutCubit.homeModel!.categories.length,
+                      dotsCount: homeCubit.homeModel!.categories.length,
                       position: homeCubit.categoryCurrentIndex,
                       decorator: DotsDecorator(
                         color: Colors.grey,
