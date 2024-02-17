@@ -1,4 +1,5 @@
 
+import '../../../model/home_model.dart';
 import '../../../screens_path.dart';
 
 part 'home_state.dart';
@@ -58,8 +59,24 @@ class HomeCubit extends Cubit<HomeStates> {
     });
   }
 
-  /// Get All Products Data from API :
 
+  /// Get Home Data from API :
+  HomeModel? homeModel;
+  void getHomeData() {
+    emit(LoadingHomeDataStates());
+    DioHelper.getData(
+      url: HOME,
+    ).then((value) {
+      homeModel = HomeModel.fromJson(value.data);
+      debugPrint(homeModel.toString());
+      emit(SuccessHomeDataStates(homeModel!));
+    }).catchError((error) {
+      debugPrint(error.toString());
+      emit(ErrorHomeDataStates(error.toString()));
+    });
+  }
+
+  /// Get All Products Data from API :
   ProductsModel? productsModel;
 
   void getAllProducts({required String brandId, String type = ""}) {

@@ -5,6 +5,16 @@ abstract class HomeStates {}
 
 class HomeInitialState extends HomeStates {}
 
+class LoadingHomeDataStates extends HomeStates{}
+class SuccessHomeDataStates extends HomeStates{
+  HomeModel model;
+  SuccessHomeDataStates(this.model);
+}
+class ErrorHomeDataStates extends HomeStates{
+  final String error;
+  ErrorHomeDataStates(this.error);
+}
+
 class ChangeIndexState extends HomeStates {}
 
 class ChangeBrandIndexState extends HomeStates {}

@@ -54,21 +54,7 @@ class LayoutCubit extends Cubit<LayoutStates> {
     emit(LayoutChangeTimeLineIndexState());
   }
 
-  /// Get Home Data from API :
-  HomeModel? homeModel;
-  void getHomeData() {
-    emit(LoadingHomeDataStates());
-    DioHelper.getData(
-      url: HOME,
-    ).then((value) {
-      homeModel = HomeModel.fromJson(value.data);
-      debugPrint(homeModel.toString());
-      emit(SuccessHomeDataStates(homeModel!));
-    }).catchError((error) {
-      debugPrint(error.toString());
-      emit(ErrorHomeDataStates(error.toString()));
-    });
-  }
+
 
   TimelineModel? timelineModel;
   void getTimeline() {
