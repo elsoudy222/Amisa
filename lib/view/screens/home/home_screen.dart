@@ -15,13 +15,14 @@ class HomeScreen extends StatelessWidget {
       listener: (context, state) {
         if (state is LoadingGetProductDetailsStates) {
           MyDialog.showLoadingDialog();
-        } else if (state is SuccessGetProductDetailsStates) {
+        }
+        else if (state is SuccessGetProductDetailsStates) {
           EasyLoading.dismiss();
-
           Navigator.push(context, MaterialPageRoute(builder: (context) {
             return const ProductDetailsScreen();
           }));
-        } else if (state is ErrorGetProductDetailsStates) {
+        }
+        else if (state is ErrorGetProductDetailsStates) {
           EasyLoading.dismiss();
           debugPrint("============= Error get product details ===============");
         }
@@ -59,6 +60,7 @@ class HomeScreen extends StatelessWidget {
           );
         }
         else {
+
           return Scaffold(
              //appBar: CustomHeaderWidget(),
             body: SingleChildScrollView(
@@ -326,7 +328,7 @@ class HomeScreen extends StatelessWidget {
         // return ConditionalBuilder(
         //   condition: homeCubit.homeModel != null,
         //   builder: (context) {
-        //     //EasyLoading.dismiss();
+        //     EasyLoading.dismiss();
         //     return Scaffold(
         //       // appBar: CustomHeaderWidget(),
         //       body: SingleChildScrollView(
@@ -595,7 +597,7 @@ class HomeScreen extends StatelessWidget {
         //     height: MediaQuery.of(context).size.height,
         //     width: MediaQuery.of(context).size.width,
         //     child: Center(
-        //       child: customCircularProgressIndicator(),
+        //       child: MyDialog.showLoadingDialog(),
         //     ),
         //   ),
         //   // fallback: (context) => customCircularProgressIndicator(),
